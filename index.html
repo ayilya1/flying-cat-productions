@@ -1,0 +1,3586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flying Cat Productions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- SHARED HEADER STYLES -->
+    <link
+        rel="stylesheet"
+        href="assets/css/header.css"
+    >
+
+    <style>
+
+        :root {
+            --black: #050505;
+            --white: #f4f0e7;
+            --muted: #aaa59d;
+            --line: rgba(255,255,255,0.14);
+            --accent: #CC5500;
+            --header-green: #C8FF20;
+        }
+
+
+        /* =========================================================
+           RESET
+           ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--black);
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+
+            font-family:
+                "Inter",
+                Arial,
+                sans-serif;
+
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+
+        /* =========================================================
+           GRAIN
+           ========================================================= */
+
+        body::after {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            z-index: 9999;
+
+            pointer-events: none;
+
+            opacity: 0.025;
+
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.4'/%3E%3C/svg%3E");
+        }
+
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .hero {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+            min-height: 760px;
+
+            overflow: hidden;
+
+            background: #050505;
+        }
+
+
+        /* =========================================================
+           SHARED HEADER POSITION ON HOMEPAGE
+           ========================================================= */
+
+        fcp-header {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            z-index: 30;
+
+            width: 100%;
+
+            display: block;
+        }
+
+
+        /* =========================================================
+           HERO IMAGE
+           ========================================================= */
+
+        .hero-image-wrap {
+            position: absolute;
+            inset: 0;
+
+            z-index: 0;
+
+            overflow: hidden;
+
+            background: #050505;
+        }
+
+        .hero-image {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 100%;
+            height: 100%;
+
+            max-width: none;
+
+            object-fit: cover;
+
+            object-position: 37% 50%;
+
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+
+            transform-origin: center center;
+
+            transition:
+                opacity 0.35s ease;
+        }
+
+        .hero-image.hypnos-motion {
+            transition:
+                opacity 0.35s ease,
+                transform 1.4s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+
+        /* =========================================================
+           IMAGE OVERLAY
+           ========================================================= */
+
+        .hero-image-wrap::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            z-index: 1;
+
+            pointer-events: none;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.68) 0%,
+                    rgba(0,0,0,0.40) 21%,
+                    rgba(0,0,0,0.08) 55%,
+                    rgba(0,0,0,0.34) 100%
+                ),
+
+                linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.72) 0%,
+                    rgba(0,0,0,0.02) 48%,
+                    rgba(0,0,0,0.14) 100%
+                );
+        }
+
+
+        /* =========================================================
+           LEFT HERO COPY
+           ========================================================= */
+
+        .hero-copy {
+            position: absolute;
+
+            z-index: 5;
+
+            left:
+                clamp(
+                    28px,
+                    4vw,
+                    72px
+                );
+
+            top: 50%;
+
+            width:
+                min(
+                    510px,
+                    38vw
+                );
+
+            opacity: 1;
+
+            transform:
+                translateY(-42%);
+
+            transition:
+                opacity 0.45s ease,
+                transform 0.65s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+        .hero-copy.text-leaving {
+            opacity: 0;
+
+            transform:
+                translateY(-36%);
+        }
+
+        .hero-copy.text-entering {
+            opacity: 0;
+
+            transform:
+                translateY(-48%);
+        }
+
+        .hero-kicker {
+            margin-bottom: 18px;
+
+            color: var(--accent);
+
+            font-size: 13px;
+            font-weight: 600;
+
+            letter-spacing: 0.18em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           PROJECT TITLE
+           ========================================================= */
+
+        .hero-copy h1 {
+            margin: 0;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(
+                    82px,
+                    7.3vw,
+                    122px
+                );
+
+            font-weight: 500;
+
+            line-height: 0.78;
+
+            letter-spacing: -0.05em;
+
+            color: var(--white);
+        }
+
+        .hero-rule {
+            width: 74px;
+            height: 3px;
+
+            margin:
+                28px
+                0
+                23px;
+
+            background: var(--accent);
+        }
+
+        .hero-synopsis {
+            max-width: 420px;
+
+            margin:
+                0
+                0
+                18px;
+
+            color:
+                rgba(255,255,255,0.88);
+
+            font-size: 16px;
+
+            line-height: 1.52;
+        }
+
+        .hero-specs {
+            color: var(--white);
+
+            font-size: 11px;
+            font-weight: 600;
+
+            letter-spacing: 0.17em;
+
+            line-height: 1.4;
+
+            text-transform: uppercase;
+        }
+
+        .view-project {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 22px;
+
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            letter-spacing: 0.15em;
+
+            text-transform: uppercase;
+
+            transition:
+                gap 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .view-project:hover {
+            gap: 13px;
+
+            opacity: 0.8;
+        }
+
+
+        /* =========================================================
+           RIGHT PROJECT PANEL
+           ========================================================= */
+
+        .hero-metadata {
+            position: absolute;
+
+            z-index: 6;
+
+            right: 7.5%;
+
+            width: 355px;
+
+            color: var(--white);
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+            transition:
+                top 0.65s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                ),
+                opacity 0.45s ease,
+                transform 0.65s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+        .hero.project-victoria .hero-metadata {
+            top: 22%;
+        }
+
+        .hero.project-hypnos .hero-metadata {
+            top: 33%;
+        }
+
+        .hero.project-moneyback .hero-metadata {
+            top: 33%;
+        }
+
+        .hero-metadata.metadata-leaving {
+            opacity: 0;
+
+            transform:
+                translateY(16px);
+        }
+
+        .hero-metadata.metadata-entering {
+            opacity: 0;
+
+            transform:
+                translateY(-16px);
+        }
+
+
+        /* =========================================================
+           LAURELS
+           ========================================================= */
+
+        .hero-laurels {
+            display: flex;
+            align-items: center;
+
+            gap: 34px;
+
+            width: 100%;
+
+            min-height: 105px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-laurels.hidden {
+            display: none;
+        }
+
+        .hero-laurel-vqff {
+            width: 145px;
+        }
+
+        .hero-laurel-j4r {
+            width: 68px;
+        }
+
+        .hero-laurels img {
+            width: 100%;
+            height: auto;
+
+            object-fit: contain;
+        }
+
+
+        /* =========================================================
+           PROJECT TABS
+           ========================================================= */
+
+        .project-tabs {
+            display: flex;
+            align-items: center;
+
+            gap: 26px;
+
+            width: 100%;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 26px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.34);
+        }
+
+        .project-tab {
+            position: relative;
+
+            padding: 0;
+
+            border: 0;
+
+            background: transparent;
+
+            color:
+                rgba(255,255,255,0.58);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.14em;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition:
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        .project-tab:hover {
+            color: var(--white);
+        }
+
+        .project-tab.active {
+            color: var(--white);
+        }
+
+        .project-tab.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: -16px;
+
+            height: 2px;
+
+            background: var(--accent);
+
+            transform-origin:
+                left center;
+
+            animation:
+                tabIndicatorIn
+                0.4s
+                cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+        @keyframes tabIndicatorIn {
+
+            from {
+                transform:
+                    scaleX(0);
+
+                opacity: 0;
+            }
+
+            to {
+                transform:
+                    scaleX(1);
+
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================================================
+           PANEL TRANSITIONS
+           ========================================================= */
+
+        .metadata-panel {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+            transition:
+                opacity 0.42s ease,
+                transform 0.58s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+        .metadata-panel.panel-leaving {
+            opacity: 0;
+
+            transform:
+                translateY(10px);
+        }
+
+        .metadata-panel.panel-entering {
+            opacity: 0;
+
+            transform:
+                translateY(-10px);
+        }
+
+
+        /* =========================================================
+           ABOUT PANEL
+           ========================================================= */
+
+        .about-panel {
+            display: block;
+        }
+
+        .about-panel.hidden {
+            display: none;
+        }
+
+
+        /* =========================================================
+           TRAILER
+           ========================================================= */
+
+        .trailer-panel {
+            display: none;
+        }
+
+        .trailer-panel.active {
+            display: block;
+        }
+
+        .trailer-player {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio:
+                16 / 9;
+
+            overflow: hidden;
+
+            background: #080808;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+        }
+
+        .trailer-player iframe {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border: 0;
+        }
+
+        .trailer-start {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            gap: 14px;
+
+            padding: 0;
+
+            border: 0;
+
+            background:
+                transparent;
+
+            color:
+                var(--white);
+
+            cursor: pointer;
+
+            overflow: hidden;
+        }
+
+        .trailer-thumbnail {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            z-index: 0;
+
+            transform:
+                scale(1);
+
+            transition:
+                transform 0.8s cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+        .trailer-start::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 1;
+
+            pointer-events: none;
+
+            background:
+
+                linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.62) 0%,
+                    rgba(0,0,0,0.12) 55%,
+                    rgba(0,0,0,0.18) 100%
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.18),
+                    transparent 55%
+                );
+        }
+
+        .trailer-start:hover .trailer-thumbnail {
+            transform:
+                scale(1.025);
+        }
+
+        .trailer-play-icon {
+            position: relative;
+
+            z-index: 2;
+
+            width: 58px;
+            height: 58px;
+
+            display: grid;
+            place-items: center;
+
+            border:
+                2px solid
+                var(--accent);
+
+            border-radius: 50%;
+
+            background:
+                rgba(0,0,0,0.18);
+
+            backdrop-filter:
+                blur(2px);
+
+            transition:
+                transform 0.22s ease,
+                background 0.22s ease;
+        }
+
+        .trailer-start:hover .trailer-play-icon {
+            transform:
+                scale(1.06);
+
+            background:
+                rgba(204,85,0,0.16);
+        }
+
+        .trailer-play-icon::before {
+            content: "";
+
+            display: block;
+
+            margin-left: 4px;
+
+            width: 0;
+            height: 0;
+
+            border-top:
+                8px solid
+                transparent;
+
+            border-bottom:
+                8px solid
+                transparent;
+
+            border-left:
+                13px solid
+                var(--accent);
+        }
+
+        .trailer-start-label {
+            position: relative;
+
+            z-index: 2;
+
+            color:
+                rgba(255,255,255,0.84);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 0.16em;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0
+                2px
+                9px
+                rgba(0,0,0,0.55);
+        }
+
+        .trailer-coming-soon {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio:
+                16 / 9;
+
+            display: grid;
+            place-items: center;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            background:
+                rgba(0,0,0,0.48);
+
+            color:
+                rgba(255,255,255,0.64);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.16em;
+
+            text-transform: uppercase;
+        }
+
+        .trailer-coming-soon::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            opacity: 0.26;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 20%,
+                    rgba(204,85,0,0.15) 50%,
+                    transparent 80%
+                );
+        }
+
+        .trailer-project-title {
+            margin-top: 15px;
+
+            color:
+                rgba(255,255,255,0.68);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           METADATA
+           ========================================================= */
+
+        .hero-fact {
+            margin-bottom: 27px;
+
+            color:
+                rgba(255,255,255,0.94);
+
+            font-size: 15px;
+
+            line-height: 1.48;
+        }
+
+        .hero-fact:last-child {
+            margin-bottom: 0;
+        }
+
+        .hero-fact-label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color:
+                rgba(255,255,255,0.60);
+
+            font-size: 11px;
+            font-weight: 500;
+
+            letter-spacing: 0.05em;
+
+            text-transform: uppercase;
+        }
+
+        .hero-fact strong {
+            color:
+                var(--white);
+
+            font-weight: 600;
+        }
+
+        .screening-entry {
+            margin-bottom: 17px;
+        }
+
+        .screening-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .metadata-ticket-link {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 8px;
+
+            color:
+                var(--accent);
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+            transition:
+                gap 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .metadata-ticket-link:hover {
+            gap: 10px;
+
+            opacity: 0.75;
+        }
+
+
+        /* =========================================================
+           CAROUSEL
+           ========================================================= */
+
+        .carousel-next {
+            position: absolute;
+
+            z-index: 12;
+
+            right: 32px;
+            bottom: 34px;
+
+            width: 112px;
+            height: 66px;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            padding: 0;
+
+            border: 0;
+
+            background:
+                transparent;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.22s ease;
+        }
+
+        .carousel-next:hover {
+            transform:
+                translateX(7px);
+        }
+
+        .carousel-next svg {
+            width: 102px;
+            height: 58px;
+
+            overflow: visible;
+        }
+
+        .carousel-next line,
+        .carousel-next path {
+            stroke:
+                var(--accent);
+
+            stroke-width: 4;
+
+            fill: none;
+
+            stroke-linecap: square;
+            stroke-linejoin: miter;
+        }
+
+        .carousel-count {
+            position: absolute;
+
+            z-index: 10;
+
+            right: 37px;
+            bottom: 108px;
+
+            color:
+                var(--accent);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 0.15em;
+        }
+
+        .carousel-dots {
+            position: absolute;
+
+            z-index: 10;
+
+            left: 50%;
+            bottom: 31px;
+
+            transform:
+                translateX(-50%);
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 7px;
+            height: 7px;
+
+            padding: 0;
+
+            border:
+                1px solid
+                var(--accent);
+
+            border-radius: 50%;
+
+            background:
+                transparent;
+
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            width: 28px;
+
+            border-radius: 10px;
+
+            background:
+                var(--accent);
+        }
+
+
+        /* =========================================================
+           LOWER SITE
+           ========================================================= */
+
+        .section {
+            padding:
+                80px
+                4vw;
+
+            background:
+                var(--black);
+
+            border-top:
+                1px solid
+                #151515;
+        }
+
+        .section-inner {
+            max-width: 1450px;
+
+            margin: auto;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(
+                    45px,
+                    5vw,
+                    70px
+                );
+
+            font-weight: 500;
+
+            line-height: 0.95;
+        }
+
+        .small-orange-link {
+            color:
+                var(--accent);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           NEWS
+           ========================================================= */
+
+        .news-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 30px;
+        }
+
+        .news-card {
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                var(--line);
+        }
+
+        .eyebrow {
+            color:
+                var(--accent);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+        .news-card h3 {
+            max-width: 580px;
+
+            margin:
+                15px
+                0
+                14px;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 35px;
+            font-weight: 500;
+
+            line-height: 0.98;
+        }
+
+        .news-card p {
+            max-width: 560px;
+
+            margin: 0;
+
+            color:
+                var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================================
+           FILMMAKERS
+           ========================================================= */
+
+        .makers {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 85px;
+
+            padding-top: 100px;
+        }
+
+        .makers h2 {
+            max-width: 500px;
+
+            margin:
+                18px
+                0
+                27px;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 60px;
+            font-weight: 500;
+
+            line-height: 0.88;
+        }
+
+        .makers-copy {
+            max-width: 520px;
+
+            color:
+                var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .people {
+            border-top:
+                1px solid
+                var(--line);
+        }
+
+        .person {
+            display: grid;
+
+            grid-template-columns:
+                58px
+                1fr;
+
+            gap: 19px;
+
+            align-items: center;
+
+            padding:
+                21px
+                0;
+
+            border-bottom:
+                1px solid
+                var(--line);
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+
+            border:
+                1px solid
+                #6e6a62;
+
+            border-radius: 50%;
+
+            background:
+                #302d27;
+        }
+
+        .person h3 {
+            margin:
+                0
+                0
+                5px;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 34px;
+
+            font-weight: 500;
+        }
+
+        .role {
+            color:
+                var(--accent);
+
+            font-size: 8px;
+            font-weight: 600;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           MAGAZINE
+           ========================================================= */
+
+        .magazine {
+            display: grid;
+
+            grid-template-columns:
+                0.8fr
+                1.2fr;
+
+            gap: 70px;
+
+            align-items: center;
+
+            padding-top: 120px;
+            padding-bottom: 90px;
+        }
+
+        .magazine h2 {
+            margin:
+                17px
+                0
+                23px;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 60px;
+
+            font-weight: 500;
+
+            line-height: 0.88;
+        }
+
+        .magazine-copy {
+            max-width: 350px;
+
+            color:
+                var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .magazine-covers {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap: 28px;
+        }
+
+        .magazine-cover {
+            aspect-ratio:
+                0.72;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background:
+                #181818;
+        }
+
+        .magazine-cover img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                23px
+                4vw;
+
+            border-top:
+                1px solid
+                var(--line);
+
+            background:
+                var(--black);
+
+            color:
+                #77736c;
+
+            font-size: 8px;
+
+            letter-spacing: 0.15em;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           TABLET
+           ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .hero-copy {
+                width: 43vw;
+            }
+
+            .hero-copy h1 {
+                font-size:
+                    clamp(
+                        72px,
+                        9vw,
+                        100px
+                    );
+            }
+
+            .hero-synopsis {
+                font-size: 14px;
+            }
+
+            .hero-metadata {
+                right: 3%;
+                width: 300px;
+            }
+
+            .hero.project-victoria .hero-metadata {
+                top: 21%;
+            }
+
+            .hero.project-hypnos .hero-metadata,
+            .hero.project-moneyback .hero-metadata {
+                top: 31%;
+            }
+
+            .hero-fact {
+                font-size: 13px;
+                margin-bottom: 22px;
+            }
+
+            .hero-fact-label {
+                font-size: 10px;
+            }
+
+            .hero-laurel-vqff {
+                width: 120px;
+            }
+
+            .hero-laurel-j4r {
+                width: 58px;
+            }
+
+            .makers,
+            .magazine {
+                grid-template-columns: 1fr;
+
+                gap: 55px;
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .hero {
+                width: 100%;
+
+                height: 100svh;
+
+                min-height: 720px;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+            }
+
+            .hero-image-wrap::after {
+                background:
+
+                    linear-gradient(
+                        90deg,
+                        rgba(0,0,0,0.58) 0%,
+                        rgba(0,0,0,0.20) 45%,
+                        rgba(0,0,0,0.04) 100%
+                    ),
+
+                    linear-gradient(
+                        0deg,
+                        rgba(0,0,0,0.88) 0%,
+                        rgba(0,0,0,0.19) 42%,
+                        rgba(0,0,0,0.03) 76%
+                    );
+            }
+
+            .hero-copy {
+                left: 20px;
+                right: 20px;
+
+                top: auto;
+                bottom: 155px;
+
+                width: auto;
+
+                max-width: 315px;
+
+                transform: none;
+            }
+
+            .hero-copy.text-leaving {
+                opacity: 0;
+
+                transform:
+                    translateY(12px);
+            }
+
+            .hero-copy.text-entering {
+                opacity: 0;
+
+                transform:
+                    translateY(-12px);
+            }
+
+            .hero-kicker {
+                margin-bottom: 12px;
+
+                font-size: 10px;
+
+                letter-spacing: 0.18em;
+            }
+
+            .hero-copy h1 {
+                max-width: 310px;
+
+                font-size:
+                    clamp(
+                        55px,
+                        15vw,
+                        66px
+                    );
+
+                line-height: 0.82;
+            }
+
+            .hero-rule {
+                width: 64px;
+                height: 3px;
+
+                margin:
+                    20px
+                    0
+                    17px;
+            }
+
+            .hero-synopsis {
+                max-width: 295px;
+
+                margin-bottom: 15px;
+
+                font-size: 13px;
+
+                line-height: 1.48;
+            }
+
+            .hero-specs {
+                font-size: 8px;
+
+                letter-spacing: 0.16em;
+            }
+
+            .view-project {
+                margin-top: 17px;
+
+                font-size: 9px;
+            }
+
+            .hero-metadata {
+                display: none;
+            }
+
+            .carousel-next {
+                right: 15px;
+                bottom: 20px;
+
+                width: 78px;
+                height: 45px;
+            }
+
+            .carousel-next svg {
+                width: 72px;
+                height: 42px;
+            }
+
+            .carousel-count {
+                right: 18px;
+                bottom: 73px;
+            }
+
+            .carousel-dots {
+                left: 17px;
+                bottom: 29px;
+
+                transform: none;
+            }
+
+            .section {
+                padding:
+                    55px
+                    20px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .makers,
+            .magazine {
+                grid-template-columns: 1fr;
+            }
+
+            .magazine-covers {
+                grid-template-columns: 1fr;
+            }
+
+            .magazine-cover:nth-child(2) {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section
+    class="hero project-victoria"
+    id="films"
+>
+
+
+    <div class="hero-image-wrap">
+
+        <img
+            src="assets/homepage/victoria-hero.jpg"
+            alt=""
+            class="hero-image"
+            id="heroImage"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         SHARED GLOBAL HEADER
+         ===================================================== -->
+
+    <fcp-header></fcp-header>
+
+
+    <!-- =====================================================
+         LEFT HERO
+         ===================================================== -->
+
+    <div class="hero-copy">
+
+
+        <div
+            class="hero-kicker"
+            id="heroKicker"
+        >
+            Documentary
+        </div>
+
+
+        <h1 id="heroTitle">
+            Victoria<br>
+            Ka Raja
+        </h1>
+
+
+        <div class="hero-rule"></div>
+
+
+        <p
+            class="hero-synopsis"
+            id="heroSynopsis"
+        >
+            The first Indian drag king in Canada,
+            navigating culture and self-expression
+            through performance.
+        </p>
+
+
+        <div
+            class="hero-specs"
+            id="heroSpecs"
+        >
+            English | 23 min | 4K
+        </div>
+
+
+        <a
+            class="view-project"
+            id="viewProject"
+            href="victoria-ka-raja.html"
+        >
+            Learn More →
+        </a>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT PROJECT PANEL
+         ===================================================== -->
+
+    <aside
+        class="hero-metadata"
+        id="heroMetadata"
+    >
+
+
+        <div
+            class="hero-laurels"
+            id="heroLaurels"
+        >
+
+
+            <div class="hero-laurel-vqff">
+
+                <img
+                    src="assets/logos/vqff-laurel.png"
+                    alt="Vancouver Queer Film Festival Official Selection"
+                >
+
+            </div>
+
+
+            <div class="hero-laurel-j4r">
+
+                <img
+                    src="assets/logos/justice4reel-laurel.png"
+                    alt="Justice4Reel Film Festival"
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <div
+            class="project-tabs"
+            role="tablist"
+            aria-label="Project information"
+        >
+
+
+            <button
+                class="project-tab active"
+                id="aboutProjectTab"
+                type="button"
+                role="tab"
+                aria-selected="true"
+            >
+                About Project
+            </button>
+
+
+            <button
+                class="project-tab"
+                id="trailerTab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+            >
+                Trailer
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="metadata-panel"
+            id="metadataPanel"
+        >
+
+
+            <div
+                class="about-panel"
+                id="aboutPanel"
+            >
+
+
+                <div
+                    class="hero-fact"
+                    id="factOne"
+                >
+
+                    <span class="hero-fact-label">
+                        Screenings
+                    </span>
+
+
+                    <div class="screening-entry">
+
+                        <strong>
+                            Justice4Reel Film Festival
+                        </strong>
+
+                        <br>
+
+                        June 27, 2026
+
+                        <br>
+
+                        Edmonton, Alberta
+
+                    </div>
+
+
+                    <div class="screening-entry">
+
+                        <strong>
+                            Vancouver Queer Film Festival
+                        </strong>
+
+                        <br>
+
+                        September 19, 2026
+
+                        <br>
+
+                        Vancouver, BC
+
+                        <br>
+
+
+                        <a
+                            href="#"
+                            class="metadata-ticket-link"
+                        >
+                            Get Tickets →
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="hero-fact"
+                    id="factTwo"
+                >
+
+                    <span class="hero-fact-label">
+                        Director
+                    </span>
+
+                    Ayilya Thampuran
+
+                </div>
+
+
+                <div
+                    class="hero-fact"
+                    id="factThree"
+                >
+
+                    <span class="hero-fact-label">
+                        Featuring
+                    </span>
+
+                    Badshah (Kai Rae Khushi)
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="trailer-panel"
+                id="trailerPanel"
+            >
+
+                <div
+                    id="trailerPlayerHost"
+                ></div>
+
+
+                <div
+                    class="trailer-project-title"
+                    id="trailerProjectTitle"
+                >
+                    Victoria Ka Raja — Official Trailer
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         CAROUSEL CONTROLS
+         ===================================================== -->
+
+    <div
+        class="carousel-count"
+        id="carouselCount"
+    >
+        01 / 03
+    </div>
+
+
+    <div class="carousel-dots">
+
+
+        <button
+            class="carousel-dot active"
+            data-slide="0"
+            aria-label="Victoria Ka Raja"
+        ></button>
+
+
+        <button
+            class="carousel-dot"
+            data-slide="1"
+            aria-label="Hypnos Lullaby"
+        ></button>
+
+
+        <button
+            class="carousel-dot"
+            data-slide="2"
+            aria-label="Or Your Money Back"
+        ></button>
+
+
+    </div>
+
+
+    <button
+        class="carousel-next"
+        id="carouselNext"
+        aria-label="Next project"
+    >
+
+        <svg
+            viewBox="0 0 110 60"
+            aria-hidden="true"
+        >
+
+            <line
+                x1="3"
+                y1="30"
+                x2="94"
+                y2="30"
+            />
+
+            <path
+                d="M75 10 L96 30 L75 50"
+            />
+
+        </svg>
+
+    </button>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     NEWS
+     ========================================================= -->
+
+<section
+    class="section"
+    id="news"
+>
+
+    <div class="section-inner">
+
+
+        <div class="section-title">
+
+            <h2>
+                From Flying Cat Productions
+            </h2>
+
+
+            <a
+                href="news.html"
+                class="small-orange-link"
+            >
+                All News →
+            </a>
+
+        </div>
+
+
+        <div class="news-grid">
+
+
+            <article class="news-card">
+
+                <div class="eyebrow">
+                    Festival Premiere / June 27, 2026
+                </div>
+
+
+                <h3>
+                    Victoria Ka Raja premieres at Justice4Reel
+                </h3>
+
+
+                <p>
+                    Victoria Ka Raja launches at the Edmonton
+                    John Humphrey Centre for Peace and Human
+                    Rights’ Justice4Reel Film Festival.
+                </p>
+
+            </article>
+
+
+            <article class="news-card">
+
+                <div class="eyebrow">
+                    Hypnos Lullaby Post-Production / January, 2025
+                </div>
+
+
+                <h3>
+                    Pinari Productions joins Hypnos Lullaby
+                </h3>
+
+
+                <p>
+                    Flying Cat Productions partners with
+                    Pinari Productions as post-production
+                    partner for Hypnos Lullaby.
+                </p>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             FILMMAKERS
+             ===================================================== -->
+
+        <div
+            class="makers"
+            id="about"
+        >
+
+
+            <div>
+
+
+                <div class="eyebrow">
+                    The Filmmakers
+                </div>
+
+
+                <h2>
+                    Built by people<br>
+                    who listen closely.
+                </h2>
+
+
+                <p class="makers-copy">
+
+                    Flying Cat Productions is a Vancouver-based
+                    independent film company founded by Ayilya
+                    Thampuran and Mikel Estrada. Together, they
+                    develop and produce documentary and narrative
+                    work with curiosity, care, and cinematic rigor.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="people">
+
+
+                <div class="person">
+
+                    <div class="avatar"></div>
+
+
+                    <div>
+
+                        <h3>
+                            Ayilya Thampuran
+                        </h3>
+
+
+                        <div class="role">
+                            Producer / Director / Editor
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="person">
+
+                    <div class="avatar"></div>
+
+
+                    <div>
+
+                        <h3>
+                            Mikel Estrada
+                        </h3>
+
+
+                        <div class="role">
+                            Producer / Director / VFX Artist
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             MAGAZINE
+             ===================================================== -->
+
+        <div
+            class="magazine"
+            id="magazine"
+        >
+
+
+            <div>
+
+
+                <div class="eyebrow">
+                    Focal Point Magazine
+                </div>
+
+
+                <h2>
+                    Read Focal<br>
+                    Point
+                </h2>
+
+
+                <p class="magazine-copy">
+
+                    Stories, essays, behind-the-scenes
+                    insights, and reflections from our
+                    filmmaking journey.
+
+                </p>
+
+
+                <a
+                    href="magazine.html"
+                    class="small-orange-link"
+                >
+                    Read the Magazine →
+                </a>
+
+
+            </div>
+
+
+            <div class="magazine-covers">
+
+
+                <div class="magazine-cover">
+
+                    <img
+                        src="assets/homepage/focal-cover.jpg"
+                        alt="Focal Point Magazine"
+                    >
+
+                </div>
+
+
+                <div class="magazine-cover">
+
+                    <img
+                        src="assets/homepage/focal-spread.jpg"
+                        alt="Focal Point editorial spread"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    <span>
+        © 2026 Flying Cat Productions
+    </span>
+
+    <span>
+        Vancouver, British Columbia
+    </span>
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================================================
+   PROJECT DATA
+   ========================================================= */
+
+const projects = [
+
+
+    {
+        heroClass:
+            "project-victoria",
+
+        title:
+            "Victoria<br>Ka Raja",
+
+        kicker:
+            "Documentary",
+
+        synopsis:
+            "The first Indian drag king in Canada, navigating culture and self-expression through performance.",
+
+        specs:
+            "English | 23 min | 4K",
+
+        image:
+            "assets/homepage/victoria-hero.jpg",
+
+        trailerId:
+            "rZhfV_KAeyo",
+
+        trailerThumbnail:
+            "assets/homepage/victoria-trailer-thumb.jpg",
+
+        desktopFocalPoint:
+            "37% 50%",
+
+        mobileFocalPoint:
+            "37% 50%",
+
+        desktopScale:
+            1,
+
+        mobileScale:
+            1.08,
+
+        safeCropScale:
+            1,
+
+        portraitBoost:
+            0.15,
+
+        maxAdaptiveBoost:
+            1.10,
+
+        animateImage:
+            false,
+
+        link:
+            "victoria-ka-raja.html",
+
+        showLaurels:
+            true,
+
+        factOne:
+            `
+            <span class="hero-fact-label">
+                Screenings
+            </span>
+
+            <div class="screening-entry">
+
+                <strong>
+                    Justice4Reel Film Festival
+                </strong>
+
+                <br>
+
+                June 27, 2026
+
+                <br>
+
+                Edmonton, Alberta
+
+            </div>
+
+
+            <div class="screening-entry">
+
+                <strong>
+                    Vancouver Queer Film Festival
+                </strong>
+
+                <br>
+
+                September 19, 2026
+
+                <br>
+
+                Vancouver, BC
+
+                <br>
+
+                <a
+                    href="#"
+                    class="metadata-ticket-link"
+                >
+                    Get Tickets →
+                </a>
+
+            </div>
+            `,
+
+        factTwo:
+            `
+            <span class="hero-fact-label">
+                Director
+            </span>
+
+            Ayilya Thampuran
+            `,
+
+        factThree:
+            `
+            <span class="hero-fact-label">
+                Featuring
+            </span>
+
+            Badshah (Kai Rae Khushi)
+            `
+    },
+
+
+    {
+        heroClass:
+            "project-hypnos",
+
+        title:
+            "Hypnos<br>Lullaby",
+
+        kicker:
+            "Narrative",
+
+        synopsis:
+            "A nocturnal narrative pilot drifting through longing, memory, and the fragile space between waking and dream.",
+
+        specs:
+            "English | 37 min | 4K",
+
+        image:
+            "assets/homepage/hypnos-hero.png",
+
+        trailerId:
+            "B37OvxFMxzE",
+
+        trailerThumbnail:
+            "assets/homepage/hypnos-trailer-thumb.jpg",
+
+        desktopFocalPoint:
+            "50% 48%",
+
+        mobileFocalPoint:
+            "50% 46%",
+
+        desktopScale:
+            1,
+
+        mobileScale:
+            1,
+
+        safeCropScale:
+            1.22,
+
+        portraitBoost:
+            0,
+
+        maxAdaptiveBoost:
+            1,
+
+        animateImage:
+            true,
+
+        link:
+            "#",
+
+        showLaurels:
+            false,
+
+        factOne:
+            `
+            <span class="hero-fact-label">
+                Status
+            </span>
+
+            In Development (Post Production)
+            `,
+
+        factTwo:
+            `
+            <span class="hero-fact-label">
+                Director
+            </span>
+
+            Mikel Estrada
+            `,
+
+        factThree:
+            `
+            <span class="hero-fact-label">
+                Featuring
+            </span>
+
+            Tahnee Langshaw as
+            <strong>Sarah Maddox</strong>
+
+            <br>
+
+            Mozi Mayaleh as
+            <strong>Joseph Reade</strong>
+
+            <br>
+
+            Ryan Minaker as
+            <strong>Ethan Bowman</strong>
+
+            <br>
+
+            Rebecca Vado as
+            <strong>Silvia Warrenhouse</strong>
+            `
+    },
+
+
+    {
+        heroClass:
+            "project-moneyback",
+
+        title:
+            "Or Your<br>Money Back",
+
+        kicker:
+            "Dark Comedy",
+
+        synopsis:
+            "A dark comedy short navigating the absurdity of promises, expectations, and what happens when satisfaction is anything but guaranteed.",
+
+        specs:
+            "English | Short Film | 4K",
+
+        image:
+            "assets/homepage/moneyback-hero.png",
+
+        trailerId:
+            null,
+
+        trailerThumbnail:
+            null,
+
+        desktopFocalPoint:
+            "50% 45%",
+
+        mobileFocalPoint:
+            "39% 44%",
+
+        desktopScale:
+            1,
+
+        mobileScale:
+            1,
+
+        safeCropScale:
+            1.38,
+
+        portraitBoost:
+            0,
+
+        maxAdaptiveBoost:
+            1,
+
+        animateImage:
+            false,
+
+        link:
+            "#",
+
+        showLaurels:
+            false,
+
+        factOne:
+            `
+            <span class="hero-fact-label">
+                Status
+            </span>
+
+            In Development (Post Production)
+            `,
+
+        factTwo:
+            `
+            <span class="hero-fact-label">
+                Director
+            </span>
+
+            Ivan Bello
+            `,
+
+        factThree:
+            `
+            <span class="hero-fact-label">
+                Featuring
+            </span>
+
+            Tasos Karantais as
+            <strong>Ash Reynolds</strong>
+
+            <br>
+
+            Christopher Rosario as
+            <strong>Terry Terenzi</strong>
+
+            <br>
+
+            Duncan Nicholson as
+            <strong>Pizza Boss</strong>
+
+            <br>
+
+            Aaron Peach as
+            <strong>Mob Boss</strong>
+
+            <br>
+
+            Elliot Roberts as
+            <strong>Mob Boss' Kid</strong>
+            `
+    }
+
+];
+
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const hero =
+    document.querySelector(
+        ".hero"
+    );
+
+const heroImage =
+    document.getElementById(
+        "heroImage"
+    );
+
+const heroCopy =
+    document.querySelector(
+        ".hero-copy"
+    );
+
+const heroMetadata =
+    document.getElementById(
+        "heroMetadata"
+    );
+
+const heroKicker =
+    document.getElementById(
+        "heroKicker"
+    );
+
+const heroTitle =
+    document.getElementById(
+        "heroTitle"
+    );
+
+const heroSynopsis =
+    document.getElementById(
+        "heroSynopsis"
+    );
+
+const heroSpecs =
+    document.getElementById(
+        "heroSpecs"
+    );
+
+const viewProject =
+    document.getElementById(
+        "viewProject"
+    );
+
+const heroLaurels =
+    document.getElementById(
+        "heroLaurels"
+    );
+
+const factOne =
+    document.getElementById(
+        "factOne"
+    );
+
+const factTwo =
+    document.getElementById(
+        "factTwo"
+    );
+
+const factThree =
+    document.getElementById(
+        "factThree"
+    );
+
+const aboutProjectTab =
+    document.getElementById(
+        "aboutProjectTab"
+    );
+
+const trailerTab =
+    document.getElementById(
+        "trailerTab"
+    );
+
+const metadataPanel =
+    document.getElementById(
+        "metadataPanel"
+    );
+
+const aboutPanel =
+    document.getElementById(
+        "aboutPanel"
+    );
+
+const trailerPanel =
+    document.getElementById(
+        "trailerPanel"
+    );
+
+const trailerPlayerHost =
+    document.getElementById(
+        "trailerPlayerHost"
+    );
+
+const trailerProjectTitle =
+    document.getElementById(
+        "trailerProjectTitle"
+    );
+
+const carouselCount =
+    document.getElementById(
+        "carouselCount"
+    );
+
+const carouselNext =
+    document.getElementById(
+        "carouselNext"
+    );
+
+const carouselDots =
+    document.querySelectorAll(
+        ".carousel-dot"
+    );
+
+let currentProject =
+    0;
+
+let panelTransitionTimer =
+    null;
+
+
+
+/* =========================================================
+   IMAGE FRAMING
+   ========================================================= */
+
+function getAdaptiveScaleMultiplier(
+    project
+) {
+
+    const width =
+        window.innerWidth;
+
+    const height =
+        window.innerHeight;
+
+    const aspectRatio =
+        width / height;
+
+    if (
+        aspectRatio >= 1.15
+    ) {
+
+        return 1;
+
+    }
+
+    const portraitAmount =
+        1.15 -
+        aspectRatio;
+
+    const boost =
+        1 +
+        (
+            portraitAmount *
+            project.portraitBoost
+        );
+
+    return Math.min(
+        boost,
+        project.maxAdaptiveBoost
+    );
+
+}
+
+
+
+function getProjectFraming(
+    project
+) {
+
+    const mobile =
+        window.innerWidth <= 700;
+
+    const baseScale =
+        mobile
+            ? project.mobileScale
+            : project.desktopScale;
+
+    const focalPoint =
+        mobile
+            ? project.mobileFocalPoint
+            : project.desktopFocalPoint;
+
+    const adaptiveMultiplier =
+        getAdaptiveScaleMultiplier(
+            project
+        );
+
+    const finalScale =
+        baseScale
+        *
+        adaptiveMultiplier
+        *
+        project.safeCropScale;
+
+    return {
+
+        focalPoint:
+            focalPoint,
+
+        scale:
+            finalScale
+
+    };
+
+}
+
+
+
+function applyStaticFraming(
+    project
+) {
+
+    const framing =
+        getProjectFraming(
+            project
+        );
+
+    heroImage.style.objectPosition =
+        framing.focalPoint;
+
+    heroImage.style.transform =
+        `
+        translate(-50%, -50%)
+        scale(${framing.scale})
+        `;
+
+}
+
+
+
+function applyHypnosMotion(
+    project
+) {
+
+    const framing =
+        getProjectFraming(
+            project
+        );
+
+    heroImage.style.objectPosition =
+        framing.focalPoint;
+
+    const startScale =
+        framing.scale;
+
+    const endScale =
+        framing.scale + 0.018;
+
+    heroImage.classList.remove(
+        "hypnos-motion"
+    );
+
+    heroImage.style.transform =
+        `
+        translate(-50%, -50%)
+        scale(${startScale})
+        `;
+
+    void heroImage.offsetWidth;
+
+    heroImage.classList.add(
+        "hypnos-motion"
+    );
+
+    requestAnimationFrame(
+        () => {
+
+            requestAnimationFrame(
+                () => {
+
+                    heroImage.style.transform =
+                        `
+                        translate(-50%, -50%)
+                        scale(${endScale})
+                        `;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   TRAILER
+   ========================================================= */
+
+function clearTrailerPlayer() {
+
+    trailerPlayerHost.innerHTML =
+        "";
+
+}
+
+
+
+function buildTrailerPreview(
+    project
+) {
+
+    clearTrailerPlayer();
+
+    if (
+        !project.trailerId
+    ) {
+
+        trailerPlayerHost.innerHTML =
+            `
+            <div class="trailer-coming-soon">
+                <span>
+                    Trailer Coming Soon
+                </span>
+            </div>
+            `;
+
+        return;
+
+    }
+
+    const player =
+        document.createElement(
+            "div"
+        );
+
+    player.className =
+        "trailer-player";
+
+    const startButton =
+        document.createElement(
+            "button"
+        );
+
+    startButton.type =
+        "button";
+
+    startButton.className =
+        "trailer-start";
+
+    startButton.setAttribute(
+        "aria-label",
+        `Play ${project.title.replace("<br>", " ")} trailer`
+    );
+
+    startButton.innerHTML =
+        `
+        <img
+            class="trailer-thumbnail"
+            src="${project.trailerThumbnail}"
+            alt=""
+        >
+
+        <span class="trailer-play-icon"></span>
+
+        <span class="trailer-start-label">
+            Play Trailer
+        </span>
+        `;
+
+    startButton.addEventListener(
+        "click",
+        () => {
+
+            const iframe =
+                document.createElement(
+                    "iframe"
+                );
+
+            iframe.src =
+                `https://www.youtube-nocookie.com/embed/${project.trailerId}?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3`;
+
+            iframe.title =
+                `${project.title.replace("<br>", " ")} Trailer`;
+
+            iframe.allow =
+                "autoplay; encrypted-media; picture-in-picture; fullscreen";
+
+            iframe.allowFullscreen =
+                true;
+
+            player.innerHTML =
+                "";
+
+            player.appendChild(
+                iframe
+            );
+
+        }
+    );
+
+    player.appendChild(
+        startButton
+    );
+
+    trailerPlayerHost.appendChild(
+        player
+    );
+
+}
+
+
+
+/* =========================================================
+   ABOUT / TRAILER PANEL
+   ========================================================= */
+
+function applyProjectPanel(
+    panelName
+) {
+
+    const project =
+        projects[
+            currentProject
+        ];
+
+    const showTrailer =
+        panelName ===
+        "trailer";
+
+    aboutProjectTab.classList.toggle(
+        "active",
+        !showTrailer
+    );
+
+    trailerTab.classList.toggle(
+        "active",
+        showTrailer
+    );
+
+    aboutProjectTab.setAttribute(
+        "aria-selected",
+        String(
+            !showTrailer
+        )
+    );
+
+    trailerTab.setAttribute(
+        "aria-selected",
+        String(
+            showTrailer
+        )
+    );
+
+    aboutPanel.classList.toggle(
+        "hidden",
+        showTrailer
+    );
+
+    trailerPanel.classList.toggle(
+        "active",
+        showTrailer
+    );
+
+    if (
+        showTrailer
+    ) {
+
+        buildTrailerPreview(
+            project
+        );
+
+        if (
+            project.trailerId
+        ) {
+
+            trailerProjectTitle.textContent =
+                project.title
+                    .replace(
+                        "<br>",
+                        " "
+                    )
+                +
+                " — Official Trailer";
+
+        } else {
+
+            trailerProjectTitle.textContent =
+                project.title
+                    .replace(
+                        "<br>",
+                        " "
+                    );
+
+        }
+
+    } else {
+
+        clearTrailerPlayer();
+
+    }
+
+}
+
+
+
+function setProjectPanel(
+    panelName,
+    animate = true
+) {
+
+    clearTimeout(
+        panelTransitionTimer
+    );
+
+    if (
+        !animate
+    ) {
+
+        metadataPanel.classList.remove(
+            "panel-leaving",
+            "panel-entering"
+        );
+
+        applyProjectPanel(
+            panelName
+        );
+
+        return;
+
+    }
+
+    metadataPanel.classList.remove(
+        "panel-entering"
+    );
+
+    metadataPanel.classList.add(
+        "panel-leaving"
+    );
+
+    panelTransitionTimer =
+        setTimeout(
+            () => {
+
+                applyProjectPanel(
+                    panelName
+                );
+
+                metadataPanel.classList.remove(
+                    "panel-leaving"
+                );
+
+                metadataPanel.classList.add(
+                    "panel-entering"
+                );
+
+                void metadataPanel.offsetWidth;
+
+                requestAnimationFrame(
+                    () => {
+
+                        requestAnimationFrame(
+                            () => {
+
+                                metadataPanel.classList.remove(
+                                    "panel-entering"
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            },
+            280
+        );
+
+}
+
+
+
+aboutProjectTab.addEventListener(
+    "click",
+    () => {
+
+        if (
+            aboutProjectTab.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+        setProjectPanel(
+            "about"
+        );
+
+    }
+);
+
+
+
+trailerTab.addEventListener(
+    "click",
+    () => {
+
+        if (
+            trailerTab.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+        setProjectPanel(
+            "trailer"
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   CAROUSEL
+   ========================================================= */
+
+function showProject(
+    index
+) {
+
+    clearTimeout(
+        panelTransitionTimer
+    );
+
+    currentProject =
+        (
+            index +
+            projects.length
+        )
+        %
+        projects.length;
+
+    const project =
+        projects[
+            currentProject
+        ];
+
+    heroImage.classList.remove(
+        "hypnos-motion"
+    );
+
+    heroImage.style.opacity =
+        "0";
+
+    heroCopy.classList.remove(
+        "text-entering"
+    );
+
+    heroCopy.classList.add(
+        "text-leaving"
+    );
+
+    heroMetadata.classList.remove(
+        "metadata-entering"
+    );
+
+    heroMetadata.classList.add(
+        "metadata-leaving"
+    );
+
+    setTimeout(
+        () => {
+
+            hero.classList.remove(
+                "project-victoria",
+                "project-hypnos",
+                "project-moneyback"
+            );
+
+            hero.classList.add(
+                project.heroClass
+            );
+
+            heroImage.src =
+                project.image;
+
+            heroKicker.textContent =
+                project.kicker;
+
+            heroTitle.innerHTML =
+                project.title;
+
+            heroSynopsis.textContent =
+                project.synopsis;
+
+            heroSpecs.textContent =
+                project.specs;
+
+            viewProject.href =
+                project.link;
+
+            factOne.innerHTML =
+                project.factOne;
+
+            factTwo.innerHTML =
+                project.factTwo;
+
+            factThree.innerHTML =
+                project.factThree;
+
+            setProjectPanel(
+                "about",
+                false
+            );
+
+            heroLaurels.classList.toggle(
+                "hidden",
+                !project.showLaurels
+            );
+
+            carouselCount.textContent =
+                String(
+                    currentProject + 1
+                )
+                .padStart(
+                    2,
+                    "0"
+                )
+                +
+                " / "
+                +
+                String(
+                    projects.length
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+            carouselDots.forEach(
+                (
+                    dot,
+                    dotIndex
+                ) => {
+
+                    dot.classList.toggle(
+                        "active",
+                        dotIndex ===
+                        currentProject
+                    );
+
+                }
+            );
+
+            if (
+                project.animateImage
+            ) {
+
+                applyHypnosMotion(
+                    project
+                );
+
+            } else {
+
+                applyStaticFraming(
+                    project
+                );
+
+            }
+
+            heroCopy.classList.remove(
+                "text-leaving"
+            );
+
+            heroCopy.classList.add(
+                "text-entering"
+            );
+
+            heroMetadata.classList.remove(
+                "metadata-leaving"
+            );
+
+            heroMetadata.classList.add(
+                "metadata-entering"
+            );
+
+            void heroCopy.offsetWidth;
+            void heroMetadata.offsetWidth;
+
+            heroImage.style.opacity =
+                "1";
+
+            requestAnimationFrame(
+                () => {
+
+                    requestAnimationFrame(
+                        () => {
+
+                            heroCopy.classList.remove(
+                                "text-entering"
+                            );
+
+                            heroMetadata.classList.remove(
+                                "metadata-entering"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        },
+        280
+    );
+
+}
+
+
+
+carouselNext.addEventListener(
+    "click",
+    () => {
+
+        showProject(
+            currentProject + 1
+        );
+
+    }
+);
+
+
+
+carouselDots.forEach(
+    dot => {
+
+        dot.addEventListener(
+            "click",
+            () => {
+
+                showProject(
+                    Number(
+                        dot.dataset.slide
+                    )
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   RESIZE
+   ========================================================= */
+
+let resizeFrame;
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        cancelAnimationFrame(
+            resizeFrame
+        );
+
+        resizeFrame =
+            requestAnimationFrame(
+                () => {
+
+                    const project =
+                        projects[
+                            currentProject
+                        ];
+
+                    heroImage.classList.remove(
+                        "hypnos-motion"
+                    );
+
+                    applyStaticFraming(
+                        project
+                    );
+
+                }
+            );
+
+    }
+);
+
+
+
+showProject(0);
+
+</script>
+
+
+<!-- =========================================================
+     SHARED GLOBAL HEADER SCRIPT
+     ========================================================= -->
+
+<script src="assets/js/header.js"></script>
+
+
+</body>
+
+</html>

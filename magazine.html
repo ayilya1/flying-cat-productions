@@ -1,0 +1,5293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Focal Point Magazine — Flying Cat Productions</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="assets/css/header.css"
+>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root {
+    --black: #050505;
+    --reader-black: #030303;
+    --white: #f4f0e7;
+    --lime: #C8FF20;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    background: var(--reader-black);
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100svh;
+
+    color: var(--white);
+    background: var(--reader-black);
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+body.mode-print {
+    height: 100svh;
+    overflow: hidden;
+}
+
+body.mode-web {
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+img {
+    display: block;
+}
+
+
+/* =========================================================
+   GRAIN
+   ========================================================= */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: .018;
+
+    background-image:
+        url(
+            "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.4'/%3E%3C/svg%3E"
+        );
+}
+
+
+/* =========================================================
+   SHARED GLOBAL HEADER PLACEMENT
+   ========================================================= */
+
+fcp-header {
+    display: block;
+    width: 100%;
+    z-index: 300;
+}
+
+body.mode-print fcp-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+body.mode-web fcp-header {
+    position: relative;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
+}
+
+
+/* =========================================================
+   PRINT / WEB SWITCH
+   ========================================================= */
+
+.edition-switch-wrap {
+    position: absolute;
+
+    top: 118px;
+    left: 50%;
+
+    z-index: 350;
+
+    transform: translateX(-50%);
+}
+
+body.mode-web .edition-switch-wrap {
+    top: 118px;
+}
+
+.edition-switch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 5px;
+
+    border:
+        1px solid
+        rgba(200,255,32,.22);
+
+    border-radius: 999px;
+
+    background:
+        rgba(5,5,5,.76);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.edition-tab {
+    padding:
+        8px
+        14px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.48);
+
+    cursor: pointer;
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    transition:
+        color .2s ease,
+        background .2s ease;
+}
+
+.edition-tab:hover {
+    color: var(--lime);
+}
+
+.edition-tab.active {
+    color: var(--black);
+    background: var(--lime);
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.edition-panel {
+    width: 100%;
+}
+
+.edition-panel[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   PRINT EDITION
+   ========================================================= */
+
+.print-edition {
+    position: relative;
+
+    width: 100vw;
+    height: 100svh;
+
+    overflow: hidden;
+
+    background:
+        var(--reader-black);
+}
+
+
+/* =========================================================
+   READER
+   ========================================================= */
+
+.reader {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        155px
+        70px
+        82px;
+}
+
+.book-stage {
+    position: relative;
+
+    width:
+        min(
+            1260px,
+            calc(100vw - 170px)
+        );
+
+    height:
+    min(
+        70vh,
+        760px
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+#flipbook {
+    position: relative;
+    z-index: 20;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        transparent !important;
+
+    transform-origin: center;
+}
+
+
+/* =========================================================
+   BOOK PAGES
+   ========================================================= */
+
+.book-page {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #f5f2e9;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    border-radius: 2px;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.24),
+        0 5px 14px rgba(0,0,0,.16),
+        inset 0 0 0 1px rgba(255,255,255,.06);
+
+    filter: none;
+}
+
+.page-art {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+
+    border-radius: 2px;
+
+    user-select: none;
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+}
+
+.book-page:not(.filler-page)::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    opacity: .13;
+
+    background-image:
+        url(
+            "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.22'/%3E%3C/svg%3E"
+        );
+
+    mix-blend-mode: soft-light;
+}
+.book-page:not(.filler-page)::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 6;
+
+    pointer-events: none;
+
+    border-radius: 2px;
+
+    box-shadow:
+        inset 1px 0 2px rgba(255,255,255,.10),
+        inset -1px 0 3px rgba(0,0,0,.10),
+        inset 0 1px 2px rgba(255,255,255,.05),
+        inset 0 -1px 2px rgba(0,0,0,.08);
+}
+
+
+/* =========================================================
+   FILLER PAGES
+   ========================================================= */
+
+.book-page.filler-page,
+.stf__item.filler-page {
+    background:
+        var(--reader-black) !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+#flipbook .stf__item:first-child,
+#flipbook .stf__item:first-child > div {
+    background:
+        var(--reader-black) !important;
+
+    background-color:
+        var(--reader-black) !important;
+}
+
+.book-page.filler-page::before,
+.book-page.filler-page::after,
+.stf__item.filler-page::before,
+.stf__item.filler-page::after {
+    content: none !important;
+    display: none !important;
+}
+
+#flipbook .stf__parent,
+#flipbook .stf__wrapper,
+#flipbook .stf__block {
+    background:
+        transparent !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+}
+
+
+/* =========================================================
+   EDGE TURN FIX
+   ========================================================= */
+
+.book-stage.edge-turn .stf__outerShadow,
+.book-stage.edge-turn .stf__innerShadow,
+.book-stage.edge-turn .stf__hardShadow,
+.book-stage.edge-turn .stf__hardInnerShadow {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.book-stage.edge-turn [class*="Shadow"] {
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   SUBTLE SPINE
+   ========================================================= */
+
+.spine-shadow {
+    position: absolute;
+
+    z-index: 80;
+
+    top: 50%;
+    left: 50%;
+
+    width: 14px;
+
+    height:
+        calc(
+            100% - 2px
+        );
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity .12s ease;
+}
+
+.book-stage.book-open:not(.page-moving)
+.spine-shadow {
+    opacity: 1;
+}
+
+.book-stage.page-moving
+.spine-shadow,
+
+.book-stage.edge-turn
+.spine-shadow {
+    opacity: 0 !important;
+}
+
+.spine-shadow::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0,0,0,.03) 15%,
+            rgba(0,0,0,.12) 35%,
+            rgba(0,0,0,.24) 47%,
+            rgba(0,0,0,.30) 50%,
+            rgba(0,0,0,.24) 53%,
+            rgba(0,0,0,.12) 65%,
+            rgba(0,0,0,.03) 85%,
+            transparent 100%
+        );
+
+    filter: blur(.4px);
+}
+
+
+/* =========================================================
+   PRINT ARROWS
+   ========================================================= */
+
+.nav-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 120;
+
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--lime);
+
+    cursor: pointer;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.nav-arrow:hover:not(:disabled) {
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+.nav-arrow:disabled {
+    opacity: .14;
+    cursor: default;
+}
+
+.nav-arrow svg {
+    width: 36px;
+    height: 36px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.4;
+}
+
+.prev-arrow {
+    left: 12px;
+}
+
+.next-arrow {
+    right: 12px;
+}
+
+
+/* =========================================================
+   PRINT CONTROLS
+   ========================================================= */
+
+.reader-controls {
+    position: absolute;
+
+    left: 50%;
+    bottom: 21px;
+
+    z-index: 130;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding:
+        10px
+        16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 100px;
+
+    background:
+        rgba(5,5,5,.74);
+
+    backdrop-filter: blur(16px);
+}
+
+.page-counter {
+    min-width: 105px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .14em;
+
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tool-button {
+    width: 25px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.72);
+
+    cursor: pointer;
+}
+
+.tool-button:hover {
+    color: var(--lime);
+}
+
+.control-line {
+    width: 1px;
+    height: 17px;
+
+    background:
+        rgba(255,255,255,.14);
+}
+
+
+/* =========================================================
+   PRINT LOADING
+   ========================================================= */
+
+.loading-screen {
+    position: absolute;
+    inset: 0;
+
+    z-index: 500;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    background: var(--black);
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-title {
+    color: var(--lime);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.loading-copy {
+    color:
+        rgba(255,255,255,.42);
+
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+
+.loading-track {
+    width: 180px;
+    height: 2px;
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.12);
+}
+
+.loading-bar {
+    width: 0;
+    height: 100%;
+
+    background: var(--lime);
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.reader-error {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 600;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    display: none;
+
+    width:
+        min(
+            440px,
+            calc(100vw - 40px)
+        );
+
+    padding: 30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    background: #0a0a0a;
+
+    text-align: center;
+}
+
+.reader-error.visible {
+    display: block;
+}
+
+
+/* =========================================================
+   WEB EDITION
+   ========================================================= */
+
+.web-edition {
+    min-height: 100svh;
+
+    padding-top: 55px;
+
+    background: var(--reader-black);
+    color: var(--white);
+}
+
+.web-shell {
+    width:
+        min(
+            1500px,
+            calc(100% - 48px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        45px
+        0
+        100px;
+}
+
+
+/* =========================================================
+   WEB HEADER
+   ========================================================= */
+
+.web-intro-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+    padding-bottom: 22px;
+}
+
+.web-eyebrow {
+    color: var(--lime);
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+}
+
+.web-issue {
+    color:
+        rgba(255,255,255,.45);
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+}
+
+.web-heading {
+    margin: 0;
+
+    padding:
+        10px
+        0
+        6px;
+
+    color: var(--lime);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            64px,
+            12.8vw,
+            100px
+        );
+
+    line-height: .82;
+    letter-spacing: -.075em;
+
+    text-transform: uppercase;
+}
+
+.web-tagline {
+    margin:
+        10px
+        0
+        38px;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+}
+
+.web-rule {
+    width: 100%;
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.14);
+}
+
+
+/* =========================================================
+   CMS STATUS
+   ========================================================= */
+
+.cms-status {
+    padding:
+        55px
+        0;
+
+    color:
+        rgba(255,255,255,.48);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 22px;
+}
+
+.cms-status.error {
+    color: var(--lime);
+}
+
+
+/* =========================================================
+   WEB GRID
+   ========================================================= */
+
+.web-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.14);
+}
+
+.web-card {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 30px;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.14);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.14);
+
+    background: var(--reader-black);
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease;
+}
+
+.web-card:hover {
+    background:
+        rgba(200,255,32,.055);
+}
+
+.web-card.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.web-card-image {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+.web-card.featured .web-card-image {
+    aspect-ratio: 1.38 / 1;
+}
+
+.web-card-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+}
+
+.web-card:hover .web-card-image img {
+    transform: scale(1.015);
+}
+
+.web-card-placeholder {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    place-items: center;
+
+    color:
+        rgba(255,255,255,.25);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+.web-card-meta {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 16px;
+
+    color: var(--white);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+.web-card-category {
+    color: var(--lime);
+}
+
+.web-card-title {
+    max-width: 20ch;
+
+    margin:
+        9px
+        0
+        12px;
+
+    color: var(--white);
+
+    font-size:
+        clamp(
+            18px,
+            2vw,
+            33px
+        );
+
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -.045em;
+}
+
+.web-card:not(.featured) .web-card-title {
+    font-size:
+        clamp(
+            17px,
+            1.4vw,
+            23px
+        );
+}
+
+.web-card-description {
+    max-width: 62ch;
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.web-card-link {
+    display: inline-block;
+
+    margin-top: 19px;
+    padding-bottom: 3px;
+
+    color: var(--lime);
+
+    border-bottom:
+        1px solid
+        var(--lime);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ARTICLE VIEW
+   ========================================================= */
+
+.article-view {
+    display: none;
+
+    min-height: 100svh;
+
+    background: var(--reader-black);
+}
+
+.article-view.visible {
+    display: block;
+}
+
+.web-index.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   ARTICLE TOP BAR
+   ========================================================= */
+
+.article-topbar {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    padding:
+        16px
+        30px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.13);
+
+    background:
+        rgba(3,3,3,.94);
+
+    backdrop-filter: blur(16px);
+}
+
+.article-back {
+    justify-self: start;
+
+    padding: 0;
+    border: 0;
+
+    background: transparent;
+    color: var(--lime);
+
+    cursor: pointer;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+.article-top-brand {
+    justify-self: center;
+
+    color: var(--lime);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size: 13px;
+    letter-spacing: -.04em;
+
+    text-transform: uppercase;
+}
+
+.article-top-category {
+    justify-self: end;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ARTICLE HERO
+   ========================================================= */
+
+.article-hero {
+    width:
+        min(
+            1200px,
+            calc(100% - 48px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        85px
+        0
+        50px;
+}
+
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap:
+        10px
+        24px;
+
+    margin-bottom: 24px;
+
+    color: var(--lime);
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+.article-title {
+    max-width: 15ch;
+
+    margin: 0;
+
+    color: var(--white);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            55px,
+            8.5vw,
+            125px
+        );
+
+    line-height: .88;
+    letter-spacing: -.07em;
+
+    text-transform: uppercase;
+}
+
+.article-subtitle {
+    max-width: 760px;
+
+    margin:
+        30px
+        0
+        0;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            23px,
+            2.2vw,
+            34px
+        );
+
+    line-height: 1.22;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.article-hero-image {
+    width:
+        min(
+            900px,
+            100%
+        );
+
+    max-height: 62vh;
+
+    margin:
+        50px
+        auto
+        0;
+
+    object-fit: cover;
+
+    background: #111;
+}
+
+
+/* =========================================================
+   ARTICLE BODY
+   ========================================================= */
+
+.article-content {
+    padding-bottom: 80px;
+}
+
+.article-text {
+    width:
+        min(
+            760px,
+            calc(100% - 48px)
+        );
+
+    margin: 0 auto;
+}
+
+.article-paragraph {
+    margin:
+        0
+        0
+        1.3em;
+
+    color:
+        rgba(255,255,255,.79);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            21px,
+            2vw,
+            27px
+        );
+
+    line-height: 1.5;
+}
+
+.article-paragraph strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.article-paragraph em {
+    font-style: italic;
+}
+
+.article-paragraph a {
+    color: var(--lime);
+    text-decoration: underline;
+}
+
+.article-heading {
+    margin:
+        2.2em
+        0
+        .8em;
+
+    color: var(--white);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            52px
+        );
+
+    line-height: .95;
+    letter-spacing: -.05em;
+
+    text-transform: uppercase;
+}
+
+.article-quote {
+    width:
+        min(
+            1050px,
+            calc(100% - 48px)
+        );
+
+    margin:
+        90px
+        auto;
+
+    padding:
+        50px
+        0;
+
+    border-top:
+        1px solid
+        rgba(200,255,32,.5);
+
+    border-bottom:
+        1px solid
+        rgba(200,255,32,.5);
+
+    color: var(--lime);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            70px
+        );
+
+    line-height: .98;
+    letter-spacing: -.055em;
+
+    text-transform: uppercase;
+}
+
+.article-quote-attribution {
+    display: block;
+
+    margin-top: 25px;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 9px;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ARTICLE IMAGE
+   ========================================================= */
+
+.article-image-block {
+    width:
+        min(
+            688px,
+            calc(100% - 48px)
+        );
+
+    margin:
+        75px
+        auto;
+}
+
+.article-image-block img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* =========================================================
+   HIDDEN LOCATIONS — WIDER STRIP IMAGES
+   ========================================================= */
+
+.article-view.hidden-locations
+.article-image-block {
+    width:
+        min(
+            950px,
+            calc(100% - 48px)
+        );
+}
+
+.article-caption {
+    margin-top: 14px;
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   ARTICLE DIVIDER
+   ========================================================= */
+
+.article-divider {
+    width:
+        min(
+            760px,
+            calc(100% - 48px)
+        );
+
+    height: 1px;
+
+    margin:
+        70px
+        auto;
+
+    background:
+        rgba(255,255,255,.16);
+}
+
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.article-video {
+    width:
+        min(
+            1100px,
+            calc(100% - 48px)
+        );
+
+    margin:
+        75px
+        auto;
+}
+
+.article-video-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.article-video iframe {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+.article-audio {
+    width:
+        min(
+            760px,
+            calc(100% - 48px)
+        );
+
+    margin:
+        65px
+        auto;
+
+    padding: 28px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+}
+
+.article-audio-title {
+    margin:
+        0
+        0
+        20px;
+
+    color: var(--lime);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size: 18px;
+
+    text-transform: uppercase;
+}
+
+.article-audio audio {
+    width: 100%;
+}
+
+.article-audio-embed {
+    margin-top: 18px;
+}
+
+.article-audio-embed iframe {
+    width: 100%;
+    min-height: 180px;
+
+    border: 0;
+}
+
+
+/* =========================================================
+   ARTICLE FOOTER NAV
+   ========================================================= */
+
+.article-footer-nav button {
+    padding: 0;
+    border: 0;
+
+    background: transparent;
+    color: var(--lime);
+
+    cursor: pointer;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   CONTRIBUTOR SECTIONS
+   ========================================================= */
+
+.article-contributor {
+    width:
+        min(
+            900px,
+            calc(100% - 48px)
+        );
+
+    margin:
+        90px
+        auto;
+
+    padding-top: 34px;
+
+    border-top:
+        1px solid
+        rgba(200,255,32,.42);
+}
+
+.contributor-section-title {
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+.contributor-name {
+    margin: 0;
+
+    color: var(--white);
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+    clamp(
+        28px,
+        3.6vw,
+        48px
+    );
+
+    line-height: .92;
+    letter-spacing: -.055em;
+
+    text-transform: uppercase;
+}
+
+.contributor-role {
+    margin-top: 10px;
+
+    color:
+        rgba(255,255,255,.48);
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+.contributor-text {
+    width:
+        min(
+            760px,
+            100%
+        );
+
+    margin-top: 32px;
+}
+
+.contributor-text .article-paragraph {
+    width: 100%;
+}
+
+.contributor-image {
+    width:
+        min(
+            760px,
+            100%
+        );
+
+    margin:
+        45px
+        auto
+        0;
+}
+
+.contributor-image img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media
+(max-width: 900px) {
+
+    .web-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+    .web-card.featured {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media
+(max-width: 760px) {
+
+    .edition-switch-wrap {
+        top: 105px;
+    }
+
+    .edition-tab {
+        padding:
+            7px
+            11px;
+
+        font-size: 7px;
+    }
+
+    .reader {
+        padding:
+            130px
+            10px
+            80px;
+    }
+
+    .book-stage {
+        width:
+            calc(
+                100vw - 20px
+            );
+
+        height:
+            calc(
+                100svh - 215px
+            );
+    }
+
+    .nav-arrow {
+        display: none;
+    }
+
+    .reader-controls {
+        bottom: 16px;
+
+        gap: 14px;
+
+        padding:
+            9px
+            13px;
+    }
+
+    .web-edition {
+        padding-top: 70px;
+    }
+
+    .web-shell {
+        width: 100%;
+        padding-top: 30px;
+    }
+
+    .web-intro-row {
+        margin:
+            0
+            16px;
+    }
+
+    .web-heading {
+        margin:
+            0
+            16px;
+
+        font-size: 20vw;
+    }
+
+    .web-tagline {
+        margin:
+            8px
+            16px
+            26px;
+
+        font-size: 8px;
+    }
+
+    .web-grid {
+        grid-template-columns: 1fr;
+        border-left: 0;
+    }
+
+    .web-card,
+    .web-card.featured {
+        grid-column: auto;
+        grid-row: auto;
+
+        padding:
+            18px
+            16px
+            30px;
+
+        border-right: 0;
+    }
+
+    .web-card.featured .web-card-image,
+    .web-card-image {
+        aspect-ratio: 4 / 3;
+    }
+
+    .article-topbar {
+        grid-template-columns:
+            1fr
+            auto;
+
+        padding:
+            14px
+            16px;
+    }
+
+    .article-top-brand {
+        display: none;
+    }
+
+    .article-hero {
+        width:
+            calc(
+                100% - 32px
+            );
+
+        padding-top: 55px;
+    }
+
+    .article-title {
+        font-size: 14vw;
+    }
+
+    .article-hero-image {
+        width: 100%;
+        max-height: 55vh;
+
+        margin-top: 35px;
+    }
+
+    .article-text,
+    .article-divider,
+    .article-audio {
+        width:
+            calc(
+                100% - 32px
+            );
+    }
+
+    .article-image-block,
+    .article-view.hidden-locations .article-image-block,
+    .article-quote,
+    .article-video,
+    .article-footer-nav {
+        width:
+            calc(
+                100% - 32px
+            );
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="mode-print">
+
+
+<!-- =========================================================
+     SHARED GLOBAL HEADER
+     ========================================================= -->
+
+<fcp-header></fcp-header>
+
+
+<!-- =========================================================
+     EDITION SWITCH
+     ========================================================= -->
+
+<div class="edition-switch-wrap">
+
+    <div
+        class="edition-switch"
+        role="tablist"
+        aria-label="Magazine edition"
+    >
+
+        <button
+    class="edition-tab active"
+    id="webTab"
+    type="button"
+>
+    Web Version
+</button>
+
+<button
+    class="edition-tab"
+    id="printTab"
+    type="button"
+>
+    Print Version
+</button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PRINT EDITION
+     ========================================================= -->
+
+<main
+    class="edition-panel print-edition"
+    id="printEdition"
+    hidden
+>
+
+    <section class="reader">
+
+        <button
+            class="nav-arrow prev-arrow"
+            id="prevButton"
+            type="button"
+            aria-label="Previous spread"
+            disabled
+        >
+
+            <svg viewBox="0 0 40 40">
+                <path d="M25 7 L12 20 L25 33" />
+            </svg>
+
+        </button>
+
+
+        <div
+            class="book-stage"
+            id="bookStage"
+        >
+
+            <div id="flipbook"></div>
+
+            <div class="spine-shadow"></div>
+
+        </div>
+
+
+        <button
+            class="nav-arrow next-arrow"
+            id="nextButton"
+            type="button"
+            aria-label="Next spread"
+        >
+
+            <svg viewBox="0 0 40 40">
+                <path d="M15 7 L28 20 L15 33" />
+            </svg>
+
+        </button>
+
+    </section>
+
+
+    <div class="reader-controls">
+
+        <button
+            class="tool-button"
+            id="zoomOut"
+            type="button"
+            aria-label="Zoom out"
+        >
+            −
+        </button>
+
+        <div
+            class="page-counter"
+            id="pageCounter"
+        >
+            Cover
+        </div>
+
+        <button
+            class="tool-button"
+            id="zoomIn"
+            type="button"
+            aria-label="Zoom in"
+        >
+            +
+        </button>
+
+        <div class="control-line"></div>
+
+        <button
+            class="tool-button"
+            id="fullscreenButton"
+            type="button"
+            aria-label="Fullscreen"
+        >
+            ⛶
+        </button>
+
+    </div>
+
+
+    <div
+        class="loading-screen"
+        id="loadingScreen"
+    >
+
+        <div class="loading-title">
+            Focal Point
+        </div>
+
+        <div
+            class="loading-copy"
+            id="loadingCopy"
+        >
+            Loading magazine
+        </div>
+
+        <div class="loading-track">
+            <div
+                class="loading-bar"
+                id="loadingBar"
+            ></div>
+        </div>
+
+    </div>
+
+
+    <div
+        class="reader-error"
+        id="readerError"
+    >
+        Magazine unavailable.
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     WEB EDITION
+     ========================================================= -->
+
+<main
+    class="edition-panel web-edition"
+    id="webEdition"
+>
+
+    <div
+        class="web-index"
+        id="webIndex"
+    >
+
+        <div class="web-shell">
+
+            <div class="web-intro-row">
+
+                <div
+                    class="web-eyebrow"
+                    id="webEyebrow"
+                >
+                    Focal Point · Web Edition
+                </div>
+
+                <div
+                    class="web-issue"
+                    id="webIssue"
+                >
+                    Issue 01
+                </div>
+
+            </div>
+
+
+            <h1
+                class="web-heading"
+                id="webHeading"
+            >
+                Focal Point
+            </h1>
+
+
+            <div
+                class="web-tagline"
+                id="webTagline"
+            >
+                For Filmmakers, By Filmmakers
+            </div>
+
+
+            <div class="web-rule"></div>
+
+
+            <div
+                class="cms-status"
+                id="cmsStatus"
+            >
+                Loading articles…
+            </div>
+
+
+            <section
+                class="web-grid"
+                id="webGrid"
+                hidden
+            ></section>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ARTICLE PAGE
+         ===================================================== -->
+
+    <article
+        class="article-view"
+        id="articleView"
+    >
+
+        <div class="article-topbar">
+
+            <button
+                class="article-back"
+                id="articleBack"
+                type="button"
+            >
+                ← Web Edition
+            </button>
+
+            <div class="article-top-brand">
+                Focal Point
+            </div>
+
+            <div
+                class="article-top-category"
+                id="articleTopCategory"
+            ></div>
+
+        </div>
+
+
+        <header class="article-hero">
+
+            <div
+                class="article-meta"
+                id="articleMeta"
+            ></div>
+
+
+            <h1
+                class="article-title"
+                id="articleTitle"
+            ></h1>
+
+
+            <p
+                class="article-subtitle"
+                id="articleSubtitle"
+            ></p>
+
+
+            <img
+                class="article-hero-image"
+                id="articleHeroImage"
+                src=""
+                alt=""
+                hidden
+            >
+
+        </header>
+
+
+        <div
+            class="article-content"
+            id="articleContent"
+        ></div>
+
+
+        <div class="article-footer-nav">
+
+            <button
+                id="previousArticle"
+                type="button"
+            >
+                ← Previous
+            </button>
+
+            <button
+                id="nextArticle"
+                type="button"
+            >
+                Next →
+            </button>
+
+        </div>
+
+    </article>
+
+</main>
+
+
+<!-- =========================================================
+     SHARED GLOBAL HEADER SCRIPT
+     ========================================================= -->
+
+<script src="assets/js/header.js"></script>
+
+
+<!-- =========================================================
+     PAGE FLIP
+     ========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"
+></script>
+
+
+<script type="module">
+
+import * as pdfjsLib from
+"https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
+
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
+
+
+/* =========================================================
+   CONFIG
+   ========================================================= */
+
+const STRAPI_URL =
+    "http://localhost:1337";
+
+
+const PDF_URL =
+    "assets/magazine/Focal Point Magazine Main.pdf";
+
+
+const CROP_FRACTION =
+    .03;
+
+
+const PAGE_RENDER_HEIGHT =
+    1400;
+
+
+const FLIP_TIME =
+    1250;
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const printTab =
+    document.getElementById("printTab");
+
+const webTab =
+    document.getElementById("webTab");
+
+const printEdition =
+    document.getElementById("printEdition");
+
+const webEdition =
+    document.getElementById("webEdition");
+
+const bookStage =
+    document.getElementById("bookStage");
+
+const flipbook =
+    document.getElementById("flipbook");
+
+const prevButton =
+    document.getElementById("prevButton");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const pageCounter =
+    document.getElementById("pageCounter");
+
+const zoomOut =
+    document.getElementById("zoomOut");
+
+const zoomIn =
+    document.getElementById("zoomIn");
+
+const fullscreenButton =
+    document.getElementById("fullscreenButton");
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const loadingCopy =
+    document.getElementById("loadingCopy");
+
+const loadingBar =
+    document.getElementById("loadingBar");
+
+const readerError =
+    document.getElementById("readerError");
+
+const webGrid =
+    document.getElementById("webGrid");
+
+const cmsStatus =
+    document.getElementById("cmsStatus");
+
+const webIndex =
+    document.getElementById("webIndex");
+
+const articleView =
+    document.getElementById("articleView");
+
+const articleBack =
+    document.getElementById("articleBack");
+
+const articleTitle =
+    document.getElementById("articleTitle");
+
+const articleSubtitle =
+    document.getElementById("articleSubtitle");
+
+const articleMeta =
+    document.getElementById("articleMeta");
+
+const articleTopCategory =
+    document.getElementById("articleTopCategory");
+
+const articleHeroImage =
+    document.getElementById("articleHeroImage");
+
+const articleContent =
+    document.getElementById("articleContent");
+
+const previousArticle =
+    document.getElementById("previousArticle");
+
+const nextArticle =
+    document.getElementById("nextArticle");
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let articles = [];
+let currentIssue = null;
+let activeArticleIndex = -1;
+let cmsLoaded = false;
+let cmsLoadingPromise = null;
+let currentEdition = "web";
+
+
+/* =========================================================
+   UTILS
+   ========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function strapiMediaUrl(media) {
+
+    if (!media) {
+        return "";
+    }
+
+    const actual =
+        media.data
+            ? media.data.attributes || media.data
+            : media.attributes || media;
+
+    const url = actual?.url;
+
+    if (!url) {
+        return "";
+    }
+
+    if (/^https?:\/\//i.test(url)) {
+        return url;
+    }
+
+    return `${STRAPI_URL}${url}`;
+}
+
+
+function formatDate(date) {
+
+    if (!date) {
+        return "";
+    }
+
+    const parsed =
+        new Date(`${date}T12:00:00`);
+
+    if (Number.isNaN(parsed.getTime())) {
+        return date;
+    }
+
+    return new Intl.DateTimeFormat(
+        "en-CA",
+        {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }
+    ).format(parsed);
+}
+
+
+/* =========================================================
+   FETCH STRAPI
+   ========================================================= */
+
+async function fetchJson(url) {
+
+    const response =
+        await fetch(url);
+
+    if (!response.ok) {
+
+        throw new Error(
+            `Strapi request failed: ${response.status}`
+        );
+    }
+
+    return response.json();
+}
+
+
+/* =========================================================
+   ARTICLE POPULATE QUERY
+   ========================================================= */
+
+function createArticleApiUrl() {
+
+    const query =
+        new URLSearchParams();
+
+    query.set(
+        "pagination[pageSize]",
+        "100"
+    );
+
+    query.set(
+        "populate[thumbnail]",
+        "true"
+    );
+
+    query.set(
+        "populate[heroImage]",
+        "true"
+    );
+
+    query.set(
+        "populate[issue]",
+        "true"
+    );
+
+    query.set(
+        "populate[content][on][article.para][populate]",
+        "*"
+    );
+
+    query.set(
+        "populate[content][on][article.heading][populate]",
+        "*"
+    );
+
+    query.set(
+        "populate[content][on][article.image][populate][image]",
+        "true"
+    );
+
+    query.set(
+        "populate[content][on][article.quote][populate]",
+        "*"
+    );
+
+    query.set(
+        "populate[content][on][article.video][populate]",
+        "*"
+    );
+
+    query.set(
+        "populate[content][on][article.audio][populate][audio]",
+        "true"
+    );
+
+    query.set(
+    "populate[content][on][article.divider][populate]",
+    "*"
+);
+
+query.set(
+    "populate[content][on][article.contributor][populate][image]",
+    "true"
+);
+query.set(
+    "populate[content][on][article.contributor][populate][content][populate][image]",
+    "true"
+);
+return (
+    `${STRAPI_URL}/api/magazine-articles?${query.toString()}`
+);
+}
+
+
+
+
+/* =========================================================
+   LOAD CMS
+   ========================================================= */
+
+async function loadCms() {
+
+    if (cmsLoaded) {
+        return;
+    }
+
+    if (cmsLoadingPromise) {
+        return cmsLoadingPromise;
+    }
+
+
+    cmsLoadingPromise =
+        (async () => {
+
+            try {
+
+                cmsStatus.classList.remove(
+                    "error"
+                );
+
+                cmsStatus.textContent =
+                    "Loading articles…";
+
+
+                const [
+                    issueResponse,
+                    articleResponse
+                ] =
+                    await Promise.all([
+
+                        fetchJson(
+                            `${STRAPI_URL}/api/issues?pagination[pageSize]=100`
+                        ),
+
+                        fetchJson(
+                            createArticleApiUrl()
+                        )
+
+                    ]);
+
+
+                const issues =
+                    Array.isArray(issueResponse.data)
+                        ? issueResponse.data
+                        : [];
+
+
+                issues.sort(
+                    (a,b) =>
+                        Number(b.issueNumber || 0)
+                        -
+                        Number(a.issueNumber || 0)
+                );
+
+
+                currentIssue =
+                    issues[0]
+                    ||
+                    null;
+
+
+                let incomingArticles =
+                    Array.isArray(articleResponse.data)
+                        ? articleResponse.data
+                        : [];
+
+
+                if (currentIssue) {
+
+                    const currentIssueId =
+                        currentIssue.documentId
+                        ||
+                        currentIssue.id;
+
+
+                    incomingArticles =
+                        incomingArticles.filter(
+                            article => {
+
+                                if (!article.issue) {
+                                    return false;
+                                }
+
+                                const articleIssueId =
+                                    article.issue.documentId
+                                    ||
+                                    article.issue.id;
+
+                                return (
+                                    articleIssueId
+                                    ===
+                                    currentIssueId
+                                );
+                            }
+                        );
+                }
+
+
+                incomingArticles.sort(
+                    (a,b) =>
+                        Number(a.order ?? 999)
+                        -
+                        Number(b.order ?? 999)
+                );
+
+
+                articles =
+                    incomingArticles;
+
+
+                updateIssueHeader();
+
+                renderWebGrid();
+
+                cmsLoaded =
+                    true;
+
+                cmsStatus.hidden =
+                    true;
+
+                webGrid.hidden =
+                    false;
+
+                applyArticleRouteIfNeeded();
+
+            }
+
+            catch(error) {
+
+                console.error(
+                    "Strapi CMS error:",
+                    error
+                );
+
+                cmsStatus.hidden =
+                    false;
+
+                cmsStatus.classList.add(
+                    "error"
+                );
+
+                cmsStatus.innerHTML =
+                    `
+                    Could not connect to Focal Point CMS.<br><br>
+                    Make sure Strapi is running at
+                    <strong>http://localhost:1337</strong>.
+                    `;
+            }
+
+            finally {
+
+                cmsLoadingPromise =
+                    null;
+            }
+
+        })();
+
+
+    return cmsLoadingPromise;
+}
+
+
+
+/* =========================================================
+   ISSUE HEADER
+   ========================================================= */
+
+function updateIssueHeader() {
+
+    const issueNumber =
+        currentIssue?.issueNumber
+        ??
+        1;
+
+
+    document.getElementById(
+        "webIssue"
+    ).textContent =
+        `Issue ${String(issueNumber).padStart(2,"0")}`;
+
+
+    document.getElementById(
+        "webEyebrow"
+    ).textContent =
+        "Focal Point · Web Edition";
+
+
+    document.getElementById(
+        "webHeading"
+    ).textContent =
+        "Focal Point";
+
+
+    document.getElementById(
+        "webTagline"
+    ).textContent =
+        "For Filmmakers, By Filmmakers";
+}
+
+
+
+/* =========================================================
+   RENDER WEB GRID
+   ========================================================= */
+
+function renderWebGrid() {
+
+    webGrid.innerHTML =
+        "";
+
+
+    if (!articles.length) {
+
+        webGrid.hidden =
+            true;
+
+        cmsStatus.hidden =
+            false;
+
+        cmsStatus.textContent =
+            "No published articles are currently assigned to this issue.";
+
+        return;
+    }
+
+
+    articles.forEach(
+        (
+            article,
+            index
+        ) => {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                article.featured
+                    ? "web-card featured"
+                    : "web-card";
+
+
+            card.tabIndex =
+                0;
+
+
+            const thumbnail =
+                strapiMediaUrl(
+                    article.thumbnail
+                );
+
+
+            const imageHtml =
+                thumbnail
+                    ?
+                    `
+                    <img
+                        src="${escapeHtml(thumbnail)}"
+                        alt="${escapeHtml(article.title || "")}"
+                    >
+                    `
+                    :
+                    `
+                    <div class="web-card-placeholder">
+                        Article Image
+                    </div>
+                    `;
+
+
+            card.innerHTML =
+                `
+
+                <div class="web-card-image">
+                    ${imageHtml}
+                </div>
+
+                <div class="web-card-meta">
+
+                    <span>
+                        ${escapeHtml(formatDate(article.publicationDate))}
+                    </span>
+
+                    <span class="web-card-category">
+                        ${escapeHtml(article.category || "")}
+                    </span>
+
+                </div>
+
+                <h2 class="web-card-title">
+                    ${escapeHtml(article.title || "")}
+                </h2>
+
+                <p class="web-card-description">
+                    ${escapeHtml(article.excerpt || "")}
+                </p>
+
+                <span class="web-card-link">
+                    Read Article
+                </span>
+
+                `;
+
+
+            const open =
+                () =>
+                    openArticle(
+                        index,
+                        true
+                    );
+
+
+            card.addEventListener(
+                "click",
+                open
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter"
+                        ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        open();
+                    }
+                }
+            );
+
+
+            webGrid.appendChild(
+                card
+            );
+        }
+    );
+}
+
+
+
+/* =========================================================
+   STRAPI BLOCKS RENDERER
+   ========================================================= */
+
+function renderRichTextChildren(
+    children = []
+) {
+
+    return children
+        .map(
+            child =>
+                renderRichTextNode(
+                    child
+                )
+        )
+        .join("");
+}
+
+
+function renderRichTextNode(
+    node
+) {
+
+    if (!node) {
+        return "";
+    }
+
+
+    if (node.type === "text") {
+
+        let text =
+            escapeHtml(
+                node.text || ""
+            );
+
+
+        if (node.bold) {
+            text =
+                `<strong>${text}</strong>`;
+        }
+
+
+        if (node.italic) {
+            text =
+                `<em>${text}</em>`;
+        }
+
+
+        if (node.underline) {
+            text =
+                `<u>${text}</u>`;
+        }
+
+
+        if (node.strikethrough) {
+            text =
+                `<s>${text}</s>`;
+        }
+
+
+        if (node.code) {
+            text =
+                `<code>${text}</code>`;
+        }
+
+
+        return text;
+    }
+
+
+    if (node.type === "link") {
+
+        const href =
+            escapeHtml(
+                node.url || "#"
+            );
+
+
+        return `
+            <a
+                href="${href}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ${renderRichTextChildren(node.children)}
+            </a>
+        `;
+    }
+
+
+    if (node.type === "paragraph") {
+
+        return `
+            <p class="article-paragraph">
+                ${renderRichTextChildren(node.children)}
+            </p>
+        `;
+    }
+
+
+    if (node.type === "heading") {
+
+        const level =
+            Math.min(
+                6,
+                Math.max(
+                    2,
+                    Number(
+                        node.level || 2
+                    )
+                )
+            );
+
+
+        return `
+            <h${level} class="article-heading">
+                ${renderRichTextChildren(node.children)}
+            </h${level}>
+        `;
+    }
+
+
+    if (node.type === "quote") {
+
+        return `
+            <blockquote class="article-paragraph">
+                ${renderRichTextChildren(node.children)}
+            </blockquote>
+        `;
+    }
+
+
+    if (node.type === "list") {
+
+        const tag =
+            node.format === "ordered"
+                ? "ol"
+                : "ul";
+
+
+        return `
+            <${tag} class="article-paragraph">
+                ${renderRichTextChildren(node.children)}
+            </${tag}>
+        `;
+    }
+
+
+    if (node.type === "list-item") {
+
+        return `
+            <li>
+                ${renderRichTextChildren(node.children)}
+            </li>
+        `;
+    }
+
+
+    return renderRichTextChildren(
+        node.children || []
+    );
+}
+
+
+function renderRichTextBlocks(
+    blocks
+) {
+
+    if (!Array.isArray(blocks)) {
+
+        return `
+            <p class="article-paragraph">
+                ${escapeHtml(blocks || "")}
+            </p>
+        `;
+    }
+
+
+    return blocks
+        .map(
+            block =>
+                renderRichTextNode(
+                    block
+                )
+        )
+        .join("");
+}
+
+
+
+/* =========================================================
+   YOUTUBE / VIMEO
+   ========================================================= */
+
+function convertVideoUrlToEmbed(
+    url
+) {
+
+    if (!url) {
+        return "";
+    }
+
+
+    try {
+
+        const parsed =
+            new URL(url);
+
+
+        if (
+            parsed.hostname.includes(
+                "youtu.be"
+            )
+        ) {
+
+            const id =
+                parsed.pathname
+                    .replace(
+                        "/",
+                        ""
+                    );
+
+            return (
+                `https://www.youtube.com/embed/${id}`
+            );
+        }
+
+
+        if (
+            parsed.hostname.includes(
+                "youtube.com"
+            )
+        ) {
+
+            if (
+                parsed.pathname.startsWith(
+                    "/embed/"
+                )
+            ) {
+                return url;
+            }
+
+
+            const id =
+                parsed.searchParams.get(
+                    "v"
+                );
+
+
+            if (id) {
+
+                return (
+                    `https://www.youtube.com/embed/${id}`
+                );
+            }
+        }
+
+
+        if (
+            parsed.hostname.includes(
+                "vimeo.com"
+            )
+        ) {
+
+            const id =
+                parsed.pathname
+                    .split("/")
+                    .filter(Boolean)
+                    .pop();
+
+
+            if (id) {
+
+                return (
+                    `https://player.vimeo.com/video/${id}`
+                );
+            }
+        }
+
+    }
+
+    catch(error) {
+
+        console.warn(
+            "Invalid video URL:",
+            url
+        );
+    }
+
+
+    return url;
+}
+
+
+
+/* =========================================================
+   ARTICLE COMPONENT RENDERER
+   ========================================================= */
+
+function renderArticleComponent(
+    block
+) {
+
+    if (!block) {
+        return "";
+    }
+
+
+    const component =
+        block.__component;
+
+
+    if (
+        component ===
+        "article.para"
+    ) {
+
+        return `
+            <div class="article-text">
+                ${renderRichTextBlocks(block.text)}
+            </div>
+        `;
+    }
+
+
+    if (
+        component ===
+        "article.heading"
+    ) {
+
+        return `
+            <div class="article-text">
+
+                <h2 class="article-heading">
+                    ${escapeHtml(block.text || "")}
+                </h2>
+
+            </div>
+        `;
+    }
+
+
+    if (
+        component ===
+        "article.image"
+    ) {
+
+        const image =
+            strapiMediaUrl(
+                block.image
+            );
+
+
+        if (!image) {
+            return "";
+        }
+
+
+        const caption =
+            block.caption
+                ?
+                `
+                <figcaption class="article-caption">
+                    ${escapeHtml(block.caption)}
+                </figcaption>
+                `
+                :
+                "";
+
+
+        return `
+            <figure class="article-image-block">
+
+                <img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(block.alt || block.caption || "")}"
+                >
+
+                ${caption}
+
+            </figure>
+        `;
+    }
+
+
+    if (
+        component ===
+        "article.quote"
+    ) {
+
+        const attribution =
+            block.attribution
+                ?
+                `
+                <span class="article-quote-attribution">
+                    — ${escapeHtml(block.attribution)}
+                </span>
+                `
+                :
+                "";
+
+
+        return `
+            <blockquote class="article-quote">
+
+                ${escapeHtml(block.text || "")}
+
+                ${attribution}
+
+            </blockquote>
+        `;
+    }
+
+
+    if (
+        component ===
+        "article.video"
+    ) {
+
+        const videoUrl =
+            convertVideoUrlToEmbed(
+                block.url || ""
+            );
+
+
+        if (!videoUrl) {
+            return "";
+        }
+
+
+        const caption =
+            block.caption
+                ?
+                `
+                <div class="article-caption">
+                    ${escapeHtml(block.caption)}
+                </div>
+                `
+                :
+                "";
+
+
+        return `
+            <div class="article-video">
+
+                <div class="article-video-frame">
+
+                    <iframe
+                        src="${escapeHtml(videoUrl)}"
+                        title="${escapeHtml(block.caption || "Video")}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+
+                </div>
+
+                ${caption}
+
+            </div>
+        `;
+    }
+
+
+    if (
+        component ===
+        "article.audio"
+    ) {
+
+        const audioUrl =
+            strapiMediaUrl(
+                block.audio
+            );
+
+
+        const embedUrl =
+            block.embedUrl
+            ||
+            "";
+
+
+        const title =
+            block.title
+                ?
+                `
+                <h3 class="article-audio-title">
+                    ${escapeHtml(block.title)}
+                </h3>
+                `
+                :
+                "";
+
+
+        const caption =
+            block.caption
+                ?
+                `
+                <div class="article-caption">
+                    ${escapeHtml(block.caption)}
+                </div>
+                `
+                :
+                "";
+
+
+        let player =
+            "";
+
+
+        if (audioUrl) {
+
+            player =
+                `
+                <audio
+                    controls
+                    preload="metadata"
+                    src="${escapeHtml(audioUrl)}"
+                ></audio>
+                `;
+        }
+
+        else if (embedUrl) {
+
+            player =
+                `
+                <div class="article-audio-embed">
+
+                    <iframe
+                        src="${escapeHtml(embedUrl)}"
+                        loading="lazy"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    ></iframe>
+
+                </div>
+                `;
+        }
+
+
+        if (!player) {
+            return "";
+        }
+
+
+        return `
+            <section class="article-audio">
+
+                ${title}
+
+                ${player}
+
+                ${caption}
+
+            </section>
+        `;
+    }
+if (
+    component ===
+    "article.contributor"
+) {
+
+    const image =
+        strapiMediaUrl(
+            block.image
+        );
+
+
+    const sectionTitle =
+        block.sectionTitle
+            ?
+            `
+            <div class="contributor-section-title">
+                ${escapeHtml(block.sectionTitle)}
+            </div>
+            `
+            :
+            "";
+
+
+    const author =
+        block.author
+            ?
+            `
+            <h2 class="contributor-name">
+                ${escapeHtml(block.author)}
+            </h2>
+            `
+            :
+            "";
+
+    const text =
+        Array.isArray(block.text)
+            ?
+            `
+            <div class="contributor-text">
+                ${renderRichTextBlocks(block.text)}
+            </div>
+            `
+            :
+            "";
+const contributorContent =
+    Array.isArray(block.content)
+        ?
+        block.content
+            .map(
+                item => {
+
+                    const itemText =
+                        Array.isArray(item.text)
+                            ?
+                            `
+                            <div class="contributor-text">
+                                ${renderRichTextBlocks(item.text)}
+                            </div>
+                            `
+                            :
+                            "";
+
+
+                    const itemImage =
+                        strapiMediaUrl(
+                            item.image
+                        );
+
+
+                    const itemImageHtml =
+                        itemImage
+                            ?
+                            `
+                            <figure class="contributor-image">
+
+                                <img
+                                    src="${escapeHtml(itemImage)}"
+                                    alt="${escapeHtml(
+                                        item.alt
+                                        ||
+                                        item.caption
+                                        ||
+                                        block.author
+                                        ||
+                                        ""
+                                    )}"
+                                >
+
+                                ${
+                                    item.caption
+                                        ?
+                                        `
+                                        <figcaption class="article-caption">
+                                            ${escapeHtml(item.caption)}
+                                        </figcaption>
+                                        `
+                                        :
+                                        ""
+                                }
+
+                            </figure>
+                            `
+                            :
+                            "";
+
+
+                    return `
+                        ${itemText}
+                        ${itemImageHtml}
+                    `;
+                }
+            )
+            .join("")
+        :
+        "";
+
+    const imageHtml =
+        image
+            ?
+            `
+            <figure class="contributor-image">
+
+                <img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(
+                        block.alt
+                        ||
+                        block.caption
+                        ||
+                        block.author
+                        ||
+                        ""
+                    )}"
+                >
+
+                ${
+                    block.caption
+                        ?
+                        `
+                        <figcaption class="article-caption">
+                            ${escapeHtml(block.caption)}
+                        </figcaption>
+                        `
+                        :
+                        ""
+                }
+
+            </figure>
+            `
+            :
+            "";
+
+
+    return `
+    <section class="article-contributor">
+
+        ${sectionTitle}
+
+        ${author}
+
+        ${text}
+
+        ${contributorContent}
+
+        ${imageHtml}
+
+    </section>
+`;
+}
+
+    if (
+        component ===
+        "article.divider"
+    ) {
+
+        return `
+            <div class="article-divider"></div>
+        `;
+    }
+
+
+    return "";
+}
+
+
+
+/* =========================================================
+   OPEN ARTICLE
+   ========================================================= */
+
+function openArticle(
+    index,
+    updateRoute = true
+) {
+
+    const article =
+        articles[index];
+
+
+    if (!article) {
+        return;
+    }
+
+
+    activeArticleIndex =
+        index;
+
+
+    articleView.classList.toggle(
+        "hidden-locations",
+        article.slug ===
+        "hidden-filming-locations-in-and-around-vancouver"
+    );
+
+
+    setEdition(
+        "web",
+        false
+    );
+
+
+    webIndex.classList.add(
+        "hidden"
+    );
+
+
+    articleView.classList.add(
+        "visible"
+    );
+
+
+    articleTitle.textContent =
+        article.title
+        ||
+        "";
+
+
+    articleSubtitle.textContent =
+        article.subtitle
+        ||
+        "";
+
+
+    articleSubtitle.hidden =
+        !article.subtitle;
+
+
+    articleTopCategory.textContent =
+        article.category
+        ||
+        "";
+
+
+    const issueText =
+        article.issue?.issueNumber
+            ?
+            `Issue ${String(article.issue.issueNumber).padStart(2,"0")}`
+            :
+            "";
+
+
+    const metaItems =
+        [
+            article.category,
+
+            formatDate(
+                article.publicationDate
+            ),
+
+            article.author,
+
+            issueText
+        ]
+        .filter(Boolean);
+
+
+    articleMeta.innerHTML =
+        metaItems
+            .map(
+                value =>
+                    `<span>${escapeHtml(value)}</span>`
+            )
+            .join("");
+
+
+    const hero =
+        strapiMediaUrl(
+            article.heroImage
+        );
+
+
+    if (hero) {
+
+        articleHeroImage.hidden =
+            false;
+
+        articleHeroImage.src =
+            hero;
+
+        articleHeroImage.alt =
+            article.title
+            ||
+            "";
+    }
+
+    else {
+
+        articleHeroImage.hidden =
+            true;
+
+        articleHeroImage.removeAttribute(
+            "src"
+        );
+    }
+
+
+    articleContent.innerHTML =
+        Array.isArray(article.content)
+            ?
+            article.content
+                .map(
+                    renderArticleComponent
+                )
+                .join("")
+            :
+            "";
+
+
+    previousArticle.style.visibility =
+        index > 0
+            ? "visible"
+            : "hidden";
+
+
+    nextArticle.style.visibility =
+        index < articles.length - 1
+            ? "visible"
+            : "hidden";
+
+
+    if (updateRoute) {
+
+        history.pushState(
+            null,
+            "",
+            `#article/${encodeURIComponent(article.slug || article.documentId || article.id)}`
+        );
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
+
+
+    document.title =
+        `${article.title} — Focal Point`;
+}
+
+
+
+/* =========================================================
+   CLOSE ARTICLE
+   ========================================================= */
+
+function closeArticle(
+    updateRoute = true
+) {
+
+    activeArticleIndex =
+        -1;
+
+
+    articleView.classList.remove(
+        "visible"
+    );
+
+
+    articleView.classList.remove(
+        "hidden-locations"
+    );
+
+
+    webIndex.classList.remove(
+        "hidden"
+    );
+
+
+    if (updateRoute) {
+
+        history.pushState(
+            null,
+            "",
+            "#web"
+        );
+    }
+
+
+    /* FIXED: correct closing brace here */
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
+
+
+    document.title =
+        "Focal Point Magazine — Flying Cat Productions";
+}
+
+
+
+/* =========================================================
+   ARTICLE BUTTONS
+   ========================================================= */
+
+articleBack.addEventListener(
+    "click",
+    () => {
+
+        closeArticle(
+            true
+        );
+    }
+);
+
+
+previousArticle.addEventListener(
+    "click",
+    () => {
+
+        if (
+            activeArticleIndex > 0
+        ) {
+
+            openArticle(
+                activeArticleIndex - 1,
+                true
+            );
+        }
+    }
+);
+
+
+nextArticle.addEventListener(
+    "click",
+    () => {
+
+        if (
+            activeArticleIndex
+            <
+            articles.length - 1
+        ) {
+
+            openArticle(
+                activeArticleIndex + 1,
+                true
+            );
+        }
+    }
+);
+
+
+
+/* =========================================================
+   PRINT STATE
+   ========================================================= */
+
+let pdf = null;
+
+let pageFlip = null;
+
+let totalPdfPages = 0;
+
+let pageRatio = .773;
+
+let pageImageUrls = [];
+
+let currentBookIndex = 0;
+
+let navigationLocked = false;
+
+let navigationTimer = null;
+
+let zoom = 1;
+
+let printInitialised = false;
+
+let printInitialising = false;
+
+const MIN_ZOOM = .82;
+
+const MAX_ZOOM = 1.35;
+
+const ZOOM_STEP = .08;
+
+
+
+/* =========================================================
+   EDITION SWITCH
+   ========================================================= */
+
+function setEdition(
+    edition,
+    updateRoute = true
+) {
+
+    const showWeb =
+        edition ===
+        "web";
+
+
+    currentEdition =
+        showWeb
+            ? "web"
+            : "print";
+
+
+    document.body.classList.toggle(
+        "mode-print",
+        !showWeb
+    );
+
+
+    document.body.classList.toggle(
+        "mode-web",
+        showWeb
+    );
+
+
+    printEdition.hidden =
+        showWeb;
+
+
+    webEdition.hidden =
+        !showWeb;
+
+
+    printTab.classList.toggle(
+        "active",
+        !showWeb
+    );
+
+
+    webTab.classList.toggle(
+        "active",
+        showWeb
+    );
+
+
+    printTab.setAttribute(
+        "aria-selected",
+        String(!showWeb)
+    );
+
+
+    webTab.setAttribute(
+        "aria-selected",
+        String(showWeb)
+    );
+
+
+    if (showWeb) {
+
+        loadCms();
+    }
+
+    else {
+
+        closeArticle(
+            false
+        );
+
+        ensurePrintMagazine();
+    }
+
+
+    if (updateRoute) {
+
+        history.pushState(
+            null,
+            "",
+            showWeb
+                ? "#web"
+                : "#print"
+        );
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
+
+
+    if (
+        !showWeb
+        &&
+        pageFlip
+    ) {
+
+        requestAnimationFrame(
+            () => {
+
+                window.dispatchEvent(
+                    new Event(
+                        "resize"
+                    )
+                );
+            }
+        );
+    }
+}
+
+
+printTab.addEventListener(
+    "click",
+    () => {
+
+        setEdition(
+            "print",
+            true
+        );
+    }
+);
+
+
+webTab.addEventListener(
+    "click",
+    () => {
+
+        closeArticle(
+            false
+        );
+
+        setEdition(
+            "web",
+            true
+        );
+    }
+);
+
+
+
+/* =========================================================
+   ARTICLE ROUTE
+   ========================================================= */
+
+function applyArticleRouteIfNeeded() {
+
+    const hash =
+        window.location.hash;
+
+
+    if (
+        !hash.startsWith(
+            "#article/"
+        )
+    ) {
+        return;
+    }
+
+
+    const slug =
+        decodeURIComponent(
+            hash.replace(
+                "#article/",
+                ""
+            )
+        );
+
+
+    const index =
+        articles.findIndex(
+            article => {
+
+                return (
+                    String(
+                        article.slug
+                        ||
+                        article.documentId
+                        ||
+                        article.id
+                    )
+                    ===
+                    slug
+                );
+            }
+        );
+
+
+    if (
+        index >= 0
+    ) {
+
+        openArticle(
+            index,
+            false
+        );
+    }
+}
+
+
+
+/* =========================================================
+   ROUTING
+   ========================================================= */
+
+async function applyRoute() {
+
+    const hash =
+        window.location.hash;
+
+
+    if (
+        hash.startsWith(
+            "#article/"
+        )
+    ) {
+
+        setEdition(
+            "web",
+            false
+        );
+
+        await loadCms();
+
+        applyArticleRouteIfNeeded();
+
+        return;
+    }
+
+
+    if (
+        hash ===
+        "#web"
+    ) {
+
+        closeArticle(
+            false
+        );
+
+        setEdition(
+            "web",
+            false
+        );
+
+        return;
+    }
+
+
+    closeArticle(
+        false
+    );
+
+
+ setEdition(
+    "web",
+    false
+);
+}
+
+
+window.addEventListener(
+    "popstate",
+    applyRoute
+);
+
+
+window.addEventListener(
+    "hashchange",
+    applyRoute
+);
+
+
+
+/* =========================================================
+   PRINT INITIALISATION
+   ========================================================= */
+
+async function ensurePrintMagazine() {
+
+    if (
+        printInitialised
+        ||
+        printInitialising
+    ) {
+        return;
+    }
+
+
+    printInitialising =
+        true;
+
+
+    try {
+
+        loadingCopy.textContent =
+            "Opening PDF";
+
+
+        const loadingTask =
+            pdfjsLib.getDocument(
+                PDF_URL
+            );
+
+
+        loadingTask.onProgress =
+            progress => {
+
+                if (
+                    !progress.total
+                ) {
+                    return;
+                }
+
+
+                const ratio =
+                    progress.loaded
+                    /
+                    progress.total;
+
+
+                loadingBar.style.width =
+                    `${ratio * 10}%`;
+            };
+
+
+        pdf =
+            await loadingTask.promise;
+
+
+        totalPdfPages =
+            pdf.numPages;
+
+
+        const firstPage =
+            await pdf.getPage(
+                1
+            );
+
+
+        const viewport =
+            firstPage.getViewport({
+                scale: 1
+            });
+
+
+        pageRatio =
+            viewport.width
+            /
+            viewport.height;
+
+
+        await renderMagazineImages();
+
+
+        buildPrintPages();
+
+
+        createPageFlip();
+
+
+        loadingBar.style.width =
+            "100%";
+
+
+        loadingCopy.textContent =
+            "Ready";
+
+
+        loadingScreen.classList.add(
+            "hidden"
+        );
+
+
+        printInitialised =
+            true;
+    }
+
+    catch(error) {
+
+        console.error(
+            "Magazine error:",
+            error
+        );
+
+
+        loadingScreen.classList.add(
+            "hidden"
+        );
+
+
+        readerError.classList.add(
+            "visible"
+        );
+    }
+
+    finally {
+
+        printInitialising =
+            false;
+    }
+}
+
+
+
+/* =========================================================
+   RENDER PDF
+   ========================================================= */
+
+async function renderMagazineImages() {
+
+    pageImageUrls =
+        [];
+
+
+    for (
+        let pageNumber = 1;
+        pageNumber <= totalPdfPages;
+        pageNumber++
+    ) {
+
+        loadingCopy.textContent =
+            `Preparing page ${pageNumber} of ${totalPdfPages}`;
+
+
+        const url =
+            await renderPdfPageToImage(
+                pageNumber
+            );
+
+
+        pageImageUrls.push(
+            url
+        );
+
+
+        const progress =
+            pageNumber
+            /
+            totalPdfPages;
+
+
+        loadingBar.style.width =
+            `${10 + progress * 85}%`;
+
+
+        await nextFrame();
+    }
+}
+
+
+
+/* =========================================================
+   PDF PAGE TO WEBP
+   ========================================================= */
+
+async function renderPdfPageToImage(
+    pageNumber
+) {
+
+    const page =
+        await pdf.getPage(
+            pageNumber
+        );
+
+
+    const baseViewport =
+        page.getViewport({
+            scale: 1
+        });
+
+
+    const scale =
+        PAGE_RENDER_HEIGHT
+        /
+        baseViewport.height;
+
+
+    const viewport =
+        page.getViewport({
+            scale
+        });
+
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        Math.round(
+            viewport.width
+        );
+
+
+    canvas.height =
+        Math.round(
+            viewport.height
+        );
+
+
+    const context =
+        canvas.getContext(
+            "2d",
+            {
+                alpha: false
+            }
+        );
+
+
+    await page.render({
+
+        canvasContext:
+            context,
+
+        viewport
+
+    }).promise;
+
+
+    const cropX =
+        Math.round(
+            canvas.width
+            *
+            CROP_FRACTION
+        );
+
+
+    const cropY =
+        Math.round(
+            canvas.height
+            *
+            CROP_FRACTION
+        );
+
+
+    const cropWidth =
+        canvas.width
+        -
+        cropX * 2;
+
+
+    const cropHeight =
+        canvas.height
+        -
+        cropY * 2;
+
+
+    const cropped =
+        document.createElement(
+            "canvas"
+        );
+
+
+    cropped.width =
+        cropWidth;
+
+
+    cropped.height =
+        cropHeight;
+
+
+    const cropContext =
+        cropped.getContext(
+            "2d",
+            {
+                alpha: false
+            }
+        );
+
+
+    cropContext.drawImage(
+
+        canvas,
+
+        cropX,
+        cropY,
+
+        cropWidth,
+        cropHeight,
+
+        0,
+        0,
+
+        cropWidth,
+        cropHeight
+    );
+
+
+    const blob =
+        await new Promise(
+            (
+                resolve,
+                reject
+            ) => {
+
+                cropped.toBlob(
+                    result => {
+
+                        if (result) {
+
+                            resolve(
+                                result
+                            );
+                        }
+
+                        else {
+
+                            reject(
+                                new Error(
+                                    "Could not render PDF page."
+                                )
+                            );
+                        }
+                    },
+
+                    "image/webp",
+
+                    .92
+                );
+            }
+        );
+
+
+    page.cleanup();
+
+
+    return URL.createObjectURL(
+        blob
+    );
+}
+
+
+
+/* =========================================================
+   BUILD PRINT PAGES
+   ========================================================= */
+
+function buildPrintPages() {
+
+    flipbook.innerHTML =
+        "";
+
+
+    const front =
+        document.createElement(
+            "div"
+        );
+
+
+    front.className =
+        "book-page filler-page";
+
+
+    flipbook.appendChild(
+        front
+    );
+
+
+    pageImageUrls.forEach(
+        (
+            url,
+            index
+        ) => {
+
+            const page =
+                document.createElement(
+                    "div"
+                );
+
+
+            page.className =
+                "book-page";
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "page-art";
+
+
+            image.src =
+                url;
+
+
+            image.alt =
+                `Focal Point Magazine page ${index + 1}`;
+
+
+            image.draggable =
+                false;
+
+
+            page.appendChild(
+                image
+            );
+
+
+            flipbook.appendChild(
+                page
+            );
+        }
+    );
+
+
+    const back =
+        document.createElement(
+            "div"
+        );
+
+
+    back.className =
+        "book-page filler-page";
+
+
+    flipbook.appendChild(
+        back
+    );
+}
+
+
+
+/* =========================================================
+   PAGE FLIP
+   ========================================================= */
+
+function createPageFlip() {
+
+    if (
+        typeof St ===
+        "undefined"
+        ||
+        !St.PageFlip
+    ) {
+
+        throw new Error(
+            "PageFlip library failed to load."
+        );
+    }
+
+
+    const baseHeight =
+        760;
+
+
+    const baseWidth =
+        Math.round(
+            baseHeight
+            *
+            pageRatio
+        );
+
+
+    pageFlip =
+        new St.PageFlip(
+            flipbook,
+            {
+
+                width:
+                    baseWidth,
+
+                height:
+                    baseHeight,
+
+                size:
+                    "stretch",
+
+                minWidth:
+                    230,
+
+                maxWidth:
+                    baseWidth,
+
+                minHeight:
+                    Math.round(
+                        230
+                        /
+                        pageRatio
+                    ),
+
+                maxHeight:
+                    baseHeight,
+
+                drawShadow:
+                    true,
+
+                maxShadowOpacity:
+                    .28,
+
+                flippingTime:
+                    FLIP_TIME,
+
+                usePortrait:
+                    true,
+
+                showCover:
+                    false,
+
+                autoSize:
+                    true,
+
+                mobileScrollSupport:
+                    false,
+
+                useMouseEvents:
+                    true,
+
+                disableFlipByClick:
+                    false,
+
+                swipeDistance:
+                    40
+            }
+        );
+
+
+    const pages =
+        Array.from(
+            flipbook.querySelectorAll(
+                ".book-page"
+            )
+        );
+
+
+    pageFlip.loadFromHTML(
+        pages
+    );
+
+
+    pageFlip.turnToPage(
+        0
+    );
+
+
+    pageFlip.on(
+        "flip",
+        event => {
+
+            currentBookIndex =
+                Number(
+                    event.data
+                );
+
+
+            updateReaderState();
+        }
+    );
+
+
+    pageFlip.on(
+        "changeState",
+        event => {
+
+            const state =
+                event.data;
+
+
+            if (
+                state === "flipping"
+                ||
+                state === "user_fold"
+                ||
+                state === "fold_corner"
+            ) {
+
+                bookStage.classList.add(
+                    "page-moving"
+                );
+            }
+
+
+            if (
+                state === "read"
+            ) {
+
+                navigationLocked =
+                    false;
+
+
+                clearTimeout(
+                    navigationTimer
+                );
+
+
+                bookStage.classList.remove(
+                    "page-moving"
+                );
+
+
+                bookStage.classList.remove(
+                    "edge-turn"
+                );
+
+
+                currentBookIndex =
+                    pageFlip.getCurrentPageIndex();
+
+
+                updateReaderState();
+            }
+        }
+    );
+
+
+    currentBookIndex =
+        0;
+
+
+    updateReaderState();
+}
+
+
+
+/* =========================================================
+   PRINT READER STATE
+   ========================================================= */
+
+function updateReaderState() {
+
+    if (!pageFlip) {
+        return;
+    }
+
+
+    currentBookIndex =
+        pageFlip.getCurrentPageIndex();
+
+
+    const interior =
+        currentBookIndex >= 2
+        &&
+        currentBookIndex <
+        totalPdfPages;
+
+
+    bookStage.classList.toggle(
+        "book-open",
+        interior
+    );
+
+
+    if (
+        currentBookIndex <= 1
+    ) {
+
+        pageCounter.textContent =
+            `Cover · 01 / ${String(totalPdfPages).padStart(2,"0")}`;
+    }
+
+    else if (
+        currentBookIndex >=
+        totalPdfPages
+    ) {
+
+        pageCounter.textContent =
+            `${String(totalPdfPages).padStart(2,"0")} / ${String(totalPdfPages).padStart(2,"0")}`;
+    }
+
+    else {
+
+        const left =
+            currentBookIndex;
+
+
+        const right =
+            Math.min(
+                currentBookIndex + 1,
+                totalPdfPages
+            );
+
+
+        pageCounter.textContent =
+            `${String(left).padStart(2,"0")}–${String(right).padStart(2,"0")} / ${String(totalPdfPages).padStart(2,"0")}`;
+    }
+
+
+    prevButton.disabled =
+        currentBookIndex <= 0;
+
+
+    nextButton.disabled =
+        currentBookIndex >=
+        totalPdfPages;
+}
+
+
+
+/* =========================================================
+   PRINT NAVIGATION
+   ========================================================= */
+
+function lockNavigation() {
+
+    navigationLocked =
+        true;
+
+
+    clearTimeout(
+        navigationTimer
+    );
+
+
+    navigationTimer =
+        setTimeout(
+            () => {
+
+                navigationLocked =
+                    false;
+
+
+                bookStage.classList.remove(
+                    "page-moving"
+                );
+
+
+                bookStage.classList.remove(
+                    "edge-turn"
+                );
+
+
+                if (pageFlip) {
+
+                    updateReaderState();
+                }
+            },
+
+            FLIP_TIME + 350
+        );
+}
+
+
+function goNext() {
+
+    if (
+        currentEdition !== "print"
+        ||
+        !pageFlip
+        ||
+        navigationLocked
+    ) {
+        return;
+    }
+
+
+    const current =
+        pageFlip.getCurrentPageIndex();
+
+
+    if (
+        current >= totalPdfPages
+    ) {
+        return;
+    }
+
+
+    if (
+        current >= totalPdfPages - 2
+    ) {
+
+        bookStage.classList.add(
+            "edge-turn"
+        );
+    }
+
+
+    lockNavigation();
+
+
+    pageFlip.flipNext(
+        "bottom"
+    );
+}
+
+
+function goPrevious() {
+
+    if (
+        currentEdition !== "print"
+        ||
+        !pageFlip
+        ||
+        navigationLocked
+    ) {
+        return;
+    }
+
+
+    const current =
+        pageFlip.getCurrentPageIndex();
+
+
+    if (
+        current <= 0
+    ) {
+        return;
+    }
+
+
+    if (
+        current <= 2
+    ) {
+
+        bookStage.classList.add(
+            "edge-turn"
+        );
+    }
+
+
+    lockNavigation();
+
+
+    pageFlip.flipPrev(
+        "bottom"
+    );
+}
+
+
+nextButton.addEventListener(
+    "click",
+    event => {
+
+        event.preventDefault();
+
+        goNext();
+    }
+);
+
+
+prevButton.addEventListener(
+    "click",
+    event => {
+
+        event.preventDefault();
+
+        goPrevious();
+    }
+);
+
+
+
+/* =========================================================
+   ZOOM
+   ========================================================= */
+
+function applyZoom() {
+
+    flipbook.style.transform =
+        `scale(${zoom})`;
+}
+
+
+zoomIn.addEventListener(
+    "click",
+    () => {
+
+        zoom =
+            Math.min(
+                MAX_ZOOM,
+                zoom + ZOOM_STEP
+            );
+
+
+        applyZoom();
+    }
+);
+
+
+zoomOut.addEventListener(
+    "click",
+    () => {
+
+        zoom =
+            Math.max(
+                MIN_ZOOM,
+                zoom - ZOOM_STEP
+            );
+
+
+        applyZoom();
+    }
+);
+
+
+
+/* =========================================================
+   FULLSCREEN
+   ========================================================= */
+
+fullscreenButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            if (
+                !document.fullscreenElement
+            ) {
+
+                await printEdition.requestFullscreen();
+            }
+
+            else {
+
+                await document.exitFullscreen();
+            }
+        }
+
+        catch(error) {
+
+            console.error(
+                "Fullscreen error:",
+                error
+            );
+        }
+    }
+);
+
+
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+window.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            currentEdition !== "print"
+        ) {
+            return;
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            goNext();
+        }
+
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            goPrevious();
+        }
+    }
+);
+
+
+
+/* =========================================================
+   NEXT FRAME
+   ========================================================= */
+
+function nextFrame() {
+
+    return new Promise(
+        resolve => {
+
+            requestAnimationFrame(
+                () => {
+
+                    requestAnimationFrame(
+                        resolve
+                    );
+                }
+            );
+        }
+    );
+}
+
+
+
+/* =========================================================
+   CLEANUP
+   ========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        pageImageUrls.forEach(
+            url => {
+
+                URL.revokeObjectURL(
+                    url
+                );
+            }
+        );
+    }
+);
+
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+applyRoute();
+
+</script>
+
+
+</body>
+</html>

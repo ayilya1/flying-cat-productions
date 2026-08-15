@@ -1,0 +1,251 @@
+/* =========================================================
+   FLYING CAT — GLOBAL HEADER
+   ========================================================= */
+
+:root {
+    --fcp-header-green: #C8FF20;
+    --fcp-header-orange: #CC5500;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.fcp-site-header {
+    position: relative;
+
+    z-index: 100;
+
+    width: 100%;
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding:
+        24px
+        32px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.fcp-home-logo {
+    width: 90px;
+
+    flex: 0 0 auto;
+
+    pointer-events: auto;
+}
+
+
+.fcp-home-logo img {
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.fcp-header-right {
+    width:
+        min(
+            560px,
+            48vw
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.fcp-main-nav {
+    width: 100%;
+
+    display: flex;
+
+    align-items: baseline;
+
+    justify-content: flex-end;
+
+    gap:
+        clamp(
+            20px,
+            2.2vw,
+            36px
+        );
+}
+
+
+.fcp-main-nav a {
+    position: relative;
+
+    color: var(--fcp-header-green);
+
+    font-family:
+        "Archivo Black",
+        "Arial Black",
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(
+            18px,
+            1.65vw,
+            28px
+        );
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.055em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    text-decoration: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.3s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+
+.fcp-main-nav a:hover {
+    opacity: 0.64;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.fcp-main-nav a.active {
+    color: var(--fcp-header-orange);
+}
+
+
+/* =========================================================
+   MANIFESTO
+   ========================================================= */
+
+.fcp-header-manifesto {
+    width:
+        min(
+            390px,
+            100%
+        );
+
+    margin:
+        13px
+        0
+        0;
+
+    color: var(--fcp-header-green);
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.045em;
+
+    text-transform: uppercase;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .fcp-site-header {
+        min-height: 78px;
+
+        padding:
+            16px
+            17px;
+
+        gap: 16px;
+    }
+
+
+    .fcp-home-logo {
+        width: 66px;
+    }
+
+
+    .fcp-header-right {
+        width: auto;
+
+        flex: 1;
+    }
+
+
+    .fcp-main-nav {
+        gap: 10px;
+    }
+
+
+    .fcp-main-nav a {
+        font-size: 12px;
+
+        letter-spacing: -0.045em;
+    }
+
+
+    .fcp-header-manifesto {
+        width:
+            min(
+                220px,
+                100%
+            );
+
+        margin-top: 8px;
+
+        font-size: 5.5px;
+
+        line-height: 1.4;
+    }
+
+}
