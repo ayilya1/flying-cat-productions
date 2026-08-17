@@ -749,7 +749,10 @@ const projects = [
             false,
 
         link:
-            "victoria-ka-raja.html",
+    "victoria-ka-raja.html",
+
+        showTickets:
+            true,
 
         showLaurels:
             true,
@@ -872,11 +875,14 @@ const projects = [
         animateImage:
             true,
 
-        link:
-    "hypnos-lullaby.html",
+            link:
+        "hypnos-lullaby.html",
 
-        showLaurels:
-            false,
+    showTickets:
+        false,
+
+    showLaurels:
+        false,
 
         factOne:
             `
@@ -1080,6 +1086,11 @@ const heroSpecs =
 const viewProject =
     document.getElementById(
         "viewProject"
+    );
+
+    const ticketButton =
+    document.getElementById(
+        "ticketButton"
     );
 
 const heroLaurels =
@@ -1737,6 +1748,11 @@ function showProject(
 
             viewProject.href =
                 project.link;
+
+                ticketButton.classList.toggle(
+    "hidden",
+    !project.showTickets
+);
 
             factOne.innerHTML =
                 project.factOne;

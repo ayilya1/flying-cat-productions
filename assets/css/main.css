@@ -2113,4 +2113,51 @@ fcp-header {
         line-height: 1.45;
     }
 
+    /* =========================================================
+   MOBILE CAROUSEL — PROJECT CONSISTENCY
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* =====================================================
+       GET TICKETS — VKR ONLY
+       ===================================================== */
+
+    .project-hypnos .ticket-button,
+    .project-moneyback .ticket-button {
+        display: none !important;
+    }
+
+    .project-victoria .ticket-button {
+        display: inline-flex;
+    }
+
+
+    /* =====================================================
+       MATCH HYPNOS TYPOGRAPHY TO VKR
+       ===================================================== */
+
+    .project-hypnos .hero-copy h1 {
+        font-size:
+            clamp(
+                54px,
+                15vw,
+                78px
+            );
+
+        line-height: .88;
+    }
+
+
+    .project-hypnos .hero-synopsis {
+        width: 100%;
+
+        max-width: 310px;
+
+        font-size: 16px;
+
+        line-height: 1.45;
+    }
+
+}
 }
