@@ -1,0 +1,9 @@
+{
+  
+  "rewrites": [
+    {
+      "source": "/news/:slug",
+      "destination": "/news.html?article=:slug"
+    }
+  ]
+}
