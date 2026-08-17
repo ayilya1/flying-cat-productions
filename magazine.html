@@ -10,11 +10,13 @@
 >
 
 <title>Focal Point Magazine — Flying Cat Productions</title>
+
 <link
     rel="icon"
     type="image/png"
     href="assets/favicon.png"
 >
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -32,6 +34,7 @@
     rel="stylesheet"
     href="assets/css/magazine.css"
 >
+
 </head>
 
 
@@ -58,20 +61,20 @@
     >
 
         <button
-    class="edition-tab active"
-    id="webTab"
-    type="button"
->
-    Web Version
-</button>
+            class="edition-tab active"
+            id="webTab"
+            type="button"
+        >
+            Web Version
+        </button>
 
-<button
-    class="edition-tab"
-    id="printTab"
-    type="button"
->
-    Print Version
-</button>
+        <button
+            class="edition-tab"
+            id="printTab"
+            type="button"
+        >
+            Print Version
+        </button>
 
     </div>
 
@@ -405,7 +408,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
    ========================================================= */
 
 const STRAPI_URL =
-  "https://strapi-cms-focal-point-magazine-production.up.railway.app";
+    "https://strapi-cms-focal-point-magazine-production.up.railway.app";
 
 
 const PDF_URL =
@@ -429,91 +432,177 @@ const FLIP_TIME =
    ========================================================= */
 
 const printTab =
-    document.getElementById("printTab");
+    document.getElementById(
+        "printTab"
+    );
+
 
 const webTab =
-    document.getElementById("webTab");
+    document.getElementById(
+        "webTab"
+    );
+
 
 const printEdition =
-    document.getElementById("printEdition");
+    document.getElementById(
+        "printEdition"
+    );
+
 
 const webEdition =
-    document.getElementById("webEdition");
+    document.getElementById(
+        "webEdition"
+    );
+
 
 const bookStage =
-    document.getElementById("bookStage");
+    document.getElementById(
+        "bookStage"
+    );
+
 
 const flipbook =
-    document.getElementById("flipbook");
+    document.getElementById(
+        "flipbook"
+    );
+
 
 const prevButton =
-    document.getElementById("prevButton");
+    document.getElementById(
+        "prevButton"
+    );
+
 
 const nextButton =
-    document.getElementById("nextButton");
+    document.getElementById(
+        "nextButton"
+    );
+
 
 const pageCounter =
-    document.getElementById("pageCounter");
+    document.getElementById(
+        "pageCounter"
+    );
+
 
 const zoomOut =
-    document.getElementById("zoomOut");
+    document.getElementById(
+        "zoomOut"
+    );
+
 
 const zoomIn =
-    document.getElementById("zoomIn");
+    document.getElementById(
+        "zoomIn"
+    );
+
 
 const fullscreenButton =
-    document.getElementById("fullscreenButton");
+    document.getElementById(
+        "fullscreenButton"
+    );
+
 
 const loadingScreen =
-    document.getElementById("loadingScreen");
+    document.getElementById(
+        "loadingScreen"
+    );
+
 
 const loadingCopy =
-    document.getElementById("loadingCopy");
+    document.getElementById(
+        "loadingCopy"
+    );
+
 
 const loadingBar =
-    document.getElementById("loadingBar");
+    document.getElementById(
+        "loadingBar"
+    );
+
 
 const readerError =
-    document.getElementById("readerError");
+    document.getElementById(
+        "readerError"
+    );
+
 
 const webGrid =
-    document.getElementById("webGrid");
+    document.getElementById(
+        "webGrid"
+    );
+
 
 const cmsStatus =
-    document.getElementById("cmsStatus");
+    document.getElementById(
+        "cmsStatus"
+    );
+
 
 const webIndex =
-    document.getElementById("webIndex");
+    document.getElementById(
+        "webIndex"
+    );
+
 
 const articleView =
-    document.getElementById("articleView");
+    document.getElementById(
+        "articleView"
+    );
+
 
 const articleBack =
-    document.getElementById("articleBack");
+    document.getElementById(
+        "articleBack"
+    );
+
 
 const articleTitle =
-    document.getElementById("articleTitle");
+    document.getElementById(
+        "articleTitle"
+    );
+
 
 const articleSubtitle =
-    document.getElementById("articleSubtitle");
+    document.getElementById(
+        "articleSubtitle"
+    );
+
 
 const articleMeta =
-    document.getElementById("articleMeta");
+    document.getElementById(
+        "articleMeta"
+    );
+
 
 const articleTopCategory =
-    document.getElementById("articleTopCategory");
+    document.getElementById(
+        "articleTopCategory"
+    );
+
 
 const articleHeroImage =
-    document.getElementById("articleHeroImage");
+    document.getElementById(
+        "articleHeroImage"
+    );
+
 
 const articleContent =
-    document.getElementById("articleContent");
+    document.getElementById(
+        "articleContent"
+    );
+
 
 const previousArticle =
-    document.getElementById("previousArticle");
+    document.getElementById(
+        "previousArticle"
+    );
+
 
 const nextArticle =
-    document.getElementById("nextArticle");
+    document.getElementById(
+        "nextArticle"
+    );
 
 
 /* =========================================================
@@ -521,10 +610,15 @@ const nextArticle =
    ========================================================= */
 
 let articles = [];
+
 let currentIssue = null;
+
 let activeArticleIndex = -1;
+
 let cmsLoaded = false;
+
 let cmsLoadingPromise = null;
+
 let currentEdition = "web";
 
 
@@ -534,12 +628,30 @@ let currentEdition = "web";
 
 function escapeHtml(value) {
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
 }
 
 
@@ -549,22 +661,35 @@ function strapiMediaUrl(media) {
         return "";
     }
 
+
     const actual =
         media.data
             ? media.data.attributes || media.data
             : media.attributes || media;
 
-    const url = actual?.url;
+
+    const url =
+        actual?.url;
+
 
     if (!url) {
         return "";
     }
 
-    if (/^https?:\/\//i.test(url)) {
+
+    if (
+        /^https?:\/\//i.test(
+            url
+        )
+    ) {
         return url;
     }
 
-    return `${STRAPI_URL}${url}`;
+
+    return (
+        `${STRAPI_URL}${url}`
+    );
+
 }
 
 
@@ -574,21 +699,38 @@ function formatDate(date) {
         return "";
     }
 
-    const parsed =
-        new Date(`${date}T12:00:00`);
 
-    if (Number.isNaN(parsed.getTime())) {
+    const parsed =
+        new Date(
+            `${date}T12:00:00`
+        );
+
+
+    if (
+        Number.isNaN(
+            parsed.getTime()
+        )
+    ) {
         return date;
     }
+
 
     return new Intl.DateTimeFormat(
         "en-CA",
         {
-            month: "long",
-            day: "numeric",
-            year: "numeric"
+            month:
+                "long",
+
+            day:
+                "numeric",
+
+            year:
+                "numeric"
         }
-    ).format(parsed);
+    ).format(
+        parsed
+    );
+
 }
 
 
@@ -599,16 +741,22 @@ function formatDate(date) {
 async function fetchJson(url) {
 
     const response =
-        await fetch(url);
+        await fetch(
+            url
+        );
+
 
     if (!response.ok) {
 
         throw new Error(
             `Strapi request failed: ${response.status}`
         );
+
     }
 
+
     return response.json();
+
 }
 
 
@@ -621,75 +769,90 @@ function createArticleApiUrl() {
     const query =
         new URLSearchParams();
 
+
     query.set(
         "pagination[pageSize]",
         "100"
     );
+
 
     query.set(
         "populate[thumbnail]",
         "true"
     );
 
+
     query.set(
         "populate[heroImage]",
         "true"
     );
+
 
     query.set(
         "populate[issue]",
         "true"
     );
 
+
     query.set(
         "populate[content][on][article.para][populate]",
         "*"
     );
+
 
     query.set(
         "populate[content][on][article.heading][populate]",
         "*"
     );
 
+
     query.set(
         "populate[content][on][article.image][populate][image]",
         "true"
     );
+
 
     query.set(
         "populate[content][on][article.quote][populate]",
         "*"
     );
 
+
     query.set(
         "populate[content][on][article.video][populate]",
         "*"
     );
+
 
     query.set(
         "populate[content][on][article.audio][populate][audio]",
         "true"
     );
 
+
     query.set(
-    "populate[content][on][article.divider][populate]",
-    "*"
-);
+        "populate[content][on][article.divider][populate]",
+        "*"
+    );
 
-query.set(
-    "populate[content][on][article.contributor][populate][image]",
-    "true"
-);
-query.set(
-    "populate[content][on][article.contributor][populate][content][populate][image]",
-    "true"
-);
-return (
-    `${STRAPI_URL}/api/magazine-articles?${query.toString()}`
-);
+
+    query.set(
+        "populate[content][on][article.contributor][populate][image]",
+        "true"
+    );
+
+
+    query.set(
+        "populate[content][on][article.contributor][populate][content][populate][image]",
+        "true"
+    );
+
+
+    return (
+        `${STRAPI_URL}/api/magazine-articles?${query.toString()}`
+    );
+
 }
-
-
 
 
 /* =========================================================
@@ -698,11 +861,16 @@ return (
 
 async function loadCms() {
 
-    if (cmsLoaded) {
+    if (
+        cmsLoaded
+    ) {
         return;
     }
 
-    if (cmsLoadingPromise) {
+
+    if (
+        cmsLoadingPromise
+    ) {
         return cmsLoadingPromise;
     }
 
@@ -715,6 +883,7 @@ async function loadCms() {
                 cmsStatus.classList.remove(
                     "error"
                 );
+
 
                 cmsStatus.textContent =
                     "Loading articles…";
@@ -738,16 +907,25 @@ async function loadCms() {
 
 
                 const issues =
-                    Array.isArray(issueResponse.data)
+                    Array.isArray(
+                        issueResponse.data
+                    )
                         ? issueResponse.data
                         : [];
 
 
                 issues.sort(
-                    (a,b) =>
-                        Number(b.issueNumber || 0)
+                    (
+                        a,
+                        b
+                    ) =>
+                        Number(
+                            b.issueNumber || 0
+                        )
                         -
-                        Number(a.issueNumber || 0)
+                        Number(
+                            a.issueNumber || 0
+                        )
                 );
 
 
@@ -758,12 +936,16 @@ async function loadCms() {
 
 
                 let incomingArticles =
-                    Array.isArray(articleResponse.data)
+                    Array.isArray(
+                        articleResponse.data
+                    )
                         ? articleResponse.data
                         : [];
 
 
-                if (currentIssue) {
+                if (
+                    currentIssue
+                ) {
 
                     const currentIssueId =
                         currentIssue.documentId
@@ -775,30 +957,43 @@ async function loadCms() {
                         incomingArticles.filter(
                             article => {
 
-                                if (!article.issue) {
+                                if (
+                                    !article.issue
+                                ) {
                                     return false;
                                 }
+
 
                                 const articleIssueId =
                                     article.issue.documentId
                                     ||
                                     article.issue.id;
 
+
                                 return (
                                     articleIssueId
                                     ===
                                     currentIssueId
                                 );
+
                             }
                         );
+
                 }
 
 
                 incomingArticles.sort(
-                    (a,b) =>
-                        Number(a.order ?? 999)
+                    (
+                        a,
+                        b
+                    ) =>
+                        Number(
+                            a.order ?? 999
+                        )
                         -
-                        Number(b.order ?? 999)
+                        Number(
+                            b.order ?? 999
+                        )
                 );
 
 
@@ -810,14 +1005,18 @@ async function loadCms() {
 
                 renderWebGrid();
 
+
                 cmsLoaded =
                     true;
+
 
                 cmsStatus.hidden =
                     true;
 
+
                 webGrid.hidden =
                     false;
+
 
                 applyArticleRouteIfNeeded();
 
@@ -830,12 +1029,15 @@ async function loadCms() {
                     error
                 );
 
+
                 cmsStatus.hidden =
                     false;
+
 
                 cmsStatus.classList.add(
                     "error"
                 );
+
 
                 cmsStatus.innerHTML =
                     `
@@ -843,20 +1045,22 @@ async function loadCms() {
                     Make sure Strapi is running at
                     <strong>the Focal Point CMS.</strong>
                     `;
+
             }
 
             finally {
 
                 cmsLoadingPromise =
                     null;
+
             }
 
         })();
 
 
     return cmsLoadingPromise;
-}
 
+}
 
 
 /* =========================================================
@@ -893,8 +1097,8 @@ function updateIssueHeader() {
         "webTagline"
     ).textContent =
         "For Filmmakers, By Filmmakers";
-}
 
+}
 
 
 /* =========================================================
@@ -907,18 +1111,24 @@ function renderWebGrid() {
         "";
 
 
-    if (!articles.length) {
+    if (
+        !articles.length
+    ) {
 
         webGrid.hidden =
             true;
 
+
         cmsStatus.hidden =
             false;
+
 
         cmsStatus.textContent =
             "No published articles are currently assigned to this issue.";
 
+
         return;
+
     }
 
 
@@ -1020,15 +1230,19 @@ function renderWebGrid() {
                 event => {
 
                     if (
-                        event.key === "Enter"
+                        event.key ===
+                        "Enter"
                         ||
-                        event.key === " "
+                        event.key ===
+                        " "
                     ) {
 
                         event.preventDefault();
 
                         open();
+
                     }
+
                 }
             );
 
@@ -1036,10 +1250,11 @@ function renderWebGrid() {
             webGrid.appendChild(
                 card
             );
+
         }
     );
-}
 
+}
 
 
 /* =========================================================
@@ -1058,6 +1273,7 @@ function renderRichTextChildren(
                 )
         )
         .join("");
+
 }
 
 
@@ -1070,7 +1286,10 @@ function renderRichTextNode(
     }
 
 
-    if (node.type === "text") {
+    if (
+        node.type ===
+        "text"
+    ) {
 
         let text =
             escapeHtml(
@@ -1078,41 +1297,65 @@ function renderRichTextNode(
             );
 
 
-        if (node.bold) {
+        if (
+            node.bold
+        ) {
+
             text =
                 `<strong>${text}</strong>`;
+
         }
 
 
-        if (node.italic) {
+        if (
+            node.italic
+        ) {
+
             text =
                 `<em>${text}</em>`;
+
         }
 
 
-        if (node.underline) {
+        if (
+            node.underline
+        ) {
+
             text =
                 `<u>${text}</u>`;
+
         }
 
 
-        if (node.strikethrough) {
+        if (
+            node.strikethrough
+        ) {
+
             text =
                 `<s>${text}</s>`;
+
         }
 
 
-        if (node.code) {
+        if (
+            node.code
+        ) {
+
             text =
                 `<code>${text}</code>`;
+
         }
 
 
         return text;
+
     }
 
 
-    if (node.type === "link") {
+    if (
+        node.type ===
+        "link"
+    ) {
 
         const href =
             escapeHtml(
@@ -1129,20 +1372,28 @@ function renderRichTextNode(
                 ${renderRichTextChildren(node.children)}
             </a>
         `;
+
     }
 
 
-    if (node.type === "paragraph") {
+    if (
+        node.type ===
+        "paragraph"
+    ) {
 
         return `
             <p class="article-paragraph">
                 ${renderRichTextChildren(node.children)}
             </p>
         `;
+
     }
 
 
-    if (node.type === "heading") {
+    if (
+        node.type ===
+        "heading"
+    ) {
 
         const level =
             Math.min(
@@ -1161,23 +1412,32 @@ function renderRichTextNode(
                 ${renderRichTextChildren(node.children)}
             </h${level}>
         `;
+
     }
 
 
-    if (node.type === "quote") {
+    if (
+        node.type ===
+        "quote"
+    ) {
 
         return `
             <blockquote class="article-paragraph">
                 ${renderRichTextChildren(node.children)}
             </blockquote>
         `;
+
     }
 
 
-    if (node.type === "list") {
+    if (
+        node.type ===
+        "list"
+    ) {
 
         const tag =
-            node.format === "ordered"
+            node.format ===
+            "ordered"
                 ? "ol"
                 : "ul";
 
@@ -1187,22 +1447,28 @@ function renderRichTextNode(
                 ${renderRichTextChildren(node.children)}
             </${tag}>
         `;
+
     }
 
 
-    if (node.type === "list-item") {
+    if (
+        node.type ===
+        "list-item"
+    ) {
 
         return `
             <li>
                 ${renderRichTextChildren(node.children)}
             </li>
         `;
+
     }
 
 
     return renderRichTextChildren(
         node.children || []
     );
+
 }
 
 
@@ -1210,13 +1476,18 @@ function renderRichTextBlocks(
     blocks
 ) {
 
-    if (!Array.isArray(blocks)) {
+    if (
+        !Array.isArray(
+            blocks
+        )
+    ) {
 
         return `
             <p class="article-paragraph">
                 ${escapeHtml(blocks || "")}
             </p>
         `;
+
     }
 
 
@@ -1228,8 +1499,8 @@ function renderRichTextBlocks(
                 )
         )
         .join("");
-}
 
+}
 
 
 /* =========================================================
@@ -1248,7 +1519,9 @@ function convertVideoUrlToEmbed(
     try {
 
         const parsed =
-            new URL(url);
+            new URL(
+                url
+            );
 
 
         if (
@@ -1264,9 +1537,11 @@ function convertVideoUrlToEmbed(
                         ""
                     );
 
+
             return (
                 `https://www.youtube.com/embed/${id}`
             );
+
         }
 
 
@@ -1281,7 +1556,9 @@ function convertVideoUrlToEmbed(
                     "/embed/"
                 )
             ) {
+
                 return url;
+
             }
 
 
@@ -1291,12 +1568,16 @@ function convertVideoUrlToEmbed(
                 );
 
 
-            if (id) {
+            if (
+                id
+            ) {
 
                 return (
                     `https://www.youtube.com/embed/${id}`
                 );
+
             }
+
         }
 
 
@@ -1313,12 +1594,16 @@ function convertVideoUrlToEmbed(
                     .pop();
 
 
-            if (id) {
+            if (
+                id
+            ) {
 
                 return (
                     `https://player.vimeo.com/video/${id}`
                 );
+
             }
+
         }
 
     }
@@ -1329,12 +1614,13 @@ function convertVideoUrlToEmbed(
             "Invalid video URL:",
             url
         );
+
     }
 
 
     return url;
-}
 
+}
 
 
 /* =========================================================
@@ -1364,6 +1650,7 @@ function renderArticleComponent(
                 ${renderRichTextBlocks(block.text)}
             </div>
         `;
+
     }
 
 
@@ -1381,6 +1668,7 @@ function renderArticleComponent(
 
             </div>
         `;
+
     }
 
 
@@ -1424,6 +1712,7 @@ function renderArticleComponent(
 
             </figure>
         `;
+
     }
 
 
@@ -1453,6 +1742,7 @@ function renderArticleComponent(
 
             </blockquote>
         `;
+
     }
 
 
@@ -1502,6 +1792,7 @@ function renderArticleComponent(
 
             </div>
         `;
+
     }
 
 
@@ -1550,7 +1841,9 @@ function renderArticleComponent(
             "";
 
 
-        if (audioUrl) {
+        if (
+            audioUrl
+        ) {
 
             player =
                 `
@@ -1560,9 +1853,12 @@ function renderArticleComponent(
                     src="${escapeHtml(audioUrl)}"
                 ></audio>
                 `;
+
         }
 
-        else if (embedUrl) {
+        else if (
+            embedUrl
+        ) {
 
             player =
                 `
@@ -1576,10 +1872,13 @@ function renderArticleComponent(
 
                 </div>
                 `;
+
         }
 
 
-        if (!player) {
+        if (
+            !player
+        ) {
             return "";
         }
 
@@ -1595,176 +1894,192 @@ function renderArticleComponent(
 
             </section>
         `;
+
     }
-if (
-    component ===
-    "article.contributor"
-) {
-
-    const image =
-        strapiMediaUrl(
-            block.image
-        );
 
 
-    const sectionTitle =
-        block.sectionTitle
-            ?
-            `
-            <div class="contributor-section-title">
-                ${escapeHtml(block.sectionTitle)}
-            </div>
-            `
-            :
-            "";
+    if (
+        component ===
+        "article.contributor"
+    ) {
+
+        const image =
+            strapiMediaUrl(
+                block.image
+            );
 
 
-    const author =
-        block.author
-            ?
-            `
-            <h2 class="contributor-name">
-                ${escapeHtml(block.author)}
-            </h2>
-            `
-            :
-            "";
-
-    const text =
-        Array.isArray(block.text)
-            ?
-            `
-            <div class="contributor-text">
-                ${renderRichTextBlocks(block.text)}
-            </div>
-            `
-            :
-            "";
-const contributorContent =
-    Array.isArray(block.content)
-        ?
-        block.content
-            .map(
-                item => {
-
-                    const itemText =
-                        Array.isArray(item.text)
-                            ?
-                            `
-                            <div class="contributor-text">
-                                ${renderRichTextBlocks(item.text)}
-                            </div>
-                            `
-                            :
-                            "";
+        const sectionTitle =
+            block.sectionTitle
+                ?
+                `
+                <div class="contributor-section-title">
+                    ${escapeHtml(block.sectionTitle)}
+                </div>
+                `
+                :
+                "";
 
 
-                    const itemImage =
-                        strapiMediaUrl(
-                            item.image
-                        );
+        const author =
+            block.author
+                ?
+                `
+                <h2 class="contributor-name">
+                    ${escapeHtml(block.author)}
+                </h2>
+                `
+                :
+                "";
 
 
-                    const itemImageHtml =
-                        itemImage
-                            ?
-                            `
-                            <figure class="contributor-image">
-
-                                <img
-                                    src="${escapeHtml(itemImage)}"
-                                    alt="${escapeHtml(
-                                        item.alt
-                                        ||
-                                        item.caption
-                                        ||
-                                        block.author
-                                        ||
-                                        ""
-                                    )}"
-                                >
-
-                                ${
-                                    item.caption
-                                        ?
-                                        `
-                                        <figcaption class="article-caption">
-                                            ${escapeHtml(item.caption)}
-                                        </figcaption>
-                                        `
-                                        :
-                                        ""
-                                }
-
-                            </figure>
-                            `
-                            :
-                            "";
-
-
-                    return `
-                        ${itemText}
-                        ${itemImageHtml}
-                    `;
-                }
+        const text =
+            Array.isArray(
+                block.text
             )
-            .join("")
-        :
-        "";
+                ?
+                `
+                <div class="contributor-text">
+                    ${renderRichTextBlocks(block.text)}
+                </div>
+                `
+                :
+                "";
 
-    const imageHtml =
-        image
-            ?
-            `
-            <figure class="contributor-image">
 
-                <img
-                    src="${escapeHtml(image)}"
-                    alt="${escapeHtml(
-                        block.alt
-                        ||
+        const contributorContent =
+            Array.isArray(
+                block.content
+            )
+                ?
+                block.content
+                    .map(
+                        item => {
+
+                            const itemText =
+                                Array.isArray(
+                                    item.text
+                                )
+                                    ?
+                                    `
+                                    <div class="contributor-text">
+                                        ${renderRichTextBlocks(item.text)}
+                                    </div>
+                                    `
+                                    :
+                                    "";
+
+
+                            const itemImage =
+                                strapiMediaUrl(
+                                    item.image
+                                );
+
+
+                            const itemImageHtml =
+                                itemImage
+                                    ?
+                                    `
+                                    <figure class="contributor-image">
+
+                                        <img
+                                            src="${escapeHtml(itemImage)}"
+                                            alt="${escapeHtml(
+                                                item.alt
+                                                ||
+                                                item.caption
+                                                ||
+                                                block.author
+                                                ||
+                                                ""
+                                            )}"
+                                        >
+
+                                        ${
+                                            item.caption
+                                                ?
+                                                `
+                                                <figcaption class="article-caption">
+                                                    ${escapeHtml(item.caption)}
+                                                </figcaption>
+                                                `
+                                                :
+                                                ""
+                                        }
+
+                                    </figure>
+                                    `
+                                    :
+                                    "";
+
+
+                            return `
+                                ${itemText}
+                                ${itemImageHtml}
+                            `;
+
+                        }
+                    )
+                    .join("")
+                :
+                "";
+
+
+        const imageHtml =
+            image
+                ?
+                `
+                <figure class="contributor-image">
+
+                    <img
+                        src="${escapeHtml(image)}"
+                        alt="${escapeHtml(
+                            block.alt
+                            ||
+                            block.caption
+                            ||
+                            block.author
+                            ||
+                            ""
+                        )}"
+                    >
+
+                    ${
                         block.caption
-                        ||
-                        block.author
-                        ||
-                        ""
-                    )}"
-                >
+                            ?
+                            `
+                            <figcaption class="article-caption">
+                                ${escapeHtml(block.caption)}
+                            </figcaption>
+                            `
+                            :
+                            ""
+                    }
 
-                ${
-                    block.caption
-                        ?
-                        `
-                        <figcaption class="article-caption">
-                            ${escapeHtml(block.caption)}
-                        </figcaption>
-                        `
-                        :
-                        ""
-                }
-
-            </figure>
-            `
-            :
-            "";
+                </figure>
+                `
+                :
+                "";
 
 
-    return `
-    <section class="article-contributor">
+        return `
+            <section class="article-contributor">
 
-        ${sectionTitle}
+                ${sectionTitle}
 
-        ${author}
+                ${author}
 
-        ${text}
+                ${text}
 
-        ${contributorContent}
+                ${contributorContent}
 
-        ${imageHtml}
+                ${imageHtml}
 
-    </section>
-`;
-}
+            </section>
+        `;
+
+    }
+
 
     if (
         component ===
@@ -1774,12 +2089,13 @@ const contributorContent =
         return `
             <div class="article-divider"></div>
         `;
+
     }
 
 
     return "";
-}
 
+}
 
 
 /* =========================================================
@@ -1792,10 +2108,14 @@ function openArticle(
 ) {
 
     const article =
-        articles[index];
+        articles[
+            index
+        ];
 
 
-    if (!article) {
+    if (
+        !article
+    ) {
         return;
     }
 
@@ -1869,7 +2189,9 @@ function openArticle(
 
             issueText
         ]
-        .filter(Boolean);
+        .filter(
+            Boolean
+        );
 
 
     articleMeta.innerHTML =
@@ -1887,18 +2209,23 @@ function openArticle(
         );
 
 
-    if (hero) {
+    if (
+        hero
+    ) {
 
         articleHeroImage.hidden =
             false;
 
+
         articleHeroImage.src =
             hero;
+
 
         articleHeroImage.alt =
             article.title
             ||
             "";
+
     }
 
     else {
@@ -1906,14 +2233,18 @@ function openArticle(
         articleHeroImage.hidden =
             true;
 
+
         articleHeroImage.removeAttribute(
             "src"
         );
+
     }
 
 
     articleContent.innerHTML =
-        Array.isArray(article.content)
+        Array.isArray(
+            article.content
+        )
             ?
             article.content
                 .map(
@@ -1936,27 +2267,41 @@ function openArticle(
             : "hidden";
 
 
-    if (updateRoute) {
+    if (
+        updateRoute
+    ) {
 
         history.pushState(
             null,
             "",
-            `#article/${encodeURIComponent(article.slug || article.documentId || article.id)}`
+            `#article/${encodeURIComponent(
+                article.slug
+                ||
+                article.documentId
+                ||
+                article.id
+            )}`
         );
+
     }
 
 
     window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
+        top:
+            0,
+
+        left:
+            0,
+
+        behavior:
+            "instant"
     });
 
 
     document.title =
         `${article.title} — Focal Point`;
-}
 
+}
 
 
 /* =========================================================
@@ -1986,28 +2331,35 @@ function closeArticle(
     );
 
 
-    if (updateRoute) {
+    if (
+        updateRoute
+    ) {
 
         history.pushState(
             null,
             "",
             "#web"
         );
+
     }
 
 
-    /* FIXED: correct closing brace here */
     window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
+        top:
+            0,
+
+        left:
+            0,
+
+        behavior:
+            "instant"
     });
 
 
     document.title =
         "Focal Point Magazine — Flying Cat Productions";
-}
 
+}
 
 
 /* =========================================================
@@ -2021,6 +2373,7 @@ articleBack.addEventListener(
         closeArticle(
             true
         );
+
     }
 );
 
@@ -2037,7 +2390,9 @@ previousArticle.addEventListener(
                 activeArticleIndex - 1,
                 true
             );
+
         }
+
     }
 );
 
@@ -2056,44 +2411,71 @@ nextArticle.addEventListener(
                 activeArticleIndex + 1,
                 true
             );
+
         }
+
     }
 );
-
 
 
 /* =========================================================
    PRINT STATE
    ========================================================= */
 
-let pdf = null;
+let pdf =
+    null;
 
-let pageFlip = null;
 
-let totalPdfPages = 0;
+let pageFlip =
+    null;
 
-let pageRatio = .773;
 
-let pageImageUrls = [];
+let totalPdfPages =
+    0;
 
-let currentBookIndex = 0;
 
-let navigationLocked = false;
+let pageRatio =
+    .773;
 
-let navigationTimer = null;
 
-let zoom = 1;
+let pageImageUrls =
+    [];
 
-let printInitialised = false;
 
-let printInitialising = false;
+let currentBookIndex =
+    0;
 
-const MIN_ZOOM = .82;
 
-const MAX_ZOOM = 1.35;
+let navigationLocked =
+    false;
 
-const ZOOM_STEP = .08;
 
+let navigationTimer =
+    null;
+
+
+let zoom =
+    1;
+
+
+let printInitialised =
+    false;
+
+
+let printInitialising =
+    false;
+
+
+const MIN_ZOOM =
+    .82;
+
+
+const MAX_ZOOM =
+    1.35;
+
+
+const ZOOM_STEP =
+    .08;
 
 
 /* =========================================================
@@ -2150,19 +2532,26 @@ function setEdition(
 
     printTab.setAttribute(
         "aria-selected",
-        String(!showWeb)
+        String(
+            !showWeb
+        )
     );
 
 
     webTab.setAttribute(
         "aria-selected",
-        String(showWeb)
+        String(
+            showWeb
+        )
     );
 
 
-    if (showWeb) {
+    if (
+        showWeb
+    ) {
 
         loadCms();
+
     }
 
     else {
@@ -2171,11 +2560,15 @@ function setEdition(
             false
         );
 
+
         ensurePrintMagazine();
+
     }
 
 
-    if (updateRoute) {
+    if (
+        updateRoute
+    ) {
 
         history.pushState(
             null,
@@ -2184,13 +2577,19 @@ function setEdition(
                 ? "#web"
                 : "#print"
         );
+
     }
 
 
     window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant"
+        top:
+            0,
+
+        left:
+            0,
+
+        behavior:
+            "instant"
     });
 
 
@@ -2208,9 +2607,12 @@ function setEdition(
                         "resize"
                     )
                 );
+
             }
         );
+
     }
+
 }
 
 
@@ -2222,6 +2624,7 @@ printTab.addEventListener(
             "print",
             true
         );
+
     }
 );
 
@@ -2234,13 +2637,14 @@ webTab.addEventListener(
             false
         );
 
+
         setEdition(
             "web",
             true
         );
+
     }
 );
-
 
 
 /* =========================================================
@@ -2286,6 +2690,7 @@ function applyArticleRouteIfNeeded() {
                     ===
                     slug
                 );
+
             }
         );
 
@@ -2298,9 +2703,10 @@ function applyArticleRouteIfNeeded() {
             index,
             false
         );
-    }
-}
 
+    }
+
+}
 
 
 /* =========================================================
@@ -2324,11 +2730,15 @@ async function applyRoute() {
             false
         );
 
+
         await loadCms();
+
 
         applyArticleRouteIfNeeded();
 
+
         return;
+
     }
 
 
@@ -2341,12 +2751,31 @@ async function applyRoute() {
             false
         );
 
+
         setEdition(
             "web",
             false
         );
 
+
         return;
+
+    }
+
+
+    if (
+        hash ===
+        "#print"
+    ) {
+
+        setEdition(
+            "print",
+            false
+        );
+
+
+        return;
+
     }
 
 
@@ -2355,10 +2784,11 @@ async function applyRoute() {
     );
 
 
- setEdition(
-    "web",
-    false
-);
+    setEdition(
+        "web",
+        false
+    );
+
 }
 
 
@@ -2372,7 +2802,6 @@ window.addEventListener(
     "hashchange",
     applyRoute
 );
-
 
 
 /* =========================================================
@@ -2424,6 +2853,7 @@ async function ensurePrintMagazine() {
 
                 loadingBar.style.width =
                     `${ratio * 10}%`;
+
             };
 
 
@@ -2443,7 +2873,8 @@ async function ensurePrintMagazine() {
 
         const viewport =
             firstPage.getViewport({
-                scale: 1
+                scale:
+                    1
             });
 
 
@@ -2477,6 +2908,7 @@ async function ensurePrintMagazine() {
 
         printInitialised =
             true;
+
     }
 
     catch(error) {
@@ -2495,15 +2927,17 @@ async function ensurePrintMagazine() {
         readerError.classList.add(
             "visible"
         );
+
     }
 
     finally {
 
         printInitialising =
             false;
-    }
-}
 
+    }
+
+}
 
 
 /* =========================================================
@@ -2548,9 +2982,10 @@ async function renderMagazineImages() {
 
 
         await nextFrame();
-    }
-}
 
+    }
+
+}
 
 
 /* =========================================================
@@ -2569,7 +3004,8 @@ async function renderPdfPageToImage(
 
     const baseViewport =
         page.getViewport({
-            scale: 1
+            scale:
+                1
         });
 
 
@@ -2607,7 +3043,8 @@ async function renderPdfPageToImage(
         canvas.getContext(
             "2d",
             {
-                alpha: false
+                alpha:
+                    false
             }
         );
 
@@ -2668,7 +3105,8 @@ async function renderPdfPageToImage(
         cropped.getContext(
             "2d",
             {
-                alpha: false
+                alpha:
+                    false
             }
         );
 
@@ -2688,6 +3126,7 @@ async function renderPdfPageToImage(
 
         cropWidth,
         cropHeight
+
     );
 
 
@@ -2701,11 +3140,14 @@ async function renderPdfPageToImage(
                 cropped.toBlob(
                     result => {
 
-                        if (result) {
+                        if (
+                            result
+                        ) {
 
                             resolve(
                                 result
                             );
+
                         }
 
                         else {
@@ -2715,13 +3157,16 @@ async function renderPdfPageToImage(
                                     "Could not render PDF page."
                                 )
                             );
+
                         }
+
                     },
 
                     "image/webp",
 
                     .92
                 );
+
             }
         );
 
@@ -2732,8 +3177,8 @@ async function renderPdfPageToImage(
     return URL.createObjectURL(
         blob
     );
-}
 
+}
 
 
 /* =========================================================
@@ -2807,6 +3252,7 @@ function buildPrintPages() {
             flipbook.appendChild(
                 page
             );
+
         }
     );
 
@@ -2824,8 +3270,8 @@ function buildPrintPages() {
     flipbook.appendChild(
         back
     );
-}
 
+}
 
 
 /* =========================================================
@@ -2844,6 +3290,7 @@ function createPageFlip() {
         throw new Error(
             "PageFlip library failed to load."
         );
+
     }
 
 
@@ -2918,6 +3365,7 @@ function createPageFlip() {
 
                 swipeDistance:
                     40
+
             }
         );
 
@@ -2935,8 +3383,20 @@ function createPageFlip() {
     );
 
 
+    const isMobileReader =
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches;
+
+
+    const startingPage =
+        isMobileReader
+            ? 1
+            : 0;
+
+
     pageFlip.turnToPage(
-        0
+        startingPage
     );
 
 
@@ -2951,6 +3411,7 @@ function createPageFlip() {
 
 
             updateReaderState();
+
         }
     );
 
@@ -2964,21 +3425,26 @@ function createPageFlip() {
 
 
             if (
-                state === "flipping"
+                state ===
+                "flipping"
                 ||
-                state === "user_fold"
+                state ===
+                "user_fold"
                 ||
-                state === "fold_corner"
+                state ===
+                "fold_corner"
             ) {
 
                 bookStage.classList.add(
                     "page-moving"
                 );
+
             }
 
 
             if (
-                state === "read"
+                state ===
+                "read"
             ) {
 
                 navigationLocked =
@@ -3005,18 +3471,20 @@ function createPageFlip() {
 
 
                 updateReaderState();
+
             }
+
         }
     );
 
 
     currentBookIndex =
-        0;
+        startingPage;
 
 
     updateReaderState();
-}
 
+}
 
 
 /* =========================================================
@@ -3025,7 +3493,9 @@ function createPageFlip() {
 
 function updateReaderState() {
 
-    if (!pageFlip) {
+    if (
+        !pageFlip
+    ) {
         return;
     }
 
@@ -3034,15 +3504,29 @@ function updateReaderState() {
         pageFlip.getCurrentPageIndex();
 
 
+    const isMobileReader =
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches;
+
+
+    const pdfPageNumber =
+        Math.max(
+            1,
+            currentBookIndex
+        );
+
+
     const interior =
         currentBookIndex >= 2
         &&
-        currentBookIndex <
-        totalPdfPages;
+        currentBookIndex < totalPdfPages;
 
 
     bookStage.classList.toggle(
         "book-open",
+        !isMobileReader
+        &&
         interior
     );
 
@@ -3053,15 +3537,16 @@ function updateReaderState() {
 
         pageCounter.textContent =
             `Cover · 01 / ${String(totalPdfPages).padStart(2,"0")}`;
+
     }
 
     else if (
-        currentBookIndex >=
-        totalPdfPages
+        isMobileReader
     ) {
 
         pageCounter.textContent =
-            `${String(totalPdfPages).padStart(2,"0")} / ${String(totalPdfPages).padStart(2,"0")}`;
+            `${String(pdfPageNumber).padStart(2,"0")} / ${String(totalPdfPages).padStart(2,"0")}`;
+
     }
 
     else {
@@ -3079,18 +3564,21 @@ function updateReaderState() {
 
         pageCounter.textContent =
             `${String(left).padStart(2,"0")}–${String(right).padStart(2,"0")} / ${String(totalPdfPages).padStart(2,"0")}`;
+
     }
 
 
     prevButton.disabled =
-        currentBookIndex <= 0;
+        isMobileReader
+            ? currentBookIndex <= 1
+            : currentBookIndex <= 0;
 
 
     nextButton.disabled =
         currentBookIndex >=
         totalPdfPages;
-}
 
+}
 
 
 /* =========================================================
@@ -3126,21 +3614,27 @@ function lockNavigation() {
                 );
 
 
-                if (pageFlip) {
+                if (
+                    pageFlip
+                ) {
 
                     updateReaderState();
+
                 }
+
             },
 
             FLIP_TIME + 350
         );
+
 }
 
 
 function goNext() {
 
     if (
-        currentEdition !== "print"
+        currentEdition !==
+        "print"
         ||
         !pageFlip
         ||
@@ -3155,19 +3649,22 @@ function goNext() {
 
 
     if (
-        current >= totalPdfPages
+        current >=
+        totalPdfPages
     ) {
         return;
     }
 
 
     if (
-        current >= totalPdfPages - 2
+        current >=
+        totalPdfPages - 2
     ) {
 
         bookStage.classList.add(
             "edge-turn"
         );
+
     }
 
 
@@ -3177,14 +3674,13 @@ function goNext() {
     pageFlip.flipNext(
         "bottom"
     );
+
 }
 
 
 function goPrevious() {
 
     if (
-        currentEdition !== "print"
-        ||
         !pageFlip
         ||
         navigationLocked
@@ -3193,24 +3689,22 @@ function goPrevious() {
     }
 
 
-    const current =
+    const isMobileReader =
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches;
+
+
+    const currentIndex =
         pageFlip.getCurrentPageIndex();
 
 
     if (
-        current <= 0
+        isMobileReader
+        &&
+        currentIndex <= 1
     ) {
         return;
-    }
-
-
-    if (
-        current <= 2
-    ) {
-
-        bookStage.classList.add(
-            "edge-turn"
-        );
     }
 
 
@@ -3220,6 +3714,7 @@ function goPrevious() {
     pageFlip.flipPrev(
         "bottom"
     );
+
 }
 
 
@@ -3230,6 +3725,7 @@ nextButton.addEventListener(
         event.preventDefault();
 
         goNext();
+
     }
 );
 
@@ -3241,9 +3737,9 @@ prevButton.addEventListener(
         event.preventDefault();
 
         goPrevious();
+
     }
 );
-
 
 
 /* =========================================================
@@ -3254,6 +3750,7 @@ function applyZoom() {
 
     flipbook.style.transform =
         `scale(${zoom})`;
+
 }
 
 
@@ -3269,6 +3766,7 @@ zoomIn.addEventListener(
 
 
         applyZoom();
+
     }
 );
 
@@ -3285,9 +3783,9 @@ zoomOut.addEventListener(
 
 
         applyZoom();
+
     }
 );
-
 
 
 /* =========================================================
@@ -3305,62 +3803,32 @@ fullscreenButton.addEventListener(
             ) {
 
                 await printEdition.requestFullscreen();
+
             }
 
             else {
 
                 await document.exitFullscreen();
+
             }
+
         }
 
         catch(error) {
 
-            console.error(
-                "Fullscreen error:",
+            console.warn(
+                "Fullscreen unavailable:",
                 error
             );
+
         }
+
     }
 );
 
 
-
 /* =========================================================
-   KEYBOARD
-   ========================================================= */
-
-window.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            currentEdition !== "print"
-        ) {
-            return;
-        }
-
-
-        if (
-            event.key === "ArrowRight"
-        ) {
-
-            goNext();
-        }
-
-
-        if (
-            event.key === "ArrowLeft"
-        ) {
-
-            goPrevious();
-        }
-    }
-);
-
-
-
-/* =========================================================
-   NEXT FRAME
+   FRAME HELPER
    ========================================================= */
 
 function nextFrame() {
@@ -3369,38 +3837,16 @@ function nextFrame() {
         resolve => {
 
             requestAnimationFrame(
-                () => {
-
+                () =>
                     requestAnimationFrame(
                         resolve
-                    );
-                }
+                    )
             );
+
         }
     );
+
 }
-
-
-
-/* =========================================================
-   CLEANUP
-   ========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    () => {
-
-        pageImageUrls.forEach(
-            url => {
-
-                URL.revokeObjectURL(
-                    url
-                );
-            }
-        );
-    }
-);
-
 
 
 /* =========================================================
@@ -3411,6 +3857,6 @@ applyRoute();
 
 </script>
 
-
 </body>
+
 </html>
