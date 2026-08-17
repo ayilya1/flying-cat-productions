@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hypnos Lullaby: Where Dreams Come to Die — Flying Cat Productions</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --black: #080808;
+    --black-soft: #0d0d0c;
+    --white: #f3efe6;
+    --muted: #9f9b94;
+    --muted-light: #c0bbb3;
+    --accent: #CC5500;
+    --line: rgba(255,255,255,0.13);
+    --nav-white: #f5f2e9;
+    --header-green: #C8FF20;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    background: var(--black);
+}
+
+body {
+    overflow: hidden;
+
+    background: var(--black);
+    color: var(--white);
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   SUBTLE GRAIN
+   ========================================================= */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: 0.022;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.4'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: relative;
+    z-index: 100;
+
+    width: 100%;
+    height: 94px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding:
+        24px
+        32px;
+
+    background: var(--black);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.home-logo {
+    position: relative;
+
+    width: 90px;
+
+    flex: 0 0 auto;
+
+    pointer-events: auto;
+}
+
+.home-logo img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+
+.header-right {
+    width:
+        min(
+            560px,
+            48vw
+        );
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   HEADER NAV
+   ========================================================= */
+
+.main-nav {
+    width: 100%;
+
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+
+    gap:
+        clamp(
+            20px,
+            2.2vw,
+            36px
+        );
+}
+
+.main-nav a {
+    position: relative;
+
+    color: var(--header-green);
+
+    font-family:
+        "Archivo Black",
+        "Arial Black",
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        clamp(
+            18px,
+            1.65vw,
+            28px
+        );
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.055em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.3s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+.main-nav a:hover {
+    opacity: 0.64;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   HEADER MANIFESTO
+   ========================================================= */
+
+.header-manifesto {
+    width:
+        min(
+            390px,
+            100%
+        );
+
+    margin:
+        13px
+        0
+        0;
+
+    color: var(--header-green);
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.045em;
+
+    text-transform: uppercase;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   TWO COLUMN LAYOUT
+   ========================================================= */
+
+.project-layout {
+    height: calc(100vh - 94px);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px, 31%)
+        minmax(0, 69%);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LEFT COLUMN
+   ========================================================= */
+
+.left-rail {
+    height: 100%;
+    min-height: 0;
+
+    padding:
+        30px
+        clamp(30px, 3vw, 48px)
+        40px;
+
+    background: var(--black);
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(255,255,255,0.20)
+        transparent;
+}
+
+.left-rail::-webkit-scrollbar {
+    width: 4px;
+}
+
+.left-rail::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.left-rail::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.20);
+
+    border-radius: 99px;
+}
+
+.project-kicker {
+    margin-bottom: 11px;
+
+    color: var(--accent);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+}
+
+.project-title {
+    margin: 0 0 28px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-weight: 500;
+
+    line-height: 0.9;
+
+    color: #f4f0e7;
+
+    letter-spacing: -0.015em;
+}
+
+
+.project-title-main {
+    display: block;
+
+    font-size:
+        clamp(
+            58px,
+            7vw,
+            120px
+        );
+}
+
+
+.project-title-sub {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size:
+        clamp(
+            32px,
+            3.6vw,
+            58px
+        );
+
+    line-height: 0.92;
+}
+
+  
+
+
+
+/* =========================================================
+   POSTER
+   ========================================================= */
+
+.project-poster {
+    width: min(100%, 330px);
+
+    aspect-ratio: 2 / 3;
+
+    margin: 0 0 28px;
+
+    overflow: hidden;
+
+    background: #151515;
+}
+
+
+.project-poster img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: 50% 50%;
+
+    transform: scale(1.18);
+
+    transform-origin: center;
+
+    display: block;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.festival-list {
+    margin: 0 0 24px;
+
+    color: var(--accent);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.07em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SYNOPSIS
+   ========================================================= */
+
+.short-synopsis {
+    margin: 0 0 24px;
+
+    max-width: 350px;
+
+    color: var(--muted-light);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   METADATA
+   ========================================================= */
+
+.project-meta {
+    display: grid;
+
+    grid-template-columns:
+        82px
+        minmax(0,1fr);
+
+    gap:
+        7px
+        12px;
+
+    margin-bottom: 24px;
+}
+
+.meta-key {
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+}
+
+.meta-value {
+    color: var(--white);
+
+    font-size: 11px;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+.right-column {
+    height: 100%;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding:
+        30px
+        clamp(34px,4vw,62px)
+        80px
+        clamp(30px,3.5vw,52px);
+
+    background: var(--black-soft);
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(255,255,255,0.30)
+        transparent;
+}
+
+.right-column::-webkit-scrollbar {
+    width: 5px;
+}
+
+.right-column::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.right-column::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.28);
+
+    border-radius: 99px;
+}
+
+
+/* =========================================================
+   YOUTUBE PLAYER
+   ========================================================= */
+
+.video-player {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+.youtube-player {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+}
+
+.youtube-player,
+.youtube-player iframe {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.video-cover {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        opacity
+        0.3s ease;
+}
+
+.video-player.started .video-cover {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.video-cover-shade {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 6;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.02) 35%,
+            rgba(0,0,0,0.22) 100%
+        );
+
+    pointer-events: none;
+
+    transition:
+        opacity
+        0.3s ease;
+}
+
+.video-player.started .video-cover-shade {
+    opacity: 0;
+}
+
+.main-play {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    z-index: 8;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 68px;
+    height: 68px;
+
+    border:
+        1.5px solid
+        var(--accent);
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,0.38);
+
+    backdrop-filter: blur(4px);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        opacity 0.2s ease;
+}
+
+.main-play::after {
+    content: "";
+
+    position: absolute;
+
+    left: 28px;
+    top: 22px;
+
+    border-top:
+        12px solid transparent;
+
+    border-bottom:
+        12px solid transparent;
+
+    border-left:
+        19px solid
+        var(--accent);
+}
+
+.main-play:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.05);
+
+    background:
+        rgba(0,0,0,0.52);
+}
+
+.video-player.started .main-play {
+    display: none;
+}
+
+
+/* =========================================================
+   LAURELS / STATUS
+   ========================================================= */
+
+.laurels {
+    display: flex;
+    align-items: center;
+
+    gap: 35px;
+
+    min-height: 105px;
+
+    padding:
+        20px
+        0
+        17px;
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.tabs {
+    height: 50px;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 32px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+}
+
+.tab-button {
+    position: relative;
+
+    height: 50px;
+
+    padding:
+        0
+        0
+        15px;
+
+    color: #77736c;
+
+    border: 0;
+
+    background: transparent;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.tab-button:hover {
+    color: var(--white);
+}
+
+.tab-button.active {
+    color: var(--white);
+}
+
+.tab-button.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    height: 2px;
+
+    background: var(--accent);
+}
+
+
+/* =========================================================
+   TAB CONTENT
+   ========================================================= */
+
+.tab-content {
+    padding:
+        42px
+        6px
+        30px
+        0;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+
+/* =========================================================
+   STORY
+   ========================================================= */
+
+.story-kicker {
+    margin-bottom: 14px;
+
+    color: var(--accent);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.17em;
+
+    text-transform: uppercase;
+}
+
+.story-title {
+    max-width: 930px;
+
+    margin:
+        0
+        0
+        35px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            66px,
+            6.3vw,
+            100px
+        );
+
+    font-weight: 500;
+
+    line-height: 0.81;
+
+    letter-spacing: -0.04em;
+}
+
+.story-body {
+    max-width: 820px;
+}
+
+.story-body p {
+    margin:
+        0
+        0
+        25px;
+
+    color: #c6c1b8;
+
+    font-size: 14px;
+
+    line-height: 1.82;
+}
+
+.story-body h3 {
+    margin:
+        58px
+        0
+        20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 44px;
+
+    font-weight: 500;
+
+    line-height: 0.95;
+}
+
+
+/* =========================================================
+   STILLS
+   ========================================================= */
+
+.gallery-intro {
+    max-width: 650px;
+
+    margin:
+        0
+        0
+        30px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+.stills-gallery {
+    column-count: 2;
+
+    column-gap: 14px;
+
+    width: 100%;
+}
+
+.still-item {
+    width: 100%;
+
+    display: inline-block;
+
+    margin:
+        0
+        0
+        14px;
+
+    break-inside: avoid;
+
+    overflow: hidden;
+
+    background: #151515;
+}
+
+.still-item img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    transition:
+        transform
+        0.45s ease,
+        opacity
+        0.3s ease;
+}
+
+.still-item:hover img {
+    transform:
+        scale(1.015);
+}
+
+
+/* =========================================================
+   BTS
+   ========================================================= */
+
+.gallery-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   CREDITS
+   ========================================================= */
+
+.credits-tab-header {
+    margin-bottom: 44px;
+}
+
+.credits-tab-kicker {
+    margin-bottom: 12px;
+
+    color: var(--accent);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: .17em;
+
+    text-transform: uppercase;
+}
+
+.credits-tab-title {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            58px,
+            5vw,
+            78px
+        );
+
+    font-weight: 500;
+
+    line-height: .85;
+
+    letter-spacing: -.035em;
+}
+
+
+.credits-list {
+    width: 100%;
+
+    max-width: 900px;
+}
+
+
+.credits-section-title {
+    margin-top: 54px;
+
+    padding:
+        0
+        0
+        12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.22);
+
+    color: var(--accent);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+}
+
+.credits-section-title:first-child {
+    margin-top: 0;
+}
+
+
+.credit-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, .7fr)
+        minmax(0, 1.3fr);
+
+    gap: 40px;
+
+    padding:
+        17px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.09);
+}
+
+
+.credit-role {
+    color: var(--muted);
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    letter-spacing: .09em;
+
+    text-transform: uppercase;
+}
+
+
+.credit-name {
+    color: var(--white);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        21px;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .project-layout {
+        grid-template-columns:
+            36%
+            64%;
+    }
+
+    .left-rail {
+        padding:
+            28px
+            24px
+            40px;
+    }
+
+    .right-column {
+        padding:
+            28px
+            27px
+            70px;
+    }
+
+    .project-title {
+        font-size:
+            clamp(
+                52px,
+                7vw,
+                72px
+            );
+    }
+
+    .project-poster {
+        width: 100%;
+
+        max-width: 300px;
+    }
+
+    .story-title {
+        font-size:
+            clamp(
+                56px,
+                7vw,
+                78px
+            );
+    }
+
+    .tabs {
+        gap: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+    html,
+    body {
+        height: auto;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+
+    .site-header {
+        height: auto;
+
+        padding:
+            16px
+            17px;
+
+        gap: 16px;
+    }
+
+    .home-logo {
+        width: 66px;
+    }
+
+    .header-right {
+        width: auto;
+
+        flex: 1;
+    }
+
+    .main-nav {
+        gap: 10px;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+
+        letter-spacing: -0.045em;
+    }
+
+    .header-manifesto {
+        width:
+            min(
+                220px,
+                100%
+            );
+
+        margin-top: 8px;
+
+        font-size: 5.5px;
+
+        line-height: 1.4;
+    }
+
+    .project-layout {
+        height: auto;
+
+        display: block;
+
+        overflow: visible;
+    }
+
+    .left-rail {
+        height: auto;
+
+        overflow: visible;
+
+        padding:
+            30px
+            18px
+            45px;
+    }
+
+    .project-title {
+        font-size: 68px;
+
+        margin-bottom: 25px;
+    }
+
+    .project-poster {
+        width:
+            min(
+                82vw,
+                330px
+            );
+
+        aspect-ratio: 2 / 3;
+    }
+
+    .right-column {
+        height: auto;
+
+        overflow: visible;
+
+        padding:
+            0
+            18px
+            60px;
+    }
+
+    .video-player {
+        aspect-ratio: 16 / 9;
+    }
+
+    .main-play {
+        width: 58px;
+        height: 58px;
+    }
+
+    .main-play::after {
+        left: 24px;
+        top: 18px;
+
+        border-top-width: 11px;
+        border-bottom-width: 11px;
+        border-left-width: 17px;
+    }
+
+    .laurels {
+        min-height: 90px;
+    }
+
+    .tabs {
+        gap: 21px;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-button {
+        flex: 0 0 auto;
+    }
+
+    .tab-content {
+        padding:
+            36px
+            0
+            20px;
+    }
+
+    .story-title {
+        font-size: 58px;
+    }
+
+    .stills-gallery {
+        column-count: 1;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .credit-row {
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+
+        padding: 16px 0;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header class="site-header">
+
+    <a
+        href="index.html"
+        class="home-logo"
+        aria-label="Flying Cat Productions home"
+    >
+
+        <img
+            src="assets/homepage/flying-cat-logo.png"
+            alt="Flying Cat Productions"
+        >
+
+    </a>
+
+
+    <div class="header-right">
+
+        <nav class="main-nav">
+
+            <a href="news.html">
+                News
+            </a>
+
+            <a href="slate.html">
+                Slate
+            </a>
+
+            <a href="magazine.html">
+                Magazine
+            </a>
+
+        </nav>
+
+
+        <p class="header-manifesto">
+            Long story short, we like movies so we make movies,
+            about all sorts of things. Join the fun.
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     PROJECT
+     ========================================================= -->
+
+<main class="project-layout">
+
+
+<!-- =========================================================
+     LEFT COLUMN
+     ========================================================= -->
+
+<aside class="left-rail">
+
+
+    <div class="project-kicker">
+        Narrative Pilot · 2026
+    </div>
+
+
+    <h1 class="project-title">
+
+    <span class="project-title-main">
+        Hypnos Lullaby:
+    </span>
+
+    <span class="project-title-sub">
+        Where Dreams Come to Die
+    </span>
+
+</h1>
+
+
+
+    <div class="project-poster">
+
+        <img
+            src="assets/projects/hypnos-lullaby/poster/_Hypnos A.jpg"
+            alt="Hypnos Lullaby: Where Dreams Come to Die film poster"
+        >
+
+    </div>
+
+
+
+    <!-- STATUS -->
+
+    <div class="festival-list">
+
+        Post Production · 2026<br>
+
+        Flying Cat Productions × Pinari Productions
+
+    </div>
+
+
+
+    <!-- DESCRIPTION -->
+
+    <p class="short-synopsis">
+
+        A nocturnal thriller drifting through
+        longing, memory, and the fragile space
+        between waking life and dream.
+
+    </p>
+
+
+
+    <!-- METADATA -->
+
+    <div class="project-meta">
+
+
+        <div class="meta-key">
+            Year
+        </div>
+
+        <div class="meta-value">
+            2026
+        </div>
+
+
+        <div class="meta-key">
+            Format
+        </div>
+
+        <div class="meta-value">
+            Narrative Pilot
+        </div>
+
+
+        <div class="meta-key">
+            Runtime
+        </div>
+
+        <div class="meta-value">
+            37 min
+        </div>
+
+
+        <div class="meta-key">
+            Country
+        </div>
+
+        <div class="meta-value">
+            Canada
+        </div>
+
+
+        <div class="meta-key">
+            Genre
+        </div>
+
+        <div class="meta-value">
+            Thriller
+        </div>
+
+
+        <div class="meta-key">
+            Production
+        </div>
+
+        <div class="meta-value">
+            Flying Cat Productions
+        </div>
+
+
+        <div class="meta-key">
+            Post Partner
+        </div>
+
+        <div class="meta-value">
+            Pinari Productions
+        </div>
+
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =========================================================
+     RIGHT COLUMN
+     ========================================================= -->
+
+<section class="right-column">
+
+
+    <!-- =====================================================
+         TRAILER
+         ===================================================== -->
+
+    <div
+        class="video-player"
+        id="videoPlayer"
+    >
+
+
+        <div
+            id="youtubePlayer"
+            class="youtube-player"
+        ></div>
+
+
+        <img
+            class="video-cover"
+            src="assets/homepage/hypnos-trailer-thumb.jpg"
+            alt="Hypnos Lullaby: Where Dreams Come to Die trailer"
+        >
+
+
+        <div class="video-cover-shade"></div>
+
+
+        <button
+            class="main-play"
+            id="mainPlay"
+            aria-label="Play Hypnos Lullaby: Where Dreams Come to Die trailer"
+        ></button>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         STATUS AREA
+         ===================================================== -->
+
+    <div class="laurels">
+
+        <div class="festival-list">
+            In Post Production
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TABS
+         ===================================================== -->
+
+    <nav
+        class="tabs"
+        aria-label="Project content"
+    >
+
+
+        <button
+            class="tab-button active"
+            data-tab="story"
+        >
+            Story
+        </button>
+
+
+        <button
+            class="tab-button"
+            data-tab="stills"
+        >
+            Stills
+        </button>
+
+
+        <button
+            class="tab-button"
+            data-tab="bts"
+        >
+            BTS
+        </button>
+
+
+        <button
+            class="tab-button"
+            data-tab="credits"
+        >
+            Credits
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         TAB CONTENT
+         ===================================================== -->
+
+    <div class="tab-content">
+
+
+        <!-- =================================================
+             STORY
+             ================================================= -->
+
+        <section
+    class="tab-panel active"
+    id="story"
+>
+
+
+    <div class="story-kicker">
+        Project Story
+    </div>
+
+
+    <h2 class="story-title">
+        A world that forgot how to dream.
+    </h2>
+
+
+    <div class="story-body">
+
+
+        <p>
+
+            Joseph awakens from a vivid dream that leaves him deeply
+            unsettled. Before he has time to process it, he rushes to
+            begin his first day as a security guard, unaware that an
+            enigmatic entity with glowing yellow eyes witnessed his
+            dream and has begun silently stalking him.
+
+        </p>
+
+
+        <h3>
+            A world without dreams
+        </h3>
+
+
+        <p>
+
+            In this world, dreaming has become a forgotten phenomenon.
+            The few people still capable of dreaming are known as
+            dreamers — rare individuals whose dreams are followed by
+            violent and unpredictable behaviour.
+
+        </p>
+
+
+        <p>
+
+            Joseph knows something no one else does: he is a dreamer
+            himself. Knowing what discovery could mean, he keeps his
+            condition hidden.
+
+        </p>
+
+
+        <h3>
+            Saint Matris Prison
+        </h3>
+
+
+        <p>
+
+            Elsewhere, at Saint Matris Prison, Warden Sarah Maddox
+            prepares for the transfer of dangerous inmate Silvia
+            Warrenhouse.
+
+        </p>
+
+
+        <p>
+
+            Sarah has become increasingly paranoid after uncovering
+            evidence of a conspiracy involving the imprisonment and
+            exploitation of the world's remaining dreamers. Her fears
+            prove justified when Warden Bowman and his superior begin
+            discussing how to eliminate her before she can expose
+            their operation.
+
+        </p>
+
+
+        <p>
+
+            Suspecting corruption has spread throughout her own
+            institution, Sarah requests additional officers to assist
+            with Silvia's transfer. Every request is denied.
+
+        </p>
+
+
+        <h3>
+            An unlikely partner
+        </h3>
+
+
+        <p>
+
+            Joseph is mistakenly sent to the wrong prison wing on his
+            first day and unexpectedly crosses paths with Sarah.
+
+        </p>
+
+
+        <p>
+
+            With no one else she trusts, Sarah recruits the
+            inexperienced guard to accompany her on the transfer.
+            During their journey, Joseph is introduced to the history
+            of dreamers and the danger surrounding them.
+
+        </p>
+
+
+        <p>
+
+            While reviewing Silvia Warrenhouse's file, he discovers
+            references to a mysterious recurring figure known as the
+            Treeguy — an entity that repeatedly appears in Silvia's
+            dreams, promising that one day he will come to her aid.
+
+        </p>
+
+
+        <h3>
+            The trap
+        </h3>
+
+
+        <p>
+
+            As Sarah and Joseph arrive at Bowman's prison, they
+            unknowingly step into a carefully orchestrated trap.
+
+        </p>
+
+
+        <p>
+
+            Bowman has arranged the transfer as part of his plan to
+            silence Sarah. Silvia, meanwhile, remains strangely calm,
+            convinced that the encounter foretold in her dreams is
+            finally approaching.
+
+        </p>
+
+
+        <p>
+
+            With Joseph hiding his own identity as a dreamer, Sarah
+            fighting to expose a conspiracy, and unseen forces closing
+            in around them, their fates become increasingly tied to the
+            mysterious figure known as the Treeguy.
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+        <!-- =================================================
+             STILLS
+             ================================================= -->
+
+        <section
+            class="tab-panel"
+            id="stills"
+        >
+
+
+            <p class="gallery-intro">
+
+                Selected stills from Hypnos Lullaby: Where Dreams Come to Die.
+
+            </p>
+
+
+            <div class="stills-gallery">
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/Bowman W.jpg"
+                        alt="Hypnos Lullaby still — Bowman"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/cat.jpg"
+                        alt="Hypnos Lullaby still — cat"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/cigar burn W.jpg"
+                        alt="Hypnos Lullaby still — cigar burn"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/cigar O.jpg"
+                        alt="Hypnos Lullaby still — cigar"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/Cigar.jpg"
+                        alt="Hypnos Lullaby still — cigar"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/Fitzburg W.jpg"
+                        alt="Hypnos Lullaby still — Fitzburg"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/hand tree shadow.jpg"
+                        alt="Hypnos Lullaby still — hand and tree shadow"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/prison hall.jpg"
+                        alt="Hypnos Lullaby still — prison hall"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/scream silvia.jpg"
+                        alt="Hypnos Lullaby still — Silvia"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/shaunbrung.jpg"
+                        alt="Hypnos Lullaby still"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/silvia interog.jpg"
+                        alt="Hypnos Lullaby still — Silvia"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/top fan.jpg"
+                        alt="Hypnos Lullaby still — fan"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/tre guy face.jpg"
+                        alt="Hypnos Lullaby still"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/tree guy hand.jpg"
+                        alt="Hypnos Lullaby still"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/van.jpg"
+                        alt="Hypnos Lullaby still — van"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/stills/Zombie.jpg"
+                        alt="Hypnos Lullaby still — zombie"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             BTS
+             ================================================= -->
+
+        <section
+            class="tab-panel"
+            id="bts"
+        >
+
+
+            <p class="gallery-intro">
+
+                Behind-the-scenes material from the production.
+
+            </p>
+
+
+            <div class="stills-gallery">
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/bts/Prison Mess Hall.jpg"
+                        alt="Hypnos Lullaby behind the scenes — Prison Mess Hall"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/bts/script.jpg"
+                        alt="Hypnos Lullaby script"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/bts/shot deck.png"
+                        alt="Hypnos Lullaby shot deck"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+                <figure class="still-item">
+                    <img
+                        src="assets/projects/hypnos-lullaby/bts/shotlist.png"
+                        alt="Hypnos Lullaby shot list"
+                        loading="lazy"
+                    >
+                </figure>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <section
+    class="tab-panel"
+    id="credits"
+>
+
+    <div class="credits-tab-header">
+
+        <div class="credits-tab-kicker">
+            Film Credits
+        </div>
+
+        <h2 class="credits-tab-title">
+            Credits
+        </h2>
+
+    </div>
+
+
+    <div class="credits-list">
+
+
+        <!-- =========================
+             DIRECTION / PRODUCTION
+             ========================= -->
+
+        <div class="credits-section-title">
+            Direction & Production
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Writer / Director
+            </div>
+            <div class="credit-name">
+                Mikel Estrada
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Producer
+            </div>
+            <div class="credit-name">
+                Mikel Estrada <br>
+                Maria Estrada
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Director of Photography
+            </div>
+            <div class="credit-name">
+                Ayilya Thampuran
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Editor
+            </div>
+            <div class="credit-name">
+                Ayilya Thampuran
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                1st Assistant Director
+            </div>
+            <div class="credit-name">
+                Ameera Makarem
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Script Supervisors
+            </div>
+            <div class="credit-name">
+                Sophia Prado<br>
+                Eala T’ilim
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Stunt Coordinator
+            </div>
+            <div class="credit-name">
+                Ben Van Huis
+            </div>
+        </div>
+
+
+        <!-- =========================
+             CAMERA
+             ========================= -->
+
+             
+        <div class="credits-section-title">
+            Camera
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Camera Operator
+            </div>
+            <div class="credit-name">
+                Ayilya Thampuran
+            </div>
+            </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                1st Assistant Camera
+            </div>
+            <div class="credit-name">
+                Caris Simmons
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                2nd Assistant Camera
+            </div>
+            <div class="credit-name">
+                Ivan Bello
+            </div>
+        </div>
+
+
+        <!-- =========================
+             SOUND
+             ========================= -->
+
+        <div class="credits-section-title">
+            Sound
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Sound Mixer / Boom Operator
+            </div>
+            <div class="credit-name">
+                Daniel Barzegar
+            </div>
+        </div>
+
+
+        <!-- =========================
+             LIGHTING & GRIP
+             ========================= -->
+
+        <div class="credits-section-title">
+            Lighting & Grip
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Gaffer
+            </div>
+            <div class="credit-name">
+                Kyle Eastwood
+            </div>
+        </div>
+
+        
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Key Grip / Grip
+            </div>
+            <div class="credit-name">
+                Adam Ponis<br>
+                Suhail Puri
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Grip
+            </div>
+            <div class="credit-name">
+                Bhuvan Krishna Vegiteela<br>
+                Madison Kennedy<br>
+            </div>
+        </div>
+
+
+        <!-- =========================
+             ART DEPARTMENT
+             ========================= -->
+
+        <div class="credits-section-title">
+            Art Department
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Production Designer
+            </div>
+            <div class="credit-name">
+                Bailey Mecredi
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Set Decorator
+            </div>
+            <div class="credit-name">
+                Amsi Colin
+            </div>
+        </div>
+
+
+        <!-- =========================
+             HAIR & MAKEUP
+             ========================= -->
+
+        <div class="credits-section-title">
+            Hair & Makeup
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Makeup / Hair Designer
+            </div>
+            <div class="credit-name">
+                Majo Montes
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                HMU Assistants
+            </div>
+            <div class="credit-name">
+                Maria Rosales<br>
+                Larisa Pereda<br>
+                Alondra Cuadros
+            </div>
+        </div>
+
+
+        <!-- =========================
+             VISUAL EFFECTS
+             ========================= -->
+
+        <div class="credits-section-title">
+            Visual Effects
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                VFX Supervisor
+            </div>
+            <div class="credit-name">
+                Diego Zarrabe<br>
+                Amsi Colin
+            </div>
+        </div>
+
+
+        <!-- =========================
+             PRODUCTION SUPPORT
+             ========================= -->
+
+        <div class="credits-section-title">
+            Production Support
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Transport
+            </div>
+            <div class="credit-name">
+                Maija Ducon
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                First Aid / BTS
+            </div>
+            <div class="credit-name">
+                Madison Kennedy
+            </div>
+        </div>
+
+
+        <!-- =========================
+             CAST
+             ========================= -->
+
+        <div class="credits-section-title">
+            Cast
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Joseph
+            </div>
+            <div class="credit-name">
+                Mozi Mayaleh
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Officer Sarah Maddox
+            </div>
+            <div class="credit-name">
+                Tahnee Langshaw
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Officer Bowman
+            </div>
+            <div class="credit-name">
+                Ryan Minaker
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Sylvia Warrenhouse
+            </div>
+            <div class="credit-name">
+                Rebecca Vado
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Warden Fitzberg
+            </div>
+            <div class="credit-name">
+                Blair Thexton
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Warden Shaunberg
+            </div>
+            <div class="credit-name">
+                Leslie Webber
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Dr. Victoria Weller
+            </div>
+            <div class="credit-name">
+                Kassandra Sison
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Sergeant Beatrice
+            </div>
+            <div class="credit-name">
+                Marie Isserman
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Clarice
+            </div>
+            <div class="credit-name">
+                Olha Onyschenko
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Agni
+            </div>
+            <div class="credit-name">
+                Leona Khong
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Post Guard
+            </div>
+            <div class="credit-name">
+                Grant Gladish
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Guard / Officer
+            </div>
+            <div class="credit-name">
+                Jayme Lee<br>
+                Tammy Theis
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Additional Cast
+            </div>
+            <div class="credit-name">
+                Tuck Abbod<br>
+                Daniel Salcedo
+            </div>
+        </div>
+
+
+        <!-- =========================
+             BACKGROUND
+             ========================= -->
+
+        <div class="credits-section-title">
+            Background Cast
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Prisoners
+            </div>
+            <div class="credit-name">
+                Marieli Osorio<br>
+                Viviana Osorio <br>
+                Fer Malfavon<br>
+                Cera Rivers<br>
+                Laura England<br>
+                Wai-Lee Reid<br>
+                Sarah Moon<br>
+                Mojon Mirzapoor<br>
+                April Waskahat<br>
+                Klara Kopeinigg
+            </div>
+        </div>
+
+
+        <!-- =========================
+             PROMOTIONAL SHOOT
+             ========================= -->
+
+        <div class="credits-section-title">
+            Promotional Photography
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Photographer / BTS
+            </div>
+            <div class="credit-name">
+                Iker Jarquin
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Gaffer
+            </div>
+            <div class="credit-name">
+                Ayilya Thampuran
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Makeup Designer
+            </div>
+            <div class="credit-name">
+                Shin Chan
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Models
+            </div>
+            <div class="credit-name">
+                Claudia Luna<br>
+                Fernanda Estrada<br>
+                Sebastian Estrada
+            </div>
+        </div>
+
+
+        <!-- =========================
+             COMPANY
+             ========================= -->
+
+        <div class="credits-section-title">
+            Production
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Production Company
+            </div>
+            <div class="credit-name">
+                Flying Cat Productions
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Post-Production Partner
+            </div>
+            <div class="credit-name">
+                Pinari Productions
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Location
+            </div>
+            <div class="credit-name">
+                Vancouver &amp; Lower Mainland,
+                British Columbia
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Language
+            </div>
+            <div class="credit-name">
+                English
+            </div>
+        </div>
+
+        <div class="credit-row">
+            <div class="credit-role">
+                Production Year
+            </div>
+            <div class="credit-name">
+                2024
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     YOUTUBE API
+     ========================================================= -->
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+
+<script>
+
+/* =========================================================
+   TAB SYSTEM
+   ========================================================= */
+
+const tabButtons =
+    document.querySelectorAll(
+        ".tab-button"
+    );
+
+const tabPanels =
+    document.querySelectorAll(
+        ".tab-panel"
+    );
+
+const rightColumn =
+    document.querySelector(
+        ".right-column"
+    );
+
+const tabs =
+    document.querySelector(
+        ".tabs"
+    );
+
+
+tabButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const target =
+                    button.dataset.tab;
+
+                tabButtons.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+                tabPanels.forEach(
+                    panel => {
+
+                        panel.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+                button.classList.add(
+                    "active"
+                );
+
+                document
+                    .getElementById(target)
+                    .classList.add(
+                        "active"
+                    );
+
+                rightColumn.scrollTo({
+
+                    top:
+                        tabs.offsetTop - 18,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   YOUTUBE PLAYER
+   ========================================================= */
+
+const videoPlayer =
+    document.getElementById(
+        "videoPlayer"
+    );
+
+const mainPlay =
+    document.getElementById(
+        "mainPlay"
+    );
+
+let youtubePlayer = null;
+
+let youtubeReady = false;
+
+
+function onYouTubeIframeAPIReady() {
+
+    youtubePlayer =
+        new YT.Player(
+            "youtubePlayer",
+            {
+
+                videoId:
+                    "B37OvxFMxzE",
+
+                playerVars: {
+
+                    autoplay: 0,
+
+                    controls: 1,
+
+                    rel: 0,
+
+                    playsinline: 1
+
+                },
+
+                events: {
+
+                    onReady:
+                        function() {
+
+                            youtubeReady =
+                                true;
+
+                        },
+
+                    onStateChange:
+                        handleYouTubeState
+
+                }
+
+            }
+        );
+
+}
+
+
+function handleYouTubeState(
+    event
+) {
+
+    if (
+        event.data ===
+        YT.PlayerState.PLAYING
+    ) {
+
+        videoPlayer
+            .classList
+            .add(
+                "started"
+            );
+
+    }
+
+}
+
+
+mainPlay.addEventListener(
+    "click",
+    () => {
+
+        if (
+            !youtubeReady
+        ) {
+
+            return;
+
+        }
+
+        videoPlayer
+            .classList
+            .add(
+                "started"
+            );
+
+        youtubePlayer
+            .playVideo();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

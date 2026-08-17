@@ -11,12 +11,12 @@ class FCPHeader extends HTMLElement {
         const isNews =
             currentPage === "news.html";
 
+        const isSlate =
+            currentPage === "slate.html";
+
         const isMagazine =
             currentPage === "magazine.html";
 
-        const isHome =
-            currentPage === "" ||
-            currentPage === "index.html";
 
         this.innerHTML = `
             <header class="fcp-site-header">
@@ -48,9 +48,10 @@ class FCPHeader extends HTMLElement {
                         </a>
 
                         <a
-                            href="${isHome ? "#films" : "index.html#films"}"
+                            href="slate.html"
+                            class="${isSlate ? "active" : ""}"
                         >
-                            Work
+                            Slate
                         </a>
 
                         <a
@@ -76,6 +77,7 @@ class FCPHeader extends HTMLElement {
     }
 
 }
+
 
 customElements.define(
     "fcp-header",

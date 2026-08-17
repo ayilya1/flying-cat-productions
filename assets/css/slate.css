@@ -1,0 +1,855 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #050505;
+    color: #f4f0e7;
+
+    font-family:
+        "Inter",
+        sans-serif;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+.page-shell {
+    width: min(1600px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+
+
+
+
+/* =========================================================
+   SLATE INTRO
+   ========================================================= */
+
+.slate-intro {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(260px, .6fr);
+
+    gap: 50px;
+
+    align-items: end;
+
+    padding:
+        90px
+        0
+        55px;
+
+    border-bottom:
+        1px solid
+        rgba(244,240,231,.5);
+}
+
+
+.slate-intro h1 {
+    margin: 0;
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            100px,
+            12vw,
+            190px
+        );
+
+    line-height: .78;
+
+    letter-spacing: -.06em;
+}
+
+
+.slate-intro p {
+    max-width: 360px;
+
+    margin:
+        0
+        0
+        8px
+        auto;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            24px,
+            2.2vw,
+            34px
+        );
+
+    line-height: 1.05;
+}
+
+/* =========================================================
+   FEATURED PROJECTS
+   ========================================================= */
+
+.featured-projects {
+    padding:
+        90px
+        0
+        140px;
+}
+
+
+.section-label {
+    margin-bottom: 46px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            24px,
+            2vw,
+            32px
+        );
+
+    font-weight: 500;
+
+    line-height: 1;
+
+    letter-spacing: -.02em;
+
+    text-transform: none;
+}
+
+
+.featured-project {
+    width: 100%;
+    margin-bottom: 130px;
+}
+
+
+.featured-project-large {
+    width: 88%;
+}
+
+
+.featured-project-right {
+    width: 68%;
+    margin-left: auto;
+}
+
+
+.featured-project-left {
+    width: 72%;
+}
+
+
+.featured-project-image {
+    display: block;
+
+    overflow: hidden;
+
+    background: #111;
+
+    text-decoration: none;
+}
+
+
+.featured-project-image img {
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+
+    transition:
+        transform
+        .6s
+        ease;
+}
+
+
+.featured-project:hover
+.featured-project-image img {
+    transform:
+        scale(1.015);
+}
+
+
+.featured-project-info {
+    display: grid;
+
+    grid-template-columns:
+        42px
+        minmax(0, 1fr)
+        42px;
+
+    gap: 26px;
+
+    align-items: start;
+
+    padding:
+        20px
+        0
+        0;
+
+    border-top:
+        1px solid
+        rgba(244,240,231,.35);
+}
+
+
+.project-copy {
+    min-width: 0;
+    max-width: 720px;
+}
+
+
+.project-number {
+    padding-top: 5px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: .08em;
+
+    opacity: .6;
+}
+
+
+.project-number {
+    padding-top: 6px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 20px;
+
+    letter-spacing: .08em;
+
+    opacity: .6;
+}
+
+
+.featured-project h2 {
+    margin: 0;
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            32px,
+            4.2vw,
+            70px
+        );
+
+    line-height: .95;
+
+    letter-spacing: -.045em;
+
+    text-transform: uppercase;
+}
+
+
+.project-meta {
+    margin-top: 12px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    letter-spacing: .06em;
+    text-transform: uppercase;
+
+    opacity: .78;
+}
+
+
+.project-status {
+    display: inline-block;
+
+    margin-top: 8px;
+
+    color: #CC5500;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: .07em;
+    text-transform: uppercase;
+}
+
+
+.project-description {
+    max-width: 520px;
+
+    margin:
+        20px
+        0
+        0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            20px,
+            1.55vw,
+            25px
+        );
+
+    line-height: 1.22;
+}
+
+
+.project-festivals {
+    margin-top: 20px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    opacity: .62;
+}
+
+
+.project-arrow {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    padding-top: 0;
+
+    color: inherit;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
+
+
+.featured-project:hover .project-arrow {
+    color: #CC5500;
+
+    transform:
+        translate(
+            4px,
+            -4px
+        );
+}
+
+
+@media (max-width: 820px) {
+
+    .featured-projects {
+        padding:
+            60px
+            0
+            90px;
+    }
+
+    .featured-project,
+    .featured-project-large,
+    .featured-project-right,
+    .featured-project-left {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 80px;
+    }
+
+    .featured-project-info {
+        grid-template-columns:
+            36px
+            minmax(0, 1fr)
+            auto;
+
+        gap: 12px;
+    }
+
+    .featured-project h2 {
+    margin: 0;
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            30px,
+            3.4vw,
+            54px
+        );
+
+    line-height: .94;
+
+    letter-spacing: -.045em;
+
+    text-transform: uppercase;
+
+    overflow-wrap: normal;
+}
+
+
+}
+/* =========================================================
+   FULL SLATE
+   ========================================================= */
+
+.full-slate {
+    padding:
+        40px
+        0
+        140px;
+}
+
+
+.slate-row {
+    display: grid;
+
+    grid-template-columns:
+        40px
+        190px
+        minmax(240px, .9fr)
+        minmax(260px, 1fr)
+        120px
+        40px;
+
+    gap: 24px;
+
+    align-items: center;
+
+    padding:
+        24px
+        0;
+
+    border-top:
+        1px solid
+        rgba(244,240,231,.28);
+}
+
+
+.slate-row:last-child {
+    border-bottom:
+        1px solid
+        rgba(244,240,231,.28);
+}
+
+
+.slate-row-number {
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: .08em;
+
+    opacity: .55;
+}
+
+
+.slate-row-image {
+    aspect-ratio:
+        16 / 10;
+
+    overflow: hidden;
+
+    background:
+        #111;
+}
+
+
+.slate-row-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.slate-row-main h3 {
+    margin: 0;
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        clamp(
+            26px,
+            2.4vw,
+            42px
+        );
+
+    line-height: .95;
+
+    letter-spacing: -.04em;
+
+    text-transform: uppercase;
+}
+
+
+.slate-row-meta {
+    margin-top: 9px;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: .06em;
+
+    text-transform: uppercase;
+
+    opacity: .72;
+}
+
+
+.slate-row-status {
+    margin-top: 6px;
+
+    color: #CC5500;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: .07em;
+
+    text-transform: uppercase;
+}
+
+
+.slate-row-description {
+    max-width: 380px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            18px,
+            1.4vw,
+            22px
+        );
+
+    line-height: 1.18;
+}
+
+
+.slate-row-festivals {
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    opacity: .55;
+}
+
+
+.slate-row-arrow {
+    justify-self: end;
+
+    font-size: 26px;
+
+    line-height: 1;
+    text-decoration: none;
+}
+
+
+@media (max-width: 900px) {
+
+    .slate-row {
+        grid-template-columns:
+            32px
+            120px
+            minmax(0, 1fr)
+            32px;
+
+        gap: 16px;
+    }
+
+
+    .slate-row-description,
+    .slate-row-festivals {
+        grid-column:
+            3 / 4;
+    }
+
+
+    .slate-row-description {
+        margin-top: 8px;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+
+    .slate-row {
+        grid-template-columns:
+            28px
+            minmax(0, 1fr)
+            28px;
+    }
+
+
+    .slate-row-image {
+        grid-column:
+            2 / 3;
+
+        width: 100%;
+
+        margin-bottom: 8px;
+    }
+
+
+    .slate-row-main,
+    .slate-row-description,
+    .slate-row-festivals {
+        grid-column:
+            2 / 3;
+    }
+
+
+    .slate-row-arrow {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    padding:
+        34px
+        0;
+
+    border-top:
+        1px solid
+        rgba(244,240,231,.3);
+
+    font-size: 11px;
+
+    letter-spacing: .04em;
+
+    text-transform: uppercase;
+}
+
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+    .page-shell {
+        width:
+            calc(100% - 28px);
+    }
+
+    .site-header {
+        padding-top: 18px;
+    }
+
+    .home-logo {
+        width: 110px;
+    }
+
+    .header-right {
+        gap: 16px;
+    }
+
+    .main-nav {
+        gap: 12px;
+    }
+
+    .main-nav a {
+        font-size: 11px;
+    }
+
+    .header-manifesto {
+        display: none;
+    }
+
+    .slate-intro {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(260px, .6fr);
+
+    gap: 50px;
+
+    align-items: end;
+
+    min-height: auto;
+
+    padding:
+        10px
+        0
+        55px;
+
+    border-bottom:
+        1px solid
+        rgba(244,240,231,.5);
+}
+
+    .slate-intro h1 {
+        font-size:
+            clamp(
+                66px,
+                24vw,
+                120px
+            );
+    }
+
+    .slate-intro p {
+        margin: 0;
+
+        max-width: 320px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}
+
+/* =========================================================
+   FINAL MOBILE SLATE HERO FIX
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+    .slate-intro {
+        display: flex !important;
+        flex-direction: column !important;
+
+        grid-template-columns: none !important;
+
+        align-items: flex-start !important;
+
+        gap: 28px !important;
+
+        min-height: 0 !important;
+
+        padding:
+            48px
+            0
+            38px !important;
+    }
+
+
+    .slate-intro h1 {
+        width: 100%;
+
+        margin: 0;
+
+        font-family:
+            "Archivo Black",
+            sans-serif;
+
+        font-size:
+            clamp(
+                72px,
+                22vw,
+                118px
+            );
+
+        line-height: .8;
+
+        letter-spacing: -.055em;
+    }
+
+
+    .slate-intro p {
+        width: min(330px, 86%);
+        max-width: 330px;
+
+        margin:
+            0
+            0
+            0
+            auto !important;
+
+        font-family:
+            "Cormorant Garamond",
+            serif;
+
+        font-size:
+            clamp(
+                24px,
+                6.5vw,
+                31px
+            );
+
+        line-height: 1.02;
+    }
+
+}
