@@ -1846,3 +1846,178 @@ fcp-header {
 
 }
 
+/* =========================================================
+   MOBILE HOMEPAGE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* =====================================================
+       FILMMAKERS — ONE COLUMN
+       ===================================================== */
+
+    .makers {
+        display: block;
+    }
+
+    .makers-heading,
+    .makers-intro-copy {
+        width: 100%;
+    }
+
+    .makers-intro-copy {
+        margin-top: 28px;
+    }
+
+    .people {
+        display: block;
+        width: 100%;
+        margin-top: 54px;
+    }
+
+    .person-card {
+        display: block;
+        width: 100%;
+        margin: 0 0 72px;
+    }
+
+    .person-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .person-photo,
+    .person-info {
+        width: 100%;
+        max-width: none;
+        margin-left: 0 !important;
+    }
+
+    .person-photo {
+        aspect-ratio: 4 / 5;
+        margin-bottom: 24px;
+    }
+
+    .person-info {
+        padding-top: 0;
+    }
+
+}
+
+/* =========================================================
+   MOBILE — NEWS HEADING
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .section-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .section-title .small-orange-link {
+        margin: 0;
+        align-self: flex-start;
+    }
+
+}
+
+/* HIDDEN OUTSIDE MOBILE */
+
+.mobile-hero-laurels {
+    display: none;
+}
+
+
+@media (max-width: 700px) {
+
+    .mobile-hero-laurels {
+        display: none;
+    }
+
+    /*
+       Only Victoria Ka Raja gets these laurels.
+       When the carousel changes to Hypnos,
+       they disappear automatically.
+    */
+
+    .project-victoria .mobile-hero-laurels {
+        display: flex;
+
+        align-items: center;
+
+        gap: 18px;
+
+        width: 100%;
+
+        margin:
+            23px
+            0
+            5px;
+    }
+
+    .mobile-laurel-vqff {
+        width: 105px;
+        height: auto;
+    }
+
+    .mobile-laurel-j4r {
+        width: 52px;
+        height: auto;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    /* =====================================================
+       VKR MOBILE FOCAL POINT
+       Keep Badshah's face clear of the copy
+       ===================================================== */
+
+    .project-victoria .hero-image {
+        object-fit: cover;
+
+        /*
+           Shows more of the LEFT side of the source image,
+           which pushes Badshah further toward the right
+           side of the phone composition.
+        */
+
+        object-position: 34% center;
+    }
+
+
+    .project-victoria .hero-copy {
+        left: 5%;
+
+        width: 48%;
+
+        max-width: 350px;
+    }
+
+
+    .project-victoria .hero-copy h1 {
+        font-size:
+            clamp(
+                54px,
+                15vw,
+                78px
+            );
+
+        line-height: .88;
+    }
+
+
+    .project-victoria .hero-synopsis {
+        width: 100%;
+
+        max-width: 310px;
+
+        font-size: 16px;
+
+        line-height: 1.45;
+    }
+
+}

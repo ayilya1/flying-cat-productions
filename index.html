@@ -100,6 +100,22 @@
             English | 23 min | 4K
         </div>
 
+        <div class="mobile-hero-laurels">
+
+    <img
+        src="assets/logos/vqff-laurel.png"
+        alt="Vancouver Queer Film Festival Official Selection"
+        class="mobile-laurel-vqff"
+    >
+
+    <img
+        src="assets/logos/justice4reel-laurel.png"
+        alt="Justice4Reel Film Festival"
+        class="mobile-laurel-j4r"
+    >
+
+</div>
+
 
         <a
             class="view-project"
@@ -497,7 +513,7 @@ refuse to leave us alone.
                     href="https://www.instagram.com/ayi_ayi_captain/"
                     class="person-social"
                 >
-                    Instagram ↗
+                    Instagram
                 </a>
 
             </div>
@@ -547,7 +563,7 @@ refuse to leave us alone.
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Instagram ↗
+                    Instagram
                 </a>
 
             </div>
@@ -2100,6 +2116,83 @@ async function loadHomepageNews() {
 
 
 loadHomepageNews();
+
+
+/* =========================================================
+   MOBILE SWIPE — HERO CAROUSEL
+   ========================================================= */
+
+let touchStartX =
+    0;
+
+let touchEndX =
+    0;
+
+const SWIPE_THRESHOLD =
+    50;
+
+
+hero.addEventListener(
+    "touchstart",
+    event => {
+
+        touchStartX =
+            event.changedTouches[0].screenX;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+hero.addEventListener(
+    "touchend",
+    event => {
+
+        touchEndX =
+            event.changedTouches[0].screenX;
+
+
+        const swipeDistance =
+            touchEndX
+            -
+            touchStartX;
+
+
+        /* Swipe left = next project */
+
+        if (
+            swipeDistance <
+            -SWIPE_THRESHOLD
+        ) {
+
+            showProject(
+                currentProject + 1
+            );
+
+        }
+
+
+        /* Swipe right = previous project */
+
+        else if (
+            swipeDistance >
+            SWIPE_THRESHOLD
+        ) {
+
+            showProject(
+                currentProject - 1
+            );
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
 
 showProject(0);
 
