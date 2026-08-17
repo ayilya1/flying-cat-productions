@@ -172,7 +172,14 @@ a {
     text-decoration: none;
 }
 
+.slate-row-main h3 a {
+    color: inherit;
+    text-decoration: none;
+}
 
+.slate-row-main h3 a:hover {
+    color: #CC5500;
+}
 .featured-project-image img {
     width: 100%;
     height: auto;
