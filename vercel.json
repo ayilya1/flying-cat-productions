@@ -1,5 +1,52 @@
 {
+  "redirects": [
+    {
+      "source": "/slate.html",
+      "destination": "/slate",
+      "permanent": true
+    },
+    {
+      "source": "/victoria-ka-raja.html",
+      "destination": "/victoria-ka-raja",
+      "permanent": true
+    },
+    {
+      "source": "/hypnos-lullaby.html",
+      "destination": "/hypnos-lullaby",
+      "permanent": true
+    },
+    {
+      "source": "/news.html",
+      "destination": "/news",
+      "permanent": true
+    },
+    {
+      "source": "/magazine.html",
+      "destination": "/magazine",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/slate",
+      "destination": "/slate.html"
+    },
+    {
+      "source": "/victoria-ka-raja",
+      "destination": "/victoria-ka-raja.html"
+    },
+    {
+      "source": "/hypnos-lullaby",
+      "destination": "/hypnos-lullaby.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news.html"
+    },
+    {
+      "source": "/magazine",
+      "destination": "/magazine.html"
+    },
     {
       "source": "/news/:slug",
       "destination": "/news.html?article=:slug"
