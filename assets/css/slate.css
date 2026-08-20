@@ -588,6 +588,14 @@ a {
 }
 
 
+.slate-row {
+    column-gap: px;
+}
+
+.slate-row-description {
+    padding-right: 34px;
+}
+
 .slate-row-description {
     max-width: 380px;
 
