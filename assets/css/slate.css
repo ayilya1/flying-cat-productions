@@ -393,15 +393,6 @@ a {
 
 
 @media (max-width: 620px) {
-.slate-row-tickets {
-    grid-column:
-        2 / 3;
-
-    margin-top: 14px;
-}
-    .slate-row-arrow {
-        display: none;
-    }
 
 }
     .featured-projects {
@@ -589,7 +580,7 @@ a {
 
 
 .slate-row {
-    column-gap: px;
+    column-gap: 32px;
 }
 
 .slate-row-description {
@@ -703,14 +694,93 @@ a {
     text-decoration: none;
 }
 
+@media (max-width: 1100px) {
+
+    .slate-row {
+        grid-template-columns:
+            40px
+            minmax(0, 1fr)
+            44px;
+
+        grid-template-areas:
+            "number image arrow"
+            ". main arrow"
+            ". description arrow"
+            ". tickets arrow";
+
+        column-gap: 24px;
+        row-gap: 18px;
+
+        align-items: start;
+    }
+
+
+    .slate-row-number {
+        grid-area: number;
+        align-self: center;
+    }
+
+
+    .slate-row-image {
+        grid-area: image;
+
+        width: 100%;
+        height: auto;
+
+        aspect-ratio: 16 / 10;
+    }
+
+
+    .slate-row-main {
+        grid-area: main;
+    }
+
+
+    .slate-row-description {
+        grid-area: description;
+
+        max-width: 680px;
+
+        padding-right: 0;
+    }
+
+
+    .slate-row-tickets {
+        grid-area: tickets;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        align-items: center;
+
+        gap:
+            10px
+            18px;
+
+        width: auto;
+
+        margin-top: 0;
+    }
+
+
+    .slate-ticket-link,
+    .slate-ticket-note {
+        white-space: nowrap;
+    }
+
+
+    .slate-row-arrow {
+        grid-area: arrow;
+
+        align-self: center;
+        justify-self: end;
+    }
+
+}
 
 @media (max-width: 900px) {
-.slate-row-tickets {
-    grid-column:
-        3 / 4;
 
-    margin-top: 10px;
-}
     .slate-row {
         grid-template-columns:
             32px
