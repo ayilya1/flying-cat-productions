@@ -9,7 +9,81 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Focal Point Magazine — Flying Cat Productions</title>
+<base href="/">
+
+<title>
+    Focal Point Magazine — Independent Film Magazine | Flying Cat Productions
+</title>
+
+<meta
+    name="description"
+    content="Focal Point is an independent film magazine by Flying Cat Productions featuring filmmaker interviews, production stories, essays and perspectives from the indie film community."
+>
+
+<meta
+    name="robots"
+    content="index, follow"
+>
+
+<link
+    rel="canonical"
+    href="https://www.flyingcatproductions.com/magazine.html"
+>
+
+<meta
+    property="og:type"
+    content="website"
+>
+
+<meta
+    property="og:title"
+    content="Focal Point Magazine — Flying Cat Productions"
+>
+
+<meta
+    property="og:description"
+    content="For filmmakers, by filmmakers. Interviews, production stories, essays and perspectives from the independent film community."
+>
+
+<meta
+    property="og:url"
+    content="https://www.flyingcatproductions.com/magazine.html"
+>
+
+<meta
+    property="og:site_name"
+    content="Flying Cat Productions"
+>
+
+<meta
+    name="twitter:card"
+    content="summary_large_image"
+>
+
+<meta
+    name="twitter:title"
+    content="Focal Point Magazine — Flying Cat Productions"
+>
+
+<meta
+    name="twitter:description"
+    content="For filmmakers, by filmmakers. Interviews, production stories, essays and perspectives from the independent film community."
+>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Periodical",
+    "name": "Focal Point",
+    "description": "An independent film magazine by Flying Cat Productions featuring filmmaker interviews, production stories, essays and perspectives from the indie film community.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Flying Cat Productions",
+        "url": "https://www.flyingcatproductions.com/"
+    },
+    "url": "https://www.flyingcatproductions.com/magazine.html"
+}
+</script>
 
 <link
     rel="icon"
@@ -733,6 +807,59 @@ function formatDate(date) {
 
 }
 
+/* =========================================================
+   MAGAZINE URLS
+   ========================================================= */
+
+function magazineArticleUrl(
+    article
+) {
+
+    const slug =
+        encodeURIComponent(
+            article.slug
+            ||
+            article.documentId
+            ||
+            article.id
+        );
+
+
+    const isLocal =
+        window.location.hostname === "127.0.0.1"
+        ||
+        window.location.hostname === "localhost";
+
+
+    if (isLocal) {
+
+        return (
+            `magazine.html?article=${slug}`
+        );
+
+    }
+
+
+    return (
+        `/magazine/${slug}`
+    );
+
+}
+
+
+function magazineIndexUrl() {
+
+    const isLocal =
+        window.location.hostname === "127.0.0.1"
+        ||
+        window.location.hostname === "localhost";
+
+
+    return isLocal
+        ? "magazine.html#web"
+        : "/magazine.html#web";
+
+}
 
 /* =========================================================
    FETCH STRAPI
@@ -1139,9 +1266,15 @@ function renderWebGrid() {
         ) => {
 
             const card =
-                document.createElement(
-                    "article"
-                );
+    document.createElement(
+        "a"
+    );
+
+
+card.href =
+    magazineArticleUrl(
+        article
+    );
 
 
             card.className =
@@ -1150,8 +1283,7 @@ function renderWebGrid() {
                     : "web-card";
 
 
-            card.tabIndex =
-                0;
+            
 
 
             const thumbnail =
@@ -1212,11 +1344,16 @@ function renderWebGrid() {
 
 
             const open =
-                () =>
-                    openArticle(
-                        index,
-                        true
-                    );
+    event => {
+
+        event.preventDefault();
+
+        openArticle(
+            index,
+            true
+        );
+
+    };
 
 
             card.addEventListener(
@@ -1225,26 +1362,7 @@ function renderWebGrid() {
             );
 
 
-            card.addEventListener(
-                "keydown",
-                event => {
-
-                    if (
-                        event.key ===
-                        "Enter"
-                        ||
-                        event.key ===
-                        " "
-                    ) {
-
-                        event.preventDefault();
-
-                        open();
-
-                    }
-
-                }
-            );
+            
 
 
             webGrid.appendChild(
@@ -2268,22 +2386,18 @@ function openArticle(
 
 
     if (
-        updateRoute
-    ) {
+    updateRoute
+) {
 
-        history.pushState(
-            null,
-            "",
-            `#article/${encodeURIComponent(
-                article.slug
-                ||
-                article.documentId
-                ||
-                article.id
-            )}`
-        );
+    history.pushState(
+        null,
+        "",
+        magazineArticleUrl(
+            article
+        )
+    );
 
-    }
+}
 
 
     window.scrollTo({
@@ -2331,17 +2445,17 @@ function closeArticle(
     );
 
 
-    if (
-        updateRoute
-    ) {
+   if (
+    updateRoute
+) {
 
-        history.pushState(
-            null,
-            "",
-            "#web"
-        );
+    history.pushState(
+        null,
+        "",
+        magazineIndexUrl()
+    );
 
-    }
+}
 
 
     window.scrollTo({
@@ -2651,28 +2765,91 @@ webTab.addEventListener(
    ARTICLE ROUTE
    ========================================================= */
 
-function applyArticleRouteIfNeeded() {
+function getRequestedMagazineArticleSlug() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const querySlug =
+        params.get(
+            "article"
+        );
+
+
+    const pathParts =
+        window.location.pathname
+            .split("/")
+            .filter(Boolean);
+
+
+    const pathSlug =
+        (
+            pathParts[0] === "magazine"
+            &&
+            pathParts[1]
+        )
+
+        ?
+
+        decodeURIComponent(
+            pathParts[1]
+        )
+
+        :
+
+        null;
+
 
     const hash =
         window.location.hash;
 
 
-    if (
-        !hash.startsWith(
+    const legacyHashSlug =
+        hash.startsWith(
             "#article/"
         )
-    ) {
-        return;
-    }
 
+        ?
 
-    const slug =
         decodeURIComponent(
             hash.replace(
                 "#article/",
                 ""
             )
-        );
+        )
+
+        :
+
+        null;
+
+
+    return (
+        querySlug
+        ||
+        pathSlug
+        ||
+        legacyHashSlug
+    );
+
+}
+
+
+function applyArticleRouteIfNeeded() {
+
+    const slug =
+        getRequestedMagazineArticleSlug();
+
+
+    if (
+        !slug
+    ) {
+
+        return false;
+
+    }
 
 
     const index =
@@ -2704,7 +2881,12 @@ function applyArticleRouteIfNeeded() {
             false
         );
 
+        return true;
+
     }
+
+
+    return false;
 
 }
 
@@ -2719,10 +2901,12 @@ async function applyRoute() {
         window.location.hash;
 
 
+    const requestedArticleSlug =
+        getRequestedMagazineArticleSlug();
+
+
     if (
-        hash.startsWith(
-            "#article/"
-        )
+        requestedArticleSlug
     ) {
 
         setEdition(

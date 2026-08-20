@@ -1,9 +1,12 @@
 {
-  
   "rewrites": [
     {
       "source": "/news/:slug",
       "destination": "/news.html?article=:slug"
+    },
+    {
+      "source": "/magazine/:slug",
+      "destination": "/magazine.html?article=:slug"
     }
   ]
 }

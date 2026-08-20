@@ -8,6 +8,10 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
+    <link
+    rel="stylesheet"
+    href="assets/css/header.css"
+>
 
     <base href="/">
 
@@ -49,6 +53,22 @@
     name="twitter:card"
     content="summary_large_image"
 >
+
+<meta
+    name="twitter:title"
+    content="News — Flying Cat Productions"
+>
+
+<meta
+    name="twitter:description"
+    content="Film premieres, festival selections, screenings and production updates from Flying Cat Productions."
+>
+
+<meta
+    name="robots"
+    content="index, follow"
+>
+
 <link
     rel="icon"
     type="image/png"
@@ -816,71 +836,10 @@
 
 
     <!-- =========================================================
-         HEADER
-         ========================================================= -->
+     SHARED GLOBAL HEADER
+     ========================================================= -->
 
-    <header class="site-header">
-
-
-        <a
-            href="index.html"
-            class="home-logo"
-            aria-label="Flying Cat Productions home"
-        >
-
-            <img
-                src="assets/homepage/flying-cat-logo.png"
-                alt="Flying Cat Productions"
-            >
-
-        </a>
-
-
-
-        <div class="header-right">
-
-
-            <nav class="main-nav">
-
-
-                <a
-                    href="news.html"
-                    class="active"
-                >
-                    News
-                </a>
-
-
-                <a
-                    href="index.html#films"
-                >
-                    Work
-                </a>
-
-
-                <a
-                    href="magazine.html"
-                >
-                    Magazine
-                </a>
-
-
-            </nav>
-
-
-
-            <p class="header-manifesto">
-
-                Long story short, we like movies so we make movies,
-                about all sorts of things. Join the fun.
-
-            </p>
-
-
-        </div>
-
-
-    </header>
+<fcp-header></fcp-header>
 
 
 
@@ -1111,7 +1070,8 @@ function applyNewsIndexSeo() {
     const url =
         `${SITE_URL}/news.html`;
 
-    applyNewsIndexSeo();
+    document.title =
+    "News — Flying Cat Productions | Film, Festival & Production Updates";
 
 
     setMetaTag(
@@ -1532,10 +1492,28 @@ function applyNewsIndexSeo() {
     article
 ) {
 
-    return (
-        `/news/${encodeURIComponent(
+    const slug =
+        encodeURIComponent(
             article.slug
-        )}`
+        );
+
+    const isLocal =
+        window.location.hostname === "127.0.0.1"
+        ||
+        window.location.hostname === "localhost";
+
+
+    if (isLocal) {
+
+        return (
+            `news.html?article=${slug}`
+        );
+
+    }
+
+
+    return (
+        `/news/${slug}`
     );
 
 }
@@ -2997,12 +2975,11 @@ function applyNewsIndexSeo() {
 
             function renderIndex() {
 
-                document.title =
-                    "News — Flying Cat Productions";
+    applyNewsIndexSeo();
 
 
-                newsIntro.hidden =
-                    false;
+    newsIntro.hidden =
+        false;
 
 
                 newsIndex.hidden =
@@ -3646,13 +3623,25 @@ setStructuredData(
 
 
 
-                    const pathParts =
+                    const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const querySlug =
+    params.get(
+        "article"
+    );
+
+
+const pathParts =
     window.location.pathname
         .split("/")
         .filter(Boolean);
 
 
-const requestedSlug =
+const pathSlug =
     (
         pathParts[0] === "news"
         &&
@@ -3668,6 +3657,12 @@ const requestedSlug =
     :
 
     null;
+
+
+const requestedSlug =
+    querySlug
+    ||
+    pathSlug;
 
 
 
@@ -3712,6 +3707,16 @@ const requestedSlug =
                         articleView.hidden =
                             false;
 
+document.title =
+    "Article Not Found — Flying Cat Productions";
+
+
+setMetaTag(
+    'meta[name="robots"]',
+    "name",
+    "robots",
+    "noindex, follow"
+);
 
                         articleView.innerHTML =
                             `
@@ -3810,6 +3815,7 @@ const requestedSlug =
 </div>
 
 
+<script src="assets/js/header.js"></script>
 </body>
 
 </html>
