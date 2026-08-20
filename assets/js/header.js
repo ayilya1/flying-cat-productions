@@ -2,21 +2,24 @@ class FCPHeader extends HTMLElement {
 
     connectedCallback() {
 
-        const currentPage =
+        const currentPath =
             window.location.pathname
-                .split("/")
-                .pop()
+                .replace(/\/+$/, "")
                 .toLowerCase();
 
 
         const isNews =
-            currentPage === "news.html";
+            currentPath === "/news"
+            ||
+            currentPath.startsWith("/news/");
 
         const isSlate =
-            currentPage === "slate.html";
+            currentPath === "/slate";
 
         const isMagazine =
-            currentPage === "magazine.html";
+            currentPath === "/magazine"
+            ||
+            currentPath.startsWith("/magazine/");
 
 
         this.innerHTML = `
@@ -24,13 +27,13 @@ class FCPHeader extends HTMLElement {
             <header class="fcp-site-header">
 
                 <a
-                    href="index.html"
+                    href="/"
                     class="fcp-home-logo"
                     aria-label="Flying Cat Productions home"
                 >
 
                     <img
-                        src="assets/homepage/flying-cat-logo.png"
+                        src="/assets/homepage/flying-cat-logo.png"
                         alt="Flying Cat Productions"
                     >
 
@@ -48,21 +51,21 @@ class FCPHeader extends HTMLElement {
                     >
 
                         <a
-                            href="news.html"
+                            href="/news"
                             class="${isNews ? "active" : ""}"
                         >
                             News
                         </a>
 
                         <a
-                            href="slate.html"
+                            href="/slate"
                             class="${isSlate ? "active" : ""}"
                         >
                             Slate
                         </a>
 
                         <a
-                            href="magazine.html"
+                            href="/magazine"
                             class="${isMagazine ? "active" : ""}"
                         >
                             Magazine
@@ -103,21 +106,21 @@ class FCPHeader extends HTMLElement {
                 >
 
                     <a
-                        href="news.html"
+                        href="/news"
                         class="${isNews ? "active" : ""}"
                     >
                         News
                     </a>
 
                     <a
-                        href="slate.html"
+                        href="/slate"
                         class="${isSlate ? "active" : ""}"
                     >
                         Slate
                     </a>
 
                     <a
-                        href="magazine.html"
+                        href="/magazine"
                         class="${isMagazine ? "active" : ""}"
                     >
                         Magazine
