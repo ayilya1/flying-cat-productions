@@ -4,12 +4,13 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
 
+    <!-- MAIN SITE -->
+
     <url>
         <loc>https://www.flyingcatproductions.com/</loc>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-
 
     <url>
         <loc>https://www.flyingcatproductions.com/slate.html</loc>
@@ -18,12 +19,13 @@
     </url>
 
 
+    <!-- PROJECTS -->
+
     <url>
         <loc>https://www.flyingcatproductions.com/victoria-ka-raja.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
-
 
     <url>
         <loc>https://www.flyingcatproductions.com/hypnos-lullaby.html</loc>
@@ -32,17 +34,63 @@
     </url>
 
 
+    <!-- NEWS -->
+
     <url>
         <loc>https://www.flyingcatproductions.com/news.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
+    <url>
+        <loc>https://www.flyingcatproductions.com/news/flying-cat-productions-dual-selection-vqff-2026</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/news/victoria-ka-raja-justice4reel-premiere</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+
+    <!-- FOCAL POINT MAGAZINE -->
 
     <url>
         <loc>https://www.flyingcatproductions.com/magazine.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/magazine/hypnos-lullaby-indie-feature</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/magazine/hidden-filming-locations-in-and-around-vancouver</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/magazine/building-worlds-inside-four-walls</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/magazine/gueros</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.flyingcatproductions.com/magazine/from-the-editor</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 
 </urlset>
