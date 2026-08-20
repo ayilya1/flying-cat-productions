@@ -808,6 +808,435 @@ function formatDate(date) {
 }
 
 /* =========================================================
+   SEO HELPERS
+   ========================================================= */
+
+const SITE_URL =
+    "https://www.flyingcatproductions.com";
+
+
+function setMetaTag(
+    selector,
+    attributeName,
+    attributeValue,
+    content
+) {
+
+    let tag =
+        document.head.querySelector(
+            selector
+        );
+
+
+    if (
+        !tag
+    ) {
+
+        tag =
+            document.createElement(
+                "meta"
+            );
+
+
+        tag.setAttribute(
+            attributeName,
+            attributeValue
+        );
+
+
+        document.head.appendChild(
+            tag
+        );
+
+    }
+
+
+    tag.setAttribute(
+        "content",
+        content
+    );
+
+}
+
+
+function removeMetaTag(
+    selector
+) {
+
+    const tag =
+        document.head.querySelector(
+            selector
+        );
+
+
+    if (
+        tag
+    ) {
+
+        tag.remove();
+
+    }
+
+}
+
+
+function setCanonical(
+    url
+) {
+
+    let canonical =
+        document.head.querySelector(
+            'link[rel="canonical"]'
+        );
+
+
+    if (
+        !canonical
+    ) {
+
+        canonical =
+            document.createElement(
+                "link"
+            );
+
+
+        canonical.setAttribute(
+            "rel",
+            "canonical"
+        );
+
+
+        document.head.appendChild(
+            canonical
+        );
+
+    }
+
+
+    canonical.setAttribute(
+        "href",
+        url
+    );
+
+}
+
+
+function setStructuredData(
+    data
+) {
+
+    let script =
+        document.head.querySelector(
+            '#dynamic-structured-data'
+        );
+
+
+    if (
+        !script
+    ) {
+
+        script =
+            document.createElement(
+                "script"
+            );
+
+
+        script.type =
+            "application/ld+json";
+
+
+        script.id =
+            "dynamic-structured-data";
+
+
+        document.head.appendChild(
+            script
+        );
+
+    }
+
+
+    script.textContent =
+        JSON.stringify(
+            data
+        );
+
+}
+
+function applyMagazineArticleSeo(
+    article
+) {
+
+    const slug =
+        encodeURIComponent(
+            article.slug
+            ||
+            article.documentId
+            ||
+            article.id
+        );
+
+
+    const url =
+        `${SITE_URL}/magazine/${slug}`;
+
+
+    const description =
+        article.excerpt
+        ||
+        article.subtitle
+        ||
+        "An article from Focal Point Magazine by Flying Cat Productions.";
+
+
+    const hero =
+        strapiMediaUrl(
+            article.heroImage
+            ||
+            article.thumbnail
+        );
+
+
+    document.title =
+        `${article.title} — Focal Point Magazine`;
+
+
+    setMetaTag(
+        'meta[name="description"]',
+        "name",
+        "description",
+        description
+    );
+
+
+    setMetaTag(
+        'meta[name="robots"]',
+        "name",
+        "robots",
+        "index, follow"
+    );
+
+
+    setMetaTag(
+        'meta[property="og:type"]',
+        "property",
+        "og:type",
+        "article"
+    );
+
+
+    setMetaTag(
+        'meta[property="og:title"]',
+        "property",
+        "og:title",
+        article.title
+    );
+
+
+    setMetaTag(
+        'meta[property="og:description"]',
+        "property",
+        "og:description",
+        description
+    );
+
+
+    setMetaTag(
+        'meta[property="og:url"]',
+        "property",
+        "og:url",
+        url
+    );
+
+
+    setMetaTag(
+        'meta[property="og:site_name"]',
+        "property",
+        "og:site_name",
+        "Flying Cat Productions"
+    );
+
+
+    setMetaTag(
+        'meta[name="twitter:card"]',
+        "name",
+        "twitter:card",
+        "summary_large_image"
+    );
+
+
+    setMetaTag(
+        'meta[name="twitter:title"]',
+        "name",
+        "twitter:title",
+        article.title
+    );
+
+
+    setMetaTag(
+        'meta[name="twitter:description"]',
+        "name",
+        "twitter:description",
+        description
+    );
+
+
+    if (
+        hero
+    ) {
+
+        setMetaTag(
+            'meta[property="og:image"]',
+            "property",
+            "og:image",
+            hero
+        );
+
+
+        setMetaTag(
+            'meta[name="twitter:image"]',
+            "name",
+            "twitter:image",
+            hero
+        );
+
+    }
+
+    else {
+
+        removeMetaTag(
+            'meta[property="og:image"]'
+        );
+
+
+        removeMetaTag(
+            'meta[name="twitter:image"]'
+        );
+
+    }
+
+
+    if (
+        article.publicationDate
+    ) {
+
+        setMetaTag(
+            'meta[property="article:published_time"]',
+            "property",
+            "article:published_time",
+            article.publicationDate
+        );
+
+    }
+
+
+    if (
+        article.updatedAt
+    ) {
+
+        setMetaTag(
+            'meta[property="article:modified_time"]',
+            "property",
+            "article:modified_time",
+            article.updatedAt
+        );
+
+    }
+
+
+    setCanonical(
+        url
+    );
+
+
+    const schema = {
+        "@context":
+            "https://schema.org",
+
+        "@type":
+            "Article",
+
+        "headline":
+            article.title,
+
+        "description":
+            description,
+
+        "url":
+            url,
+
+        "mainEntityOfPage": {
+            "@type":
+                "WebPage",
+
+            "@id":
+                url
+        },
+
+        "publisher": {
+            "@type":
+                "Organization",
+
+            "name":
+                "Flying Cat Productions",
+
+            "url":
+                `${SITE_URL}/`
+        }
+    };
+
+
+    if (
+        article.author
+    ) {
+
+        schema.author = {
+            "@type":
+                "Person",
+
+            "name":
+                article.author
+        };
+
+    }
+
+
+    if (
+        article.publicationDate
+    ) {
+
+        schema.datePublished =
+            article.publicationDate;
+
+    }
+
+
+    if (
+        article.updatedAt
+    ) {
+
+        schema.dateModified =
+            article.updatedAt;
+
+    }
+
+
+    if (
+        hero
+    ) {
+
+        schema.image =
+            hero;
+
+    }
+
+
+    setStructuredData(
+        schema
+    );
+
+}
+/* =========================================================
    MAGAZINE URLS
    ========================================================= */
 
@@ -2412,8 +2841,9 @@ function openArticle(
     });
 
 
-    document.title =
-        `${article.title} — Focal Point`;
+    applyMagazineArticleSeo(
+    article
+);
 
 }
 
@@ -2471,7 +2901,101 @@ function closeArticle(
 
 
     document.title =
-        "Focal Point Magazine — Flying Cat Productions";
+    "Focal Point Magazine — Independent Film Magazine | Flying Cat Productions";
+
+
+setMetaTag(
+    'meta[name="description"]',
+    "name",
+    "description",
+    "Focal Point is an independent film magazine by Flying Cat Productions featuring filmmaker interviews, production stories, essays and perspectives from the indie film community."
+);
+
+
+setMetaTag(
+    'meta[property="og:type"]',
+    "property",
+    "og:type",
+    "website"
+);
+
+
+setMetaTag(
+    'meta[property="og:title"]',
+    "property",
+    "og:title",
+    "Focal Point Magazine — Flying Cat Productions"
+);
+
+
+setMetaTag(
+    'meta[property="og:description"]',
+    "property",
+    "og:description",
+    "For filmmakers, by filmmakers. Interviews, production stories, essays and perspectives from the independent film community."
+);
+
+
+setMetaTag(
+    'meta[property="og:url"]',
+    "property",
+    "og:url",
+    `${SITE_URL}/magazine.html`
+);
+
+
+removeMetaTag(
+    'meta[property="og:image"]'
+);
+
+
+removeMetaTag(
+    'meta[name="twitter:image"]'
+);
+
+
+removeMetaTag(
+    'meta[property="article:published_time"]'
+);
+
+
+removeMetaTag(
+    'meta[property="article:modified_time"]'
+);
+
+
+setCanonical(
+    `${SITE_URL}/magazine.html`
+);
+
+
+setStructuredData({
+    "@context":
+        "https://schema.org",
+
+    "@type":
+        "Periodical",
+
+    "name":
+        "Focal Point",
+
+    "description":
+        "An independent film magazine by Flying Cat Productions featuring filmmaker interviews, production stories, essays and perspectives from the indie film community.",
+
+    "publisher": {
+        "@type":
+            "Organization",
+
+        "name":
+            "Flying Cat Productions",
+
+        "url":
+            `${SITE_URL}/`
+    },
+
+    "url":
+        `${SITE_URL}/magazine.html`
+});
 
 }
 
