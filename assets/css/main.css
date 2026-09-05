@@ -3417,3 +3417,221 @@ fcp-header {
     }
 
 }
+
+/* =========================================================
+   CHANDRAKAAL — VQFF LAUREL ONLY
+   DESKTOP + TABLET
+   ========================================================= */
+
+.hero.project-chandrakaal
+.hero-laurel-j4r,
+.hero.project-chandrakaal
+.hero-laurel-isaff {
+    display: none;
+}
+
+
+.hero.project-chandrakaal
+.hero-laurel-vqff {
+    display: block;
+}
+
+
+/* Give the single laurel a clean amount of space */
+
+.hero.project-chandrakaal
+.hero-laurels {
+    gap: 0;
+
+    min-height: auto;
+
+    margin-bottom: 26px;
+}
+
+
+/* Desktop size */
+
+.hero.project-chandrakaal
+.hero-laurel-vqff {
+    width: 128px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .hero.project-chandrakaal
+    .hero-laurel-vqff {
+        width: 108px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /*
+       Desktop laurels are not used in the mobile layout.
+       Keep that container out of the way.
+    */
+
+    .hero.project-chandrakaal
+    .hero-laurels {
+        display: none;
+    }
+
+
+    /*
+       Use the existing mobile laurel row.
+    */
+
+    .hero.project-chandrakaal
+    .mobile-hero-laurels {
+        display: flex;
+
+        align-items: center;
+
+        width: 100%;
+
+        margin:
+            18px
+            0
+            7px;
+    }
+
+
+    /*
+       VQFF only.
+    */
+
+    .hero.project-chandrakaal
+    .mobile-laurel-vqff {
+        display: block;
+
+        width: 78px;
+        height: auto;
+    }
+
+
+    .hero.project-chandrakaal
+    .mobile-laurel-j4r,
+    .hero.project-chandrakaal
+    .mobile-laurel-isaff {
+        display: none;
+    }
+
+}
+
+/* =========================================================
+   CHANDRAKAAL — MATCH VICTORIA METADATA ALIGNMENT
+   DESKTOP + TABLET
+   ========================================================= */
+
+.hero.project-chandrakaal
+.hero-laurels {
+    min-height: 105px;
+
+    margin-bottom: 30px;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .hero.project-chandrakaal
+    .hero-laurels {
+        min-height: 105px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .hero.project-chandrakaal
+    .hero-metadata {
+        top: 21%;
+    }
+
+}
+
+/* =========================================================
+   TABLET — CHANDRAKAAL TICKET BUTTONS
+   SMALLER + SINGLE LINE
+   ========================================================= */
+
+@media (min-width: 701px) and (max-width: 1050px) {
+
+    .hero.project-chandrakaal
+    .ticket-button {
+        white-space: nowrap;
+
+        width: auto;
+        min-width: max-content;
+
+        min-height: 34px;
+
+        padding:
+            0
+            13px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.10em;
+    }
+
+}
+
+/* =========================================================
+   TABLET — VICTORIA TICKET BUTTONS
+   SMALLER + SINGLE LINE
+   ========================================================= */
+
+@media (min-width: 701px) and (max-width: 1050px) {
+
+    .hero.project-victoria
+    .ticket-button {
+        white-space: nowrap;
+
+        width: auto;
+        min-width: max-content;
+
+        min-height: 34px;
+
+        padding:
+            0
+            13px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.10em;
+    }
+
+}
+
+/* =========================================================
+   TABLET — KEEP LEARN MORE ON ONE LINE
+   ========================================================= */
+
+@media (min-width: 701px) and (max-width: 1050px) {
+
+    .hero.project-victoria
+    .view-project {
+        white-space: nowrap;
+
+        width: auto;
+
+        min-width: max-content;
+    }
+
+}
