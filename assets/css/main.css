@@ -1,5 +1,3 @@
-
-
 :root {
     --black: #050505;
     --white: #f4f0e7;
@@ -361,6 +359,11 @@ fcp-header {
     opacity: 0.8;
 }
 
+.view-project.hidden {
+    display: none;
+}
+
+
 /* =========================================================
    HERO ACTIONS
    ========================================================= */
@@ -373,11 +376,9 @@ fcp-header {
     margin-top: 22px;
 }
 
-
 .hero-actions .view-project {
     margin-top: 0;
 }
-
 
 .ticket-button {
     display: inline-flex;
@@ -417,7 +418,6 @@ fcp-header {
         opacity 0.2s ease;
 }
 
-
 .ticket-button:hover {
     background:
         var(--accent);
@@ -426,10 +426,10 @@ fcp-header {
         var(--white);
 }
 
-
 .ticket-button.hidden {
     display: none;
 }
+
 
 /* =========================================================
     RIGHT PROJECT PANEL
@@ -475,6 +475,10 @@ fcp-header {
     top: 33%;
 }
 
+.hero.project-chandrakaal .hero-metadata {
+    top: 30%;
+}
+
 .hero.project-moneyback .hero-metadata {
     top: 33%;
 }
@@ -502,7 +506,7 @@ fcp-header {
     display: flex;
     align-items: center;
 
-    gap: 34px;
+    gap: 22px;
 
     width: 100%;
 
@@ -516,14 +520,23 @@ fcp-header {
 }
 
 .hero-laurel-vqff {
-    width: 145px;
+    width: 128px;
+    flex: 0 0 auto;
 }
 
 .hero-laurel-j4r {
-    width: 68px;
+    width: 60px;
+    flex: 0 0 auto;
+}
+
+.hero-laurel-isaff {
+    width: 115px;
+    flex: 0 0 auto;
 }
 
 .hero-laurels img {
+    display: block;
+
     width: 100%;
     height: auto;
 
@@ -1372,6 +1385,8 @@ fcp-header {
 
     background: var(--accent);
 }
+
+
 /* INTRO RIGHT */
 
 .makers-intro-copy {
@@ -1442,7 +1457,6 @@ fcp-header {
 
     background: #111;
 }
-
 
 .person-photo img {
     position: absolute;
@@ -1705,7 +1719,8 @@ fcp-header {
         width: 300px;
     }
 
-    .hero.project-victoria .hero-metadata {
+    .hero.project-victoria .hero-metadata,
+    .hero.project-chandrakaal .hero-metadata {
         top: 21%;
     }
 
@@ -1723,12 +1738,20 @@ fcp-header {
         font-size: 10px;
     }
 
+    .hero-laurels {
+        gap: 16px;
+    }
+
     .hero-laurel-vqff {
-        width: 120px;
+        width: 108px;
     }
 
     .hero-laurel-j4r {
-        width: 58px;
+        width: 50px;
+    }
+
+    .hero-laurel-isaff {
+        width: 99px;
     }
 
     .makers,
@@ -1860,31 +1883,31 @@ fcp-header {
 
         font-size: 9px;
     }
-.hero-actions {
-    gap: 12px;
 
-    margin-top: 17px;
+    .hero-actions {
+        gap: 12px;
 
-    flex-wrap: wrap;
-}
+        margin-top: 17px;
 
+        flex-wrap: wrap;
+    }
 
-.hero-actions .view-project {
-    margin-top: 0;
-}
+    .hero-actions .view-project {
+        margin-top: 0;
+    }
 
+    .ticket-button {
+        min-height: 34px;
 
-.ticket-button {
-    min-height: 34px;
+        padding:
+            0
+            13px;
 
-    padding:
-        0
-        13px;
+        font-size: 8px;
 
-    font-size: 8px;
+        letter-spacing: 0.12em;
+    }
 
-    letter-spacing: 0.12em;
-}
     .hero-metadata {
         display: none;
     }
@@ -1939,15 +1962,12 @@ fcp-header {
 
 }
 
+
 /* =========================================================
    MOBILE HOMEPAGE REFINEMENTS
    ========================================================= */
 
 @media (max-width: 700px) {
-
-    /* =====================================================
-       FILMMAKERS — ONE COLUMN
-       ===================================================== */
 
     .makers {
         display: block;
@@ -1996,6 +2016,7 @@ fcp-header {
 
 }
 
+
 /* =========================================================
    MOBILE — NEWS HEADING
    ========================================================= */
@@ -2016,12 +2037,14 @@ fcp-header {
 
 }
 
-/* HIDDEN OUTSIDE MOBILE */
+
+/* =========================================================
+   MOBILE LAURELS
+   ========================================================= */
 
 .mobile-hero-laurels {
     display: none;
 }
-
 
 @media (max-width: 700px) {
 
@@ -2029,18 +2052,12 @@ fcp-header {
         display: none;
     }
 
-    /*
-       Only Victoria Ka Raja gets these laurels.
-       When the carousel changes to Hypnos,
-       they disappear automatically.
-    */
-
     .project-victoria .mobile-hero-laurels {
         display: flex;
 
         align-items: center;
 
-        gap: 18px;
+        gap: 8px;
 
         width: 100%;
 
@@ -2051,36 +2068,38 @@ fcp-header {
     }
 
     .mobile-laurel-vqff {
-        width: 105px;
+        width: 78px;
         height: auto;
+        flex: 0 0 auto;
     }
 
     .mobile-laurel-j4r {
-        width: 52px;
+        width: 38px;
         height: auto;
+        flex: 0 0 auto;
+    }
+
+    .mobile-laurel-isaff {
+        width: 78px;
+        height: auto;
+        flex: 0 0 auto;
     }
 
 }
 
+
+/* =========================================================
+   MOBILE PROJECT-SPECIFIC HERO STYLING
+   ========================================================= */
+
 @media (max-width: 700px) {
 
-    /* =====================================================
-       VKR MOBILE FOCAL POINT
-       Keep Badshah's face clear of the copy
-       ===================================================== */
+    /* VKR focal point */
 
     .project-victoria .hero-image {
         object-fit: cover;
-
-        /*
-           Shows more of the LEFT side of the source image,
-           which pushes Badshah further toward the right
-           side of the phone composition.
-        */
-
         object-position: 34% center;
     }
-
 
     .project-victoria .hero-copy {
         left: 5%;
@@ -2090,53 +2109,7 @@ fcp-header {
         max-width: 350px;
     }
 
-
-    .project-victoria .hero-copy h1 {
-        font-size:
-            clamp(
-                54px,
-                15vw,
-                78px
-            );
-
-        line-height: .88;
-    }
-
-
-    .project-victoria .hero-synopsis {
-        width: 100%;
-
-        max-width: 310px;
-
-        font-size: 16px;
-
-        line-height: 1.45;
-    }
-
-    /* =========================================================
-   MOBILE CAROUSEL — PROJECT CONSISTENCY
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    /* =====================================================
-       GET TICKETS — VKR ONLY
-       ===================================================== */
-
-    .project-hypnos .ticket-button,
-    .project-moneyback .ticket-button {
-        display: none !important;
-    }
-
-    .project-victoria .ticket-button {
-        display: inline-flex;
-    }
-
-
-    /* =====================================================
-       MATCH HYPNOS TYPOGRAPHY TO VKR
-       ===================================================== */
-
+    .project-victoria .hero-copy h1,
     .project-hypnos .hero-copy h1 {
         font-size:
             clamp(
@@ -2148,7 +2121,7 @@ fcp-header {
         line-height: .88;
     }
 
-
+    .project-victoria .hero-synopsis,
     .project-hypnos .hero-synopsis {
         width: 100%;
 
@@ -2159,5 +2132,16 @@ fcp-header {
         line-height: 1.45;
     }
 
-}
+    /* Tickets are only shown for Victoria */
+
+    .project-hypnos .ticket-button,
+    .project-chandrakaal .ticket-button,
+    .project-moneyback .ticket-button {
+        display: none !important;
+    }
+
+    .project-victoria .ticket-button:not(.hidden) {
+        display: inline-flex;
+    }
+
 }
