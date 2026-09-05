@@ -3635,3 +3635,52 @@ fcp-header {
     }
 
 }
+
+/* =========================================================
+   DESKTOP — FIT ENTIRE FILMMAKERS SECTION IN VIEWPORT
+   ========================================================= */
+
+@media (min-width: 1051px) {
+
+    .section-makers {
+        min-height: 100vh;
+
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+
+    .fcp-makers-intro {
+        margin-bottom: 32px;
+    }
+
+
+    .fcp-makers-panels {
+        height:
+            min(
+                58vh,
+                620px
+            );
+    }
+
+
+    .fcp-makers-heading h2 {
+        font-size:
+            clamp(
+                68px,
+                6.8vw,
+                108px
+            );
+    }
+
+
+    .fcp-makers-big-copy {
+        font-size:
+            clamp(
+                22px,
+                1.7vw,
+                29px
+            );
+    }
+
+}
