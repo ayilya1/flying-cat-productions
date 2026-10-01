@@ -1130,39 +1130,18 @@ body::after {
 
 
 .stills-gallery {
-
-    column-count:
-        2;
-
-    column-gap:
-        14px;
-
-    width:
-        100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
 }
 
 
 .still-item {
-
-    width:
-        100%;
-
-    display:
-        inline-block;
-
-    margin:
-        0
-        0
-        14px;
-
-    break-inside:
-        avoid;
-
-    overflow:
-        hidden;
-
-    background:
-        #151515;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #151515;
 }
 
 
@@ -1609,10 +1588,8 @@ body::after {
 
 
     .stills-gallery {
-
-        column-count:
-            1;
-    }
+    grid-template-columns: 1fr;
+}
 
 
     .credit-row {
@@ -1671,7 +1648,90 @@ body::after {
     max-width: 100%;
     height: auto;
 }
+/* =========================================================
+   CHANDRAKAAL — TAB LAYOUT FIX
+   ========================================================= */
 
+.right-column {
+    position: relative;
+    min-width: 0;
+}
+
+.tabs,
+.tab-content {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.tab-panel,
+.tab-panel.active,
+#story,
+#stills,
+#credits {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.stills-gallery {
+    position: static !important;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+.still-item {
+    position: static !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin: 0 !important;
+
+    overflow: hidden;
+}
+
+.still-item img {
+    display: block;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto;
+
+    margin: 0;
+    transform: none;
+}
+
+@media (max-width: 720px) {
+
+    .stills-gallery {
+        grid-template-columns: 1fr;
+    }
+
+}
 </style>
 
 </head>
@@ -2021,7 +2081,7 @@ body::after {
 </div>
 
 
-            </div>
+            
 
 
         </section>
