@@ -3547,9 +3547,7 @@ function renderArchiveSection(
     }
 
 
-    const count =
-        archiveArticles.length;
-
+   
 
     return `
         <section class="news-archive">
@@ -3598,6 +3596,24 @@ function renderArchiveSection(
 function renderPressSection() {
 
     const pressItems = [
+
+        {
+            publication:
+                "BC Creates",
+
+            title:
+                "Discover Emerging Voices from B.C. at the 2026 International South Asian Film Festival",
+
+            project:
+                "Victoria Ka Raja",
+
+            date:
+                "September 17, 2026",
+
+            url:
+                "https://bccreates.com/discover-emerging-voices-from-b-c-at-the-2026-international-south-asian-film-festival/"
+        },
+
 
         {
             publication:
@@ -3679,14 +3695,9 @@ function renderPressSection() {
 
             <div class="press-heading">
 
-
                 <h2>
                     Press / In the Media
                 </h2>
-
-
-               
-
 
             </div>
 
@@ -3789,7 +3800,6 @@ function renderPressSection() {
     `;
 
 }
-
 
             /* =====================================================
                RENDER MAIN NEWS PAGE
