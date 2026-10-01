@@ -16,6 +16,11 @@
       "permanent": true
     },
     {
+      "source": "/chandrakaal.html",
+      "destination": "/chandrakaal",
+      "permanent": true
+    },
+    {
       "source": "/news.html",
       "destination": "/news",
       "permanent": true
@@ -38,6 +43,10 @@
     {
       "source": "/hypnos-lullaby",
       "destination": "/hypnos-lullaby.html"
+    },
+    {
+      "source": "/chandrakaal",
+      "destination": "/chandrakaal.html"
     },
     {
       "source": "/news",
