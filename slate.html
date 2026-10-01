@@ -97,8 +97,11 @@
             "url": "https://www.flyingcatproductions.com/hypnos-lullaby"
         },
         {
-            "@type": "CreativeWork",
-            "name": "Chandrakaal"
+            {
+    "@type": "CreativeWork",
+    "name": "Chandrakaal",
+    "url": "https://www.flyingcatproductions.com/chandrakaal"
+}
         },
         {
             "@type": "CreativeWork",
@@ -368,78 +371,91 @@
     </article>
 
 
-    <!-- 04 — CHANDRAKAAL -->
+   <!-- 04 — CHANDRAKAAL -->
 
-    <article class="slate-row">
+<article
+    class="slate-row slate-row-clickable"
+    data-project-url="/chandrakaal"
+    tabindex="0"
+    role="link"
+    aria-label="View Chandrakaal project"
+>
 
-        <div class="slate-row-number">
-            04
-        </div>
-
-        <div class="slate-row-image">
-
-            <img
-                src="assets/victoria-ka-raja/stills/vkr-still-06.jpg"
-                alt="Animated scene from Chandrakaal by Flying Cat Productions"
-            >
-
-        </div>
-
-        <div class="slate-row-main">
-
-            <h3>
-                Chandrakaal
-            </h3>
-
-            <div class="slate-row-meta">
-                2026 / Animated Short / 5 min
-            </div>
-
-            <div class="slate-row-status">
-                Festival Circuit
-            </div>
-
-        </div>
-
-        <div class="slate-row-description">
-            A five-minute animated short exploring
-            gender, transformation, and identity
-            through South Asian mythology.
-        </div>
-
-  <div class="slate-row-tickets">
-
-    <a
-        href="https://outonscreen.com/vqff-event/the-future-is-queer-shorts-journey-to-you/"
-        class="slate-ticket-link"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Sept 17 Tickets →
-    </a>
+    <div class="slate-row-number">
+        04
+    </div>
 
 
-    <a
-        href="https://outonscreen.com/vqff-event/relaxed-screening-shorts-journey-to-you/"
-        class="slate-ticket-link"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Sept 20 Tickets →
-    </a>
+    <div class="slate-row-image">
 
-</div>
-
-        <span
-        href="/chandrakaal"    
-        class="slate-row-arrow"
-            aria-hidden="true"
-
+        <img
+            src="assets/projects/chandrakaal/chandrakaal-screengrab.jpg"
+            alt="Animated scene from Chandrakaal by Flying Cat Productions"
         >
-            ↗
-        </span>
 
-    </article>
+    </div>
+
+
+    <div class="slate-row-main">
+
+        <h3>
+            Chandrakaal
+        </h3>
+
+
+        <div class="slate-row-meta">
+            2026 / Animated Short / 5 min
+        </div>
+
+
+        <div class="slate-row-status">
+            Festival Circuit
+        </div>
+
+    </div>
+
+
+    <div class="slate-row-description">
+
+        A five-minute animated short exploring
+        gender, transformation, and identity
+        through South Asian mythology.
+
+    </div>
+
+
+    <div class="slate-row-tickets">
+
+        <a
+            href="https://outonscreen.com/vqff-event/the-future-is-queer-shorts-journey-to-you/"
+            class="slate-ticket-link"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Sept 17 Tickets →
+        </a>
+
+
+        <a
+            href="https://outonscreen.com/vqff-event/relaxed-screening-shorts-journey-to-you/"
+            class="slate-ticket-link"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Sept 20 Tickets →
+        </a>
+
+    </div>
+
+
+    <span
+        class="slate-row-arrow"
+        aria-hidden="true"
+    >
+        ↗
+    </span>
+
+</article>
 
 
     <!-- 05 — OR YOUR MONEY BACK -->
@@ -573,6 +589,67 @@
     </div>
 
 <script src="assets/js/header.js"></script>
+
+<script>
+
+document
+    .querySelectorAll(
+        ".slate-row-clickable"
+    )
+    .forEach(
+        row => {
+
+            row.addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target.closest(
+                            "a"
+                        )
+                    ) {
+                        return;
+                    }
+
+                    window.location.href =
+                        row.dataset.projectUrl;
+
+                }
+            );
+
+
+            row.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter"
+                        ||
+                        event.key === " "
+                    ) {
+
+                        if (
+                            event.target.closest(
+                                "a"
+                            )
+                        ) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+                        window.location.href =
+                            row.dataset.projectUrl;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+</script>
 </body>
 
 </html>
