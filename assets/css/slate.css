@@ -1076,3 +1076,10 @@ a {
     }
 
 }
+.slate-row-main h3 {
+    transition: color 0.2s ease;
+}
+
+.slate-row-clickable:hover .slate-row-main h3 {
+    color: #CC5500;
+}
