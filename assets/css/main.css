@@ -3684,3 +3684,67 @@ fcp-header {
     }
 
 }
+
+.hero.project-chandrakaal
+.ticket-button {
+    width: auto;
+    min-width: 0;
+
+    padding:
+        10px
+        16px;
+
+    border:
+        1px solid
+        #CC5500;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.42
+        );
+
+    color:
+        #CC5500;
+
+    font-family:
+        "Archivo Black",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.15;
+
+    letter-spacing:
+        0.11em;
+
+    text-transform:
+        uppercase;
+
+    white-space:
+        nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.hero.project-chandrakaal
+.ticket-button:hover {
+    background:
+        #CC5500;
+
+    color:
+        #050505;
+}
+
+.hero.project-chandrakaal
+.hero-actions {
+    gap: 16px;
+    align-items: center;
+}
